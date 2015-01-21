@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper,twoside]{tesis}
+
+\usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[all]{xy}
+\usepackage{multicol}
+\usepackage{subfig}
+
+\begin{document}
+
+%%%% CARATULA
+\def\titulo{Licenciado }
+
+\def\autor{Anton Galitch}
+\def\tituloTesis{}
+\def\runtitulo{}
+\def\runtitle{}
+\def\director{}
+\def\codirector{}
+\def\lugar{Buenos Aires, 2014}
+\input{caratula}
+
+%%%% ABSTRACTS, AGRADECIMIENTOS Y DEDICATORIA
+\frontmatter
+\pagestyle{empty}
+\input{abs_esp.tex}
+
+\cleardoublepage
+\input{abs_en.tex}
+
+%\cleardoublepage
+%\input{agradecimientos.tex} % OPCIONAL: comentar si no se quiere
+
+\cleardoublepage
+\tableofcontents
+
+\mainmatter
+\pagestyle{headings}
+
+\newpage
+\input{intro}
+
+\newpage
+\input{preliminares}
+
+\newpage
+\input{aportes}
+
+\newpage
+\input{casodeestudio}
+
+\newpage
+\input{conclusiones}
+
+\newpage
+\input{referencias}
+
+
+%%%% BIBLIOGRAFIA
+\backmatter
+%\bibliography{tesis}
+
+\end{document}
