@@ -60,10 +60,12 @@ Dos reglas de calculo:
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\Sigma \vdash \varphi$}
+\AxiomC{$\Sigma \nvdash \varphi$}
 \RightLabel{(si no vale)}
 \UnaryInfC{$false$}
 \end{prooftree}
+
+TODO: otra posibilidad es que tire timeout. Hay que tener una regla para esto???
 
 \subsection{B'usqueda de contraejemplos}
 
@@ -99,15 +101,9 @@ TODO: agregar algun diagrama.
 
 
 %objetivo 2
-\section{Extensi'on del concepto de heterogeneidad}
-
-\subsection{Secuentes heterogeneos}
-
-\subsection{Integraci'on con Heterogenius}
+\input{heterogeneidad}
 
 
 %objetivo 3
-\section{Expansi'on del concepto de 'arbol de an'alisis}
-
-\subsection{Caminos alternativos en una demostraci'on}
+\input{arbolanalisis}
 
