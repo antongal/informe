@@ -1,109 +1,12 @@
 \chapter{Aportes}
 
-%objetivo 1: integracion de fof + herramientas.
-
-\section{Extendiendo Heterogenius con Herramientas de L'ogica de Primer Orden}
-
-Existen numerosas herramientas que funcionan con el lenguaje de l'ogica de primer orden \textit{TPTP-FOF}. Para permitir la integraci'on de estas herramientas con Heterogenius y abrir el camino para la interacci'on con las futuras tecnologias basadas en 'este lenguaje, se agreg'o \textit{TPTP-FOF} al motor de Heterogenius como un lenguaje de an'alisis.
-
-Junto a la integraci'on de \textit{TPTP-FOF}, se incorporaron los siguientes mecanismos para poder usar las herramientas correspondientes:
-
-\begin{itemize}
-\item Se permiti'o la carga de especificaciones escritas puramente en \textit{TPTP-FOF} mediante la adaptaci'on del \textit{TPTP-Parser} [TODO: citar a Andrei Tchaltsev <tchaltsev AT itc.it>
-and Alexandre Riazanov <alexandre.riazanov AT gmail.com>.]
-
-\item Se agreg'o una $\rho-$translation desde las formulas \textit{PDOCFA} a \textit{TPTP-FOF}. [TODO: referenciar la seccion que explica esto en detalle].
-
-\end{itemize}
-
-Teniendo el soporte de \textit{TPTP-FOF} por parte del motor de c'alculo de secuentes de Heterogenius, integramos algunas de las herramientas mas difundidas en el 'ambito de demostradores autom'aticos de teoremas para el lenguaje \textit{TPTP-FOF}: \textit{E-Prover} y \textit{SPASS} como calculadores de secuentes; \textit{E-Prover} y \textit{Mace4} como buscadores de contraejemplos.
-
-\subsection{Herramientas Usadas}
-//TODO: revisar todo esto y explicar con mas detalle:
-\subsubsection{E-Prover}
-
-Es un demostrador autom'atico de teoremas de l'ogica de primer orden basado en el calculo por superposici'on. Adem'as realiza b'usquedas de modelos por lo cual tambi'en se usa como un buscador de contraejemplos.
-
-\subsubsection{SPASS}
-
-Es un demostrador autom'atico de teoremas de l'ogica de primer orden con igualdad desarrollado por el Instituto Max Planck.
-
-Desde el 2000, tanto \textit{SPASS} como \textit{E-Prover} ocupan los primeros lugares en la competencia anual de demostradores de teoremas \textit{CASC} (CADE ATP System Competition).
-
-\subsubsection{Mace4}
-
-Es un buscador de modelos finitos y contraejemplos para l'ogica de primer orden.
-
-\subsection{C'alculo de secuentes}
-
-TODO: ver como escribir bien esta parte:
-
-Sea $\Sigma$ la especificaci'on y
-
-\begin{prooftree}
-\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
-\UnaryInfC{$\beta_1$,$\ldots$,$\beta_m$}
-\end{prooftree}
-
-el secuente que se quiere analizar.
-
-Se arma una nueva f'ormula $\varphi: \bigwedge\limits_{i=1}^n{\alpha_i} \Rightarrow \bigvee\limits_{j=1}^m{ \beta_{j}}$.
-
-Se aplica un demostrador autom'atico para ver si $\Sigma \vdash \varphi$.
-
-Dos reglas de calculo:
-
-\begin{prooftree}
-\AxiomC{$\Sigma \vdash \varphi$}
-\RightLabel{(si vale)}
-\UnaryInfC{$true$}
-\end{prooftree}
-
-\begin{prooftree}
-\AxiomC{$\Sigma \nvdash \varphi$}
-\RightLabel{(si no vale)}
-\UnaryInfC{$false$}
-\end{prooftree}
-
-TODO: otra posibilidad es que tire timeout. Hay que tener una regla para esto???
-
-\subsection{B'usqueda de contraejemplos}
-
-Tanto \textit{Mace4} como \textit{E-Prover} se usan para buscar contraejemplos de los secuentes \textit{TPTP-FOF}. Como las dos herramientas son buscadores de modelos, lo que se hace es armar una teoria tomando en cuenta la especificaci'on y el secuente que se quiere analizar.
-
-Sea $\Sigma$ la especificaci'on y
-
-\begin{prooftree}
-\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
-\UnaryInfC{$\beta_1$,$\ldots$,$\beta_m$}
-\end{prooftree}
-
-el secuente que se quiere analizar.
-
-Se arma una nueva teor'ia $\Gamma$ tal que:
-
-\begin{itemize}
-
-\item $\varphi \in \Gamma$ si $\varphi \in \Sigma$.
-
-\item $\gamma \in \Gamma$ \\
-	con $\gamma: \bigwedge\limits_{i=1}^n{\alpha_i} \wedge \bigwedge\limits_{j=1}^m{\neg \beta_{j}}$
-
-\end{itemize}
-
-Luego se realiza una b'usqueda de un modelo para la teor'ia construida $\Gamma$. En caso de encontrar un modelo que satisfaga la teor'ia $\Gamma$ se termina la busqueda y se reporta que existe por lo menos un contraejemplo para el secuente procesado.
-
-
-\subsection{Integraci'on con Heterogenius}
-
-TODO: explicar la arq.
-TODO: agregar algun diagrama.
-
-
-%objetivo 2
-\input{heterogeneidad}
-
-
-%objetivo 3
 \input{arbolanalisis}
 
+\newpage
+\input{heterogeneidad}
+
+\newpage
+\input{extension_fof}
+
+\newpage
+\input{implementacion}
