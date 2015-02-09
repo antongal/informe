@@ -14,6 +14,10 @@
 \usepackage{subfig}
 \usepackage{bussproofs}
 \usepackage{float}
+\usepackage{etoolbox}
+
+\apptocmd{\thebibliography}{\csname phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
+
 
 \usepackage{hyperref}
 \hypersetup{
@@ -67,12 +71,12 @@
 \newpage
 \input{conclusiones}
 
-\newpage
+%\newpage
 \input{referencias}
 
 
 %%%% BIBLIOGRAFIA
-\backmatter
+%\backmatter
 %\bibliography{tesis}
 
 \end{document}
