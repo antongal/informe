@@ -1,7 +1,52 @@
 \chapter{Preliminares}
 
-\section{C'alculo de Sequentes}
+\section{C'alculo de Secuentes}
 
+
+\section{Demostraciones Heterogeneas}
+
+
+\section{Heterogenius}
 
 
 \section{TPTP-FOF}
+
+\textit{TPTP} (mil problemas para demostradores autom'aticos, por sus siglas en ingles) \cite{tptp} es una biblioteca de problemas para demostradores autom'aticos de teoremas. La principal motivaci'on para \textit{TPTP} es permitir el testeo y evaluaci'on de diferentes sistemas de demostradores autom'aticos de teoremas. Los problemas est'an en cuatro lenguajes: \textit{THF}, \textit{TFF}, \textit{FOF} y \textit{CNF}.
+
+Anualmente se realiza la competencia \textit{CASC} (CADE ATP System Competition \cite{casc}), una competencia de demostradores autom'aticos de teoremas donde los sistemas participanetes compiten para probar la mayor cantidad de problemas de \textit{TPTP}. 'Esta competencia resulta una muy buena prueba para evaluar el funcionamiento de las herramientas autom'aticas disponibles.
+
+\textit{FOF} \cite{fof} es un lenguaje de l'ogica de primer 'orden con igualdad. Su elecci'on de \textit{FOF} est'a motivada  por su difundido uso y soporte que tiene de las herramientas autom'aticas y su expresividad a nivel de sintaxis. Una especificaci'on de \textit{TPTP-FOF} es una lista de f'ormulas que adem'as tienen un nombre y un tipo. Por ejemplo:
+
+\begin{verbatim}
+fof(john,axiom,( 
+    human(john) )).
+
+fof(all_created_equal,axiom,( 
+    ! [H1,H2] : 
+      ( ( human(H1) 
+         & human(H2) ) 
+     => created_equal(H1,H2) ) )). 
+
+fof(john_failed,axiom,( 
+    grade(john) = f )). 
+
+fof(someone_got_an_a,axiom,( 
+    ? [H] : 
+      ( human(H) 
+      & grade(H) = a ) )). 
+
+fof(distinct_grades,axiom,( 
+    a != f )). 
+
+fof(grades_not_human,axiom,( 
+    ! [G] : ~ human(grade(G)) )). 
+
+fof(someone_not_john,conjecture,( 
+    ? [H] : 
+      ( human(H) 
+      & H != john ) )). 
+\end{verbatim}
+
+Especificaci'on t'ipica en el lenguaje \textit{TPTP-FOF}. La sintaxis contiene todos los elementos de la l'ogica de primer 'orden. \textbf{![X]} es el cuantificador universal sobre la variable \textit{X}; \textbf{?[X]} es el cuantificador existencial sobre la variable \textit{X}. \textit{$human()$}, \textit{$grade()$}, \textit{$created\_equal()$} son predicados; las variables empiezan con una letra mayuscula y las constantes con minuscula. Los operadores disponibles son $\sim$, $|$, $\&$, $=>$, $<=>$, $=$ y $!=$ y corresponden con la negaci'on, la disyunci'on, la conjunci'on, la implicaci'on, la doble implicaci'on, la igualdad y la desigualdad.
+
+En el ejemplo anterior la 'ultima f'ormula es de tipo \textit{conjecture}. 'Esto indica al demostrador que es la f'ormula que se quiere probar. Las otras f'ormulas, de tipo \textit{axiom} se interpretan como axiomas.
