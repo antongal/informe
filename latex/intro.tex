@@ -1,6 +1,8 @@
 \chapter{Introducci'on}
 \section{Motivaci'on}
 
+
+
 Analisis de software. \\
 Heterogeneidad. \\
 Tool support: lightweight y heavyweight. \\
@@ -8,20 +10,25 @@ Usabilidad e interfaces. \\
 
 \section{Objetivos Especificos}
 
+En 'esta tesis se persiguen m'ultiples objetivos donde algunos son: mejorar el an'alisis heterogeneo, experimentar con nuevas tecnolog'ias y ampliar la funcionalidad de Heterogenius.
+
+
+\subsection{Extensi'on del 'arbol de an'alisis}
+
+Con el objetivo de permitir documentar todo el proceso de demostraci'on (caminos alternativos tomados, decisiones que no produjeron ning'un resultado exitoso, etc), se decidi'o ampliar el concepto del 'arbol de analisis. Para 'esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar ramas de demostraciones alternativas y ramas de decisiones no exitosas.
+
+Adem'as se introdujeron reglas de c'alculo de secuentes nuevas para permitir un mejor control de la aplicaci'on de herramientas autom'aticas externas.
+
+
 \subsection{Extensi'on de Heterogenius}
 
-El lenguaje de l'ogica de primer orden TPTP-FOF, al ser muy difundido en la comunidad de investigadores de demostradores autom'aticos de teoremas es soportado por numerosas herramientas. Entre ellas EProver y SPASS, demostradores autom'aticos de teoremas; EProver y Mace4, buscadores de modelos. 
+El lenguaje de l'ogica de primer orden \textit{TPTP-FOF}, al ser muy difundido en la comunidad de investigadores de demostradores autom'aticos de teoremas es soportado por numerosas herramientas. Entre ellas EProver y SPASS, demostradores autom'aticos de teoremas; EProver y Mace4, buscadores de modelos. 
 
-Para permitir el uso de todas 'estas herramientas y otras, se decidi'o integrar TPTP-FOF con Heterogenius mediante la implementaci'on de una $\rho-$translation desde el lenguaje $PDOCFA$.
+Para permitir el uso de todas 'estas herramientas y otras, se decidi'o integrar \textit{TPTP-FOF} con Heterogenius mediante la implementaci'on de una $\rho-$translation desde el lenguaje \textit{PDOCFA}.
 
-\subsection{True Heterogeneity}
 
-Heterogenius en su primera versi'on permiti'o realizar demostraciones heterogeneas mediante traducciones de secuentes. Cada secuente ten'ia f'ormulas de un mismo lenguaje haciendo que los secuentes sean en realidad homogeneos.
+\subsection{Heterogeneidad Verdadera}
+
+Heterogenius en su primera versi'on permiti'o realizar demostraciones heterogeneas mediante traducciones de secuentes. Cada secuente ten'ia f'ormulas de un mismo lenguaje haciendo que los mismos sean en realidad homogeneos.
 
 Se decidi'o ampliar el concepto de heterogeneidad expandiendolo tambi'en a los secuentes. De esta forma se permiti'o tener mayor flexibilidad en las demostraciones al poder soportar f'ormulas de distintos lenguajes en el mismo secuente.
-
-\subsection{Ampliaci'on del 'arbol de an'alisis}
-
-Con el objetivo de permitir documentar todo el proceso de demostraci'on (caminos alternativos tomados, decisiones que no produjeron ning'un resultado exitoso, etc), se decidi'o ampliar el concepto de 'arbol de analisis. Para 'esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar ramas de demostraciones alternativas y ramas de decisiones no exitosas.
-
-[TODO: tal vez algun grafico mostrando las diferentes ramas.]
