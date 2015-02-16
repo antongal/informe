@@ -1,16 +1,25 @@
 \chapter{Introducci'on}
 \section{Motivaci'on}
 
+Si bien el testing es la técnica más frecuentemente utilizada como validación de corrección del software, no es posible alcanzar resultados contundentes mediante su aplicación. En la amplia mayoría de los casos, esta validación parcial es suficiente. Sin embargo, en el desarrollo de sistemas críticos es necesario contar con técnicas que permitan alcanzar mayores grados de certeza sobre la satisfacción de cierto conjunto de propiedades.
 
+En tales contextos se suelen utilizar herramientas basadas en métodos formales tales como demostradores de teoremas, con los que se puede lograr certeza absoluta sobre las satisfacción de las propiedades deseadas. No obstante, una contra importante de estos métodos es su falta de automaticidad. Esta falencia está usualmente ligada al poder expresivo del lenguaje utilizado: a mayor expresividad del lenguaje, las herramientas de análisis brindan menos posibilidades de automaticidad.
 
-Analisis de software. \\
-Heterogeneidad. \\
-Tool support: lightweight y heavyweight. \\
-Usabilidad e interfaces. \\
+Un ejemplo clásico de esta correlación está dado por los lenguajes de primer orden. Su expresividad impide que se pueda construir un programa que sea capaz de decidir sobre la verdad o falsedad de una sentencia cualquiera. Sin embargo, se han desarrollado diversas herramientas que son capaces de realizar análisis automáticos para una gran cantidad de casos (como Mace4 \cite{m05}, E \cite{s13}, SPASS \cite{WDFKSW09}, etc.). 
+
+Por otro lado, la complejidad actual de los sistemas informáticos fuerza a los equipos de desarrollo a distribuir la tarea de relevar los requerimientos referidos a distintos aspecto de estos sistemas. Es sabido que diferentes aspectos de un sistema de software son mejor capturados por lenguajes de diferentes características. Esta apreciación vale tanto para lenguajes semiformales como la enorme diversidad de lenguajes diagramáticos de UML \cite{BRJ98}, como para lenguajes formales en donde diferentes lógicas resultan apropiadas para poner de relieve diferentes comportamientos de un sistema informático (algunos ejemplos son, linear temporal logics, tanto su versión proposicional, de primer orden o con operadores de pasado \cite{Pnu77}, \cite{MP95}, para caracterizar propiedades de las ejecuciones de un sistema, lógicas dinámicas, también en sus versiones proposicional y de primer orden \cite{HKT00}, etc.). Si bien esta práctica de construir especificaciones heterogéneas facilita la comprensión y documentación de los sistemas, impone una nueva dificultad a los métodos de análisis, que usualmente se aplican sobre un lenguaje único.
+
+Para salvar esta dificultad, desde hace ya algunos años, se ha estado trabajando en el desarrollo de fundamentos formales y herramientas de análisis de sistemas descriptos en forma heterogénea. Del lado de los fundamentos formales encontramos los trabajos seminales en el campo de la especificación algebraica de software como son \cite{GB84}, \cite{GB92}, \cite{Tar96}, \cite{Dia02}, mientras que del lado de las herramientas se observan trabajos como \cite{Mos02}, \cite{DF96}, \cite{DF02}, \cite{LF06}. 
+
+Otra dimensión de la heterogeneidad es la enorme diversidad de herramientas de análisis que existen hoy en día para cada lenguaje. Así, dado un lenguaje de especificación o diseño de software particular, encontramos un verdadero ecosistema de herramientas que nos brindan la posibilidad de aplicar diferentes técnicas de validación y verificación de propiedades descriptas en ese lenguaje y por lo tanto, es necesario brindar fundamentos formales a un concepto de análisis que permita la interrelación, estructurada formalmente, de estas técnicas. Con Heterogenius \cite{heterogenius} exploramos la construcción de esta herramienta cuya racionalización formal tiene origen en Argentum.
+
+Heterogenious es hoy una herramienta que integra gran variedad de lenguajes a través de traducciones que preservan la semántica de las especificaciones, y a través de diversas herramientas que permiten el análisis de propiedades en dichos lenguajes. Actualmente, una enorme variedad de herramientas, tanto demostradores semiautomáticos como bounded model-checkers automáticos, han elegido TPTP \cite{tptp} como lenguaje nativo para la realización del análisis lo que habilita el uso de una enorme variedad de métodos automáticos y semiautomáticos de análisis para especificaciones que pueden ser escritas en este lenguaje u otro para el cual existe un co-morfismo a este.
+
+En esta tesis investigaremos nuevas metodologías tendientes a sacar provecho de la madurez de los sistemas actuales de demostración automática de teoremas de primer orden descritos en lenguaje TPTP, con el objetivo de construir herramientas que sirvan de ayuda en los procesos de análisis formal de software crítico. Estas metodologías se plasmarán en mejoras concretas al sistema Heterogenius, aumentando su automaticidad en los casos que sea posible.
 
 \section{Objetivos Especificos}
 
-En 'esta tesis se persiguen m'ultiples objetivos donde algunos son: mejorar el an'alisis heterogeneo, experimentar con nuevas tecnolog'ias y ampliar la funcionalidad de Heterogenius.
+En 'esta tesis busca mejorar el an'alisis heterogeneo, mediante la extensi'on del 'arbol de an'alisis y la incorporaci'on de nuevas operaciones; experimentar con nuevas tecnolog'ias, especialmente las herramientas autom'aticas que trabajan con l'ogica de primer orden y ampliar la funcionalidad de Heterogenius.
 
 
 \subsection{Extensi'on del 'arbol de an'alisis}
