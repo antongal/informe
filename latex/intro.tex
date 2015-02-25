@@ -3,7 +3,7 @@
 
 Si bien el testing es la técnica más frecuentemente utilizada como validación de corrección del software, no es posible alcanzar resultados contundentes mediante su aplicación. En la amplia mayoría de los casos, esta validación parcial es suficiente. Sin embargo, en el desarrollo de sistemas críticos es necesario contar con técnicas que permitan alcanzar mayores grados de certeza sobre la satisfacción de cierto conjunto de propiedades.
 
-En tales contextos se suelen utilizar herramientas basadas en fuertes fundamentos matemáticos y que pertenecen a una categoría que usualmente se conoce como métodos formales tales como los demostradores de teoremas, con los que se puede lograr certeza absoluta sobre las satisfacción de las propiedades deseadas. No obstante, una contra importante de estos métodos es su falta de automaticidad. Es conocido que la tarea de demostrar propiedades requiere de capacidades matemáticas menos no tan comunes en equipos de desarrollo de sistemas de software. Esta desventaja está también ligada al poder expresivo del lenguaje utilizado: a mayor expresividad del lenguaje, las herramientas de análisis brindan menos posibilidades de automaticidad.
+En tales contextos se suelen utilizar herramientas basadas en fuertes fundamentos matemáticos y que pertenecen a una categoría que usualmente se conoce como métodos formales tales como los demostradores de teoremas, con los que se puede lograr certeza absoluta sobre las satisfacción de las propiedades deseadas. No obstante, una contra importante de estos métodos es su falta de automaticidad. Es conocido que la tarea de demostrar propiedades requiere de capacidades matemáticas no tan comunes en equipos de desarrollo de sistemas de software, lo que dificulta la realización de tareas de verificación por estos medios. Esta desventaja está también ligada al poder expresivo del lenguaje utilizado: a mayor expresividad del lenguaje, las herramientas de análisis brindan menos posibilidades de automaticidad.
 
 Un ejemplo clásico de esta correlación está dado por los lenguajes de primer orden. Su expresividad impide que se pueda construir un programa que sea capaz de decidir sobre la verdad o falsedad de una sentencia cualquiera. Sin embargo, se han desarrollado diversas herramientas que son capaces de realizar análisis automáticos para una gran cantidad de casos (como Mace4 \cite{m05}, E \cite{s13}, SPASS \cite{WDFKSW09}, etc.). 
 
@@ -11,33 +11,30 @@ Por otro lado, la complejidad actual de los sistemas informáticos fuerza a los 
 
 Para salvar esta dificultad, desde hace ya algunos años, se ha estado trabajando en el desarrollo de fundamentos formales y herramientas de análisis de sistemas descriptos en forma heterogénea. Del lado de los fundamentos formales encontramos los trabajos seminales en el campo de la especificación algebraica de software como son \cite{GB84}, \cite{GB92}, \cite{Tar96}, \cite{Dia02}, mientras que del lado de las herramientas se observan trabajos como \cite{Mos02}, \cite{DF96}, \cite{DF02}, \cite{LF06}. 
 
-Otra dimensión de la heterogeneidad es la enorme diversidad de herramientas de análisis que existen hoy en día para cada lenguaje. Así, dado un lenguaje de especificación o diseño de software particular, encontramos un verdadero ecosistema de herramientas que nos brindan la posibilidad de aplicar diferentes técnicas de validación y verificación de propiedades descriptas en ese lenguaje y por lo tanto, es necesario brindar fundamentos formales a un concepto de análisis que permita la interrelación, estructurada formalmente, de estas técnicas. Con Heterogenius \cite{heterogenius} exploramos la construcción de esta herramienta cuya racionalización formal tiene origen en Argentum.
+Otra dimensión de la heterogeneidad es la enorme diversidad de herramientas de análisis que existen hoy en día para cada lenguaje. Así, dado un lenguaje de especificación o diseño de software particular, encontramos un verdadero ecosistema de herramientas que nos brindan la posibilidad de aplicar diferentes técnicas de validación y verificación de propiedades descriptas en ese lenguaje y por lo tanto, es necesario brindar fundamentos formales a un concepto de análisis que permita la interrelación, estructurada formalmente, de estas técnicas. Con Heterogenius \cite{heterogenius} exploramos la construcción de esta herramienta cuya racionalización formal tiene origen en $\argentum$ \cite{frias:relmics01}.
 
-Heterogenious es hoy una herramienta que integra gran variedad de lenguajes a través de traducciones que preservan la semántica de las especificaciones, y a través de diversas herramientas que permiten el análisis de propiedades en dichos lenguajes. Actualmente, una enorme variedad de herramientas, tanto demostradores semiautomáticos como bounded model-checkers automáticos, han elegido TPTP \cite{tptp} como lenguaje nativo para la realización del análisis lo que habilita el uso de una enorme variedad de métodos automáticos y semiautomáticos de análisis para especificaciones que pueden ser escritas en este lenguaje u otro para el cual existe un co-morfismo a este.
+Heterogenious es hoy una herramienta que integra gran variedad de lenguajes, vinculados estos por medio de traducciones que preservan la semántica de las especificaciones, y facilitando el uso de diversas herramientas que permiten el análisis de propiedades en dichos lenguajes. Actualmente, una enorme variedad de herramientas, tanto demostradores semiautomáticos como bounded model-checkers automáticos, han elegido TPTP \cite{tptp} como lenguaje nativo para la realización del análisis lo que habilita el uso de una enorme variedad de métodos automáticos y semiautomáticos de análisis para especificaciones que pueden ser escritas en este lenguaje u otro para el cual existe un traducción que preserva la semántica de las fórmulas a este.\\
 
-En esta tesis investigaremos nuevas metodologías tendientes a sacar provecho de la madurez de los sistemas actuales de demostración automática de teoremas de primer orden descritos en lenguaje TPTP, con el objetivo de construir herramientas que sirvan de ayuda en los procesos de análisis formal de software crítico. Estas metodologías se plasmarán en mejoras concretas al sistema Heterogenius, aumentando su automaticidad en los casos que sea posible.
+Las contribuciones principales de esta tesis, que pueden leerse a modo de objetivos específicos del trabajo, son los siguientes:
 
-\section{Objetivos Especificos}
+\begin{itemize}
+\item \textbf{Extensi'on del 'arbol de an'alisis:} Ya en Heterogenious habíamos presentado como concepto la noción de árbol de análisis. Esto era una generalización del concepto de árbol de prueba para un lenguaje lógico que soportaba la invocación a herramientas auxiliares que si bien no configuraban una transformación del recuente en cuestión, permitía documentar el proceso de análisis. Si bien esta ampliación del concepto de árbol de prueba es una ganancia metodológica respecto de la utilización disociada de las herramientas disponibles, aun podría sacar provecho de ciertas mejoras. Uno de estos elementos es la posibilidad de documentar en mayor profundidad el proceso de análisis a partir de tomar en cuenta los caminos alternativos tomados, decisiones que no produjeron ning'un resultado exitoso, etc.
 
-En 'esta tesis busca mejorar el an'alisis heterogeneo, mediante la extensi'on del 'arbol de an'alisis y la incorporaci'on de nuevas operaciones; experimentar con nuevas tecnolog'ias, especialmente las herramientas autom'aticas que trabajan con l'ogica de primer orden y ampliar la funcionalidad de Heterogenius.
+Para abordar esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar ramas de demostraciones alternativas y ramas de decisiones no exitosas. Addicionalmente se introdujeron reglas de c'alculo de secuentes nuevas para permitir un mejor control de la aplicaci'on de herramientas autom'aticas externas. \marginpar{No queda claro a qué se refiere esta última oración.}
 
-
-\subsection{Extensi'on del 'arbol de an'alisis}
-
-Con el objetivo de permitir documentar todo el proceso de demostraci'on (caminos alternativos tomados, decisiones que no produjeron ning'un resultado exitoso, etc), se decidi'o ampliar el concepto del 'arbol de analisis. Para 'esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar ramas de demostraciones alternativas y ramas de decisiones no exitosas.
-
-Adem'as se introdujeron reglas de c'alculo de secuentes nuevas para permitir un mejor control de la aplicaci'on de herramientas autom'aticas externas.
-
-
-\subsection{Extensi'on de Heterogenius}
+\item \textbf{Extensi'on de Heterogenius:}
 
 El lenguaje de l'ogica de primer orden \textit{TPTP-FOF}, al ser muy difundido en la comunidad de investigadores de demostradores autom'aticos de teoremas es soportado por numerosas herramientas. Entre ellas EProver y SPASS, demostradores autom'aticos de teoremas; EProver y Mace4, buscadores de modelos. 
 
 Para permitir el uso de todas 'estas herramientas y otras, se decidi'o integrar \textit{TPTP-FOF} con Heterogenius mediante la implementaci'on de una $\rho-$translation desde el lenguaje \textit{PDOCFA}.
 
 
-\subsection{Heterogeneidad Verdadera}
+\item \textbf{Heterogeneidad Verdadera:}
 
 Heterogenius en su primera versi'on permiti'o realizar demostraciones heterogeneas mediante traducciones de secuentes. Cada secuente ten'ia f'ormulas de un mismo lenguaje haciendo que los mismos sean en realidad homogeneos.
 
 Se decidi'o ampliar el concepto de heterogeneidad expandiendolo tambi'en a los secuentes. De esta forma se permiti'o tener mayor flexibilidad en las demostraciones al poder soportar f'ormulas de distintos lenguajes en el mismo secuente.
+
+\end{itemize}
+
+El presente trabajo está organizado de la siguiente forma: en la Sec.~\ref{xxx} presentaremos...
