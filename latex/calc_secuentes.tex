@@ -1,0 +1,231 @@
+\section{Cálculo de secuentes} \label{calculo-secuentes}
+
+El cálculo de secuentes es una familia de sistemas de demostración. Los primeros cálculos de secuentes (los sistemas LK y LJ) fueron desarrollados originalmente por Gerhard Gentzen en la década del `30\cite{gentzen1935}.
+
+En el cálculo de secuentes una demostración se construye como un árbol en el que sus nodos son secuentes.
+Un secuente es un par ordenado de listas finitas de fórmulas, y lo notamos $ \Gamma \vdash  \Delta$.
+Su interpretación intuitiva puede pensarse de esta manera: un secuente $\Gamma \vdash  \Delta$ es válido en un modelo semántico \sem{M}, si $\textrm{\sem{M}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \Rightarrow \bigvee_{\delta \in \Delta} \delta )$.
+Luego, un secuente es \emph{universalmente válido} (o simplemente \emph{válido}) si es válido para todo modelo semántico.
+Correspondientemente, un secuente $\Gamma \vdash  \Delta$ es \emph{inválido} si existe un modelo semántico \sem{N} tal que $\textrm{\sem{N}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \wedge \bigwedge_{\delta \in \Delta} \neg\delta )$.
+En tal caso, diremos que \sem{N} es un \emph{contraejemplo} para ese secuente.
+
+Para demostrar la fórmula $\phi$, se parte de un árbol con un único nodo: $ \vdash \phi $ (un abuso de notación para el secuente $ \emptyset \vdash \{\phi\} $). Mediante la aplicación de reglas de inferencia sobre las hojas, el árbol crece en altura incorporando nuevos secuentes como hijos del nodo sobre el cual se aplica la regla.
+La demostración se considera terminada cuando todas las hojas del árbol son de la forma $\alpha \vdash \alpha$ con $\alpha$ una fórmula, los cuales son llamados \emph{secuentes triviales} o \emph{secuentes terminales}.
+%con $ \Sigma \cap \Gamma = \emptyset $ 
+
+Las reglas de inferencia tienen la forma que se muestra a continuación,
+\begin{prooftree}
+	\AxiomC{$\Gamma_{1} \vdash \Delta_{1} $}
+	\AxiomC{$\dots$}
+	\AxiomC{$\Gamma_{n} \vdash \Delta_{n} $}
+	\RightLabel{\scriptsize ($R$)}
+	\TrinaryInfC{$\Gamma \vdash \Delta $}
+\end{prooftree}
+y se pueden interpretar de esta manera: dada una hoja del árbol de demostración de la forma $\Gamma \vdash \Delta$, la aplicación de la regla $R$ modifica el árbol agregando $n$ nuevas hojas de la forma $\Gamma_{i}\vdash\Delta_{i}$ como hijas del secuente $\Gamma \vdash \Delta$\footnote{Si bien las reglas pueden interpretarse en sentido inverso, preferimos esta dirección debido a que vamos a darle más atención al proceso de construcción de la demostración que a su lectura posterior.}.
+
+\bigskip
+
+A modo de ejemplo, veamos cómo construir la demostración de la fórmula proposicional $(p \vee \neg p) \wedge (q \rightarrow q)$ utilizando un cálculo de secuentes para esa lógica.
+La fórmula dada es una conjunción de tautologías, ya que $(p \vee \neg p)$ y $(q \rightarrow q)$ son válidas para toda valuación, y por lo tanto es ella misma una tautología.
+Luego, por la compleción del cáculo, existe una demostración como las descriptas más arriba para esta fórmula.
+
+
+En la figura \ref{reglasProposicional} pueden verse algunas reglas del cálculo que nos serán útiles en la demostración.
+%~ \bigskip
+
+\begin{figure}
+\begin{tabularx}{\textwidth}{Xc Xc}
+	
+	%Right OR
+	\AxiomC{$\Gamma \vdash \alpha, \beta, \Delta $}
+	\RightLabel{\scriptsize (right $\vee$)}
+	\UnaryInfC{$\Gamma \vdash (\alpha \vee \beta), \Delta $}
+	\DisplayProof
+	
+	&
+	
+	%Right THEN
+	\AxiomC{$\Gamma , \alpha \vdash \beta, \Delta $}
+	\RightLabel{\scriptsize (right $\rightarrow$)}
+	\UnaryInfC{$\Gamma \vdash (\alpha \rightarrow \beta), \Delta $}
+	\DisplayProof
+	
+	\\ & \\
+	
+	%Right NOT
+	\AxiomC{$\Gamma , \alpha \vdash \Delta $}
+	\RightLabel{\scriptsize (right $\neg$)}
+	\UnaryInfC{$\Gamma \vdash (\neg\alpha) , \Delta $}
+	\DisplayProof
+	
+	&
+	
+	%Right AND
+	\AxiomC{$\Gamma \vdash \alpha, \Delta $}
+	\AxiomC{$\Gamma \vdash \beta, \Delta $}
+	\RightLabel{\scriptsize (right $\wedge$)}
+	\BinaryInfC{$\Gamma \vdash (\alpha \wedge \beta) , \Delta $}
+	\DisplayProof
+	
+\end{tabularx}
+\caption{Algunas reglas del cálculo de secuentes para lógica proposicional.}\label{reglasProposicional}
+\end{figure}
+%~ \bigskip
+
+Inicialmente tenemos, como raíz del árbol de demostración, al secuente que no tiene antecedentes y sólo tiene como consecuente la fórmula que queremos demostrar: $$ \vdash (p \vee \neg p) \wedge (q \rightarrow q)$$
+Aplicando la regla (\textit{right} $\wedge$) se obtienen dos secuentes hijos, los cuales indican nuestras nuevas obligaciones de demostración:
+$$  \vdash (p \vee \neg p) \;\;\;\;\;\;\; \vdash (q \rightarrow q) $$
+Ataquemos primero el segundo secuente recién obtenido. Al aplicar la regla (\textit{right} $\rightarrow$), se obtiene un único secuente hijo: $$ q \vdash q $$
+Como este es un secuente trivial, ya podemos considerar cerrada esta rama de la demostración.
+Volvamos entonces al secuente $\vdash (p \vee \neg p)$. Aplicando la regla (\textit{right} $\vee$), obtenemos un único secuente hijo:
+$$ \vdash p \; , \; \neg p $$
+Finalmente aplicando la regla (\textit{right} $\neg$) obtenemos nuevamente un único secuente hijo $$ p \vdash p $$
+Dado que es un secuente trivial, también podemos considerar cerrada esta rama de la demostración.
+Así llegamos a obtener un árbol con raíz $ (p \vee \neg p) \wedge (q \rightarrow q)$ y cuyas hojas son todas secuentes triviales.
+Luego, hemos demostrado dicha fórmula.
+En la figura \ref{arbolDemoEjemplo} se muestra la demostración anterior escrita utilizando la notación tradicional del cálculo de secuentes.
+
+\begin{figure}
+%\missingfigure{Arbol de demostración tradicional}
+
+\begin{prooftree}
+	\AxiomC{$p \vdash p$}
+	\RightLabel{\scriptsize(right $\neg$)}	
+		\UnaryInfC{$\vdash p , \neg p$}
+	\RightLabel{\scriptsize(right $\vee$)}	
+		\UnaryInfC{$\vdash p \vee \neg p$}
+
+	\AxiomC{$q \vdash q $}	
+	\RightLabel{\scriptsize(right $\rightarrow$)}	
+	\UnaryInfC{$\vdash (q \rightarrow q)$}
+
+\RightLabel{\scriptsize(right $\wedge$)}
+\BinaryInfC{$\vdash (p \vee \neg p) \wedge (q \rightarrow q)$}
+\end{prooftree}
+\caption{Ejemplo de demostración en notación tradicional}\label{arbolDemoEjemplo}
+\end{figure}
+
+
+%\begin{prooftree}
+%\AxiomC{$P$}
+%\RightLabel{\scriptsize(1)}
+%\UnaryInfC{$\neg P$}
+%
+%%             \BinaryInfC{$\bot$}
+%%             \RightLabel{\scriptsize(1)}
+%%             \UnaryInfC{$\neg\neg P$}
+%\end{prooftree}
+
+\bigskip
+
+%\mtodo{}{Este párrafo debería ir después del ejemplo; como está ahora, la frase "A modo de ejemplo" del párrafo siguiente parece referirse a la compleción y corrección del cálculo.}
+%\todo{Ya lo moví, pero lo sacaría la verdad}
+Para las lógicas más tradicionales (lógica proposicional, lógica de primer orden, etc.) puede demostrarse que este cáculo es completo y correcto (ver \cite{bookFoundations}, por ejemplo), es decir que para toda fórmula semánticamente válida puede construirse una demostración y que toda fórmula para la que pueda construirse una demostración es semánticamente válida.
+
+\bigskip
+
+Vale aclarar que, aunque se pueden hallar distintas versiones de estos cálculos aún para una misma lógica, cualquier cálculo de secuentes para lógica proposicional debe poseer más reglas que las utilizadas en el ejemplo anterior.
+Por lo menos debe proveer las correspondientes a los mismos símbolos lógicos que aparecen en la figura \ref{reglasProposicional} pero para el lado izquierdo del $\vdash$.
+Si bien con esas reglas puede demostrarse la corrección y compleción del cálculo (ver \cite{bookFoundations}, por ejemplo) algunos autores también incluyen otras reglas que aunque supérfluas desde el punto de vista teórico, son muy útiles al utilizar el cálculo para construir demostraciones.
+Estas reglas tienen que ver con la composición estructural de los secuentes.
+En la figura \ref{reglasEstructurales}, pueden verse algunos ejemplos de estas reglas: (\emph{left} \textbf{C}) y (\emph{right} \textbf{C}) permiten duplicar reglas del antecedente y del consecuente, (\emph{left} \textbf{X}) y (\emph{right} \textbf{X}) permiten cambiar el orden de las fórmulas, y la \textit{cut rule} puede interpretarse como la introducción de una nueva hipótesis a la demostración o como una separación en casos basada en el cumplimiento de la fórmula $\alpha$.
+
+\begin{figure}
+\begin{center}
+\begin{tabularx}{0.7\textwidth}{Xc Xc}
+
+	\AxiomC{$\Gamma_1, \alpha, \alpha, \Gamma_2 \vdash \Delta $}
+	\RightLabel{\scriptsize (left \textbf{C})}
+	\UnaryInfC{$\Gamma_1, \alpha, \Gamma_2 \vdash  \Delta $}
+	\DisplayProof
+	
+	&
+
+	\AxiomC{$\Gamma \vdash \Delta_1, \alpha, \alpha, \Delta_2 $}
+	\RightLabel{\scriptsize (right \textbf{C})}
+	\UnaryInfC{$\Gamma \vdash  \Delta_1, \alpha, \Delta_2 $}
+	\DisplayProof
+\\
+&
+\\
+
+	\AxiomC{$\Gamma_1, \alpha, \beta, \Gamma_2 \vdash \Delta $}
+	\RightLabel{\scriptsize (left \textbf{X})}
+	\UnaryInfC{$\Gamma_1, \beta, \alpha, \Gamma_2 \vdash  \Delta $}
+	\DisplayProof
+
+&	
+	%Right THEN
+	\AxiomC{$\Gamma \vdash \Delta_1, \alpha, \beta, \Delta_2 $}
+	\RightLabel{\scriptsize (right \textbf{X})}
+	\UnaryInfC{$\Gamma \vdash \Delta_1, \beta, \alpha, \Delta_2 $}
+	\DisplayProof
+	
+	%~ &
+	%~ 
+	%~ %Right THEN
+	%~ \AxiomC{$\Gamma , \alpha \vdash \beta, \Delta $}
+	%~ \RightLabel{\scriptsize (right $\rightarrow$)}
+	%~ \UnaryInfC{$\Gamma \vdash (\alpha \rightarrow \beta), \Delta $}
+	%~ \DisplayProof
+	
+	%~ \\
+\end{tabularx}
+\end{center}
+\begin{prooftree}
+	\AxiomC{$\Gamma , \alpha \vdash \Delta $}
+	\AxiomC{$\Gamma \vdash \alpha , \Delta $}
+	\RightLabel{\scriptsize (cut rule)}
+	\BinaryInfC{$\Gamma \vdash \Delta $}
+\end{prooftree}
+\caption{Reglas estructurales.}\label{reglasEstructurales}
+\end{figure}
+
+El cálculo de secuentes para lógica de primer orden provee todas las reglas del cálculo de secuentes para proposicional junto con las reglas específicas para los cuantificadores que se muestran en la figura \ref{reglasCuantificadores}.
+Las reglas (\emph{right $\forall$}) y (\emph{left $\exists$}) suelen llamarse reglas de cuantificación universal, mientras a (\emph{left $\forall$}) y (\emph{right $\exists$}) se las llama reglas de cuantificación existencial.
+A las constantes frescas que aparecen en la demostración luego de la aplicación de una regla de cuantificación universal se las llama a menudo \emph{constantes de Skolem}, y se acostumbra referirse a estas aplicaciones como \emph{skolemizaciones} de las fórmulas cuantificadas.
+
+\bigskip
+
+\begin{figure}
+\begin{tabularx}{\textwidth}{Xc Xc}
+	
+	%Left ForAll
+	\AxiomC{$\Gamma , \alpha\{x \leftarrow t\} \vdash \Delta $}
+	\RightLabel{\scriptsize (left $\forall$)}
+	\UnaryInfC{$\Gamma , (\forall x:\alpha)  \vdash \Delta $}
+	\DisplayProof
+	
+	&
+	
+	%Right ForAll
+	\AxiomC{$\Gamma \vdash \alpha\{x \leftarrow a\} , \Delta $}
+	\RightLabel{\scriptsize (right $\forall$)}
+	\UnaryInfC{$\Gamma \vdash (\forall x:\alpha), \Delta $}
+	\DisplayProof
+
+	\\ & \\
+	
+	%Left Exist
+	\AxiomC{$\Gamma , \alpha\{x \leftarrow a\} \vdash \Delta $}
+	\RightLabel{\scriptsize (left $\exists$)}
+	\UnaryInfC{$\Gamma , (\exists x:\alpha)  \vdash \Delta $}
+	\DisplayProof
+		
+	&
+	
+	%Right Exist
+	\AxiomC{$\Gamma \vdash \alpha\{x \leftarrow t\} , \Delta $}
+	\RightLabel{\scriptsize (right $\exists$)}
+	\UnaryInfC{$\Gamma \vdash (\exists x:\alpha), \Delta $}
+	\DisplayProof
+		
+\end{tabularx}
+
+\bigskip
+
+\small{Notación: $t$ es un término, $a$ es una constante fresca, y $\alpha\{ x \leftarrow t \}$ es el resultado de sustituir las ocurrencias de $x$ como variable libre en A, con el término $t$ (de ser necesario se renombran las variables ya ligadas en $A$ para evitar capturar variables libres en $t$).}
+
+
+\caption{Reglas del cálculo de secuentes para cuantificadores.} \label{reglasCuantificadores}
+\end{figure}
