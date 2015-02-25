@@ -18,22 +18,24 @@ Heterogenious es hoy una herramienta que integra gran variedad de lenguajes, vin
 Las contribuciones principales de esta tesis, que pueden leerse a modo de objetivos específicos del trabajo, son los siguientes:
 
 \begin{itemize}
-\item \textbf{Extensi'on del 'arbol de an'alisis:} Ya en Heterogenious habíamos presentado como concepto la noción de árbol de análisis. Esto era una generalización del concepto de árbol de prueba para un lenguaje lógico que soportaba la invocación a herramientas auxiliares que si bien no configuraban una transformación del recuente en cuestión, permitía documentar el proceso de análisis. Si bien esta ampliación del concepto de árbol de prueba es una ganancia metodológica respecto de la utilización disociada de las herramientas disponibles, aun podría sacar provecho de ciertas mejoras. Uno de estos elementos es la posibilidad de documentar en mayor profundidad el proceso de análisis a partir de tomar en cuenta los caminos alternativos tomados, decisiones que no produjeron ning'un resultado exitoso, etc.
+\item \textbf{Extensi'on del 'arbol de an'alisis:} Ya en Heterogenius habíamos presentado como concepto la noción de árbol de análisis. Esto era una generalización del concepto de árbol de prueba para un lenguaje lógico que soportaba la invocación a herramientas auxiliares que si bien no configuraban una transformación del recuente en cuestión, permitía documentar el proceso de análisis. Si bien esta ampliación del concepto de árbol de prueba es una ganancia metodológica respecto de la utilización disociada de las herramientas disponibles, aun podría sacar provecho de ciertas mejoras. Uno de estos elementos es la posibilidad de documentar en mayor profundidad el proceso de análisis a partir de tomar en cuenta los caminos alternativos tomados, decisiones que no produjeron ning'un resultado exitoso, etc.
 
-Para abordar esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar ramas de demostraciones alternativas y ramas de decisiones no exitosas. Addicionalmente se introdujeron reglas de c'alculo de secuentes nuevas para permitir un mejor control de la aplicaci'on de herramientas autom'aticas externas. \marginpar{No queda claro a qué se refiere esta última oración.}
+Para abordar esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar ramas de demostraciones alternativas y ramas de decisiones no exitosas.
 
 \item \textbf{Extensi'on de Heterogenius:}
 
-El lenguaje de l'ogica de primer orden \textit{TPTP-FOF}, al ser muy difundido en la comunidad de investigadores de demostradores autom'aticos de teoremas es soportado por numerosas herramientas. Entre ellas EProver y SPASS, demostradores autom'aticos de teoremas; EProver y Mace4, buscadores de modelos. 
+Heterogenius est'a integrado con varios lenguajes y herramientas que trabajan con l'ogica de alto 'orden. Debido al creciente n'umero de herramientas de l'ogica de primer 'orden y su uso en el an'alisis de software, se decidi'o soportar el lenguaje de l'ogica de primer orden \textit{TPTP-FOF}. 'Este lenguaje est'a muy difundido en la comunidad de investigadores de demostradores autom'aticos de teoremas y es soportado por numerosas herramientas, con lo cu'al se abren muchas posibilidades de interacci'on entre Heterogenius y software de an'alisis externo. 
 
-Para permitir el uso de todas 'estas herramientas y otras, se decidi'o integrar \textit{TPTP-FOF} con Heterogenius mediante la implementaci'on de una $\rho-$translation desde el lenguaje \textit{PDOCFA}.
+Para demostrar la utilidad de 'esta extensi'on se integraron los siguientes demostradores autom'aticos y buscadores de contraejemplos: EProver y SPASS, como demostradores autom'aticos de autom'aticos teoremas; EProver y Mace4, como buscadores de modelos. 
+
+Por 'ultimo como Heterogenius es una plataforma de an'alisis heterogeneo y uno de sus objetivos es permitir la interacci'on f'acil entre distintos lenguajes del sistema, se implement'o una $\rho-$translation (con perdida) desde el lenguaje \textit{PDOCFA} a \textit{TPTP-FOF}.
 
 
 \item \textbf{Heterogeneidad Verdadera:}
 
-Heterogenius en su primera versi'on permiti'o realizar demostraciones heterogeneas mediante traducciones de secuentes. Cada secuente ten'ia f'ormulas de un mismo lenguaje haciendo que los mismos sean en realidad homogeneos.
+Heterogenius en su primera versi'on se hab'ia creado como un demostrador heterogeneo pero con secuentes homogeneos. De 'esta forma cada secuente solamente pod'ia tener f'ormulas del mismo lenguaje y las traducciones se realizaban sobre todas las f'ormulas del secuente. 'Esto presenta un problema ya que no se permit'ia tener un control m'as fino sobre los secuentes y no se lograba el suficiente nivel de heterogeneidad como para abstraernos del lenguaje en el que se lleva a cabo el an'alisis.
 
-Se decidi'o ampliar el concepto de heterogeneidad expandiendolo tambi'en a los secuentes. De esta forma se permiti'o tener mayor flexibilidad en las demostraciones al poder soportar f'ormulas de distintos lenguajes en el mismo secuente.
+Debido a esto, se ampli'o el concepto de heterogeneidad expandiendolo tambi'en a los secuentes. De esta forma se permite tener f'ormulas de distintos lenguajes en el mismo secuente y realizar traducciones a nivel de f'ormulas.
 
 \end{itemize}
 
