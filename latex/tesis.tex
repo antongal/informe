@@ -18,6 +18,7 @@
 \usepackage{calligra}
 \usepackage{textcomp}
 \usepackage{tabularx}
+%\usepackage{fancyvrb}
 
 \def \argentum{{\bf A}r_{\bf g}entum}
 \newcommand{\sem}[1]{{\calligra #1}}
@@ -41,6 +42,7 @@
 
 \apptocmd{\thebibliography}{\csname phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
 
+\raggedbottom
 
 \usepackage{hyperref}
 \hypersetup{
@@ -96,6 +98,9 @@
 
 %\newpage
 \input{referencias}
+
+\newpage
+\input{anexo}
 
 
 %%%% BIBLIOGRAFIA

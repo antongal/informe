@@ -1,0 +1,447 @@
+fof(m1,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ! [A0,Af] :
+          ( ( leq(Af,A)
+            & leq(Af,ct_iden_U1)
+            & leq(Af,A)
+            & one(Af)
+            & leq(A0,A)
+            & leq(A0,ct_iden_U1)
+            & leq(A0,A)
+            & one(A0) )
+         => ( ( leq(Af,product(composition(converse(composition(A0,composition(sum(R,S),rTC(sum(R,S))))),composition(A0,composition(sum(R,S),rTC(sum(R,S))))),ct_one_prime))
+              & none(product(product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+              & none(product(product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime))) )
+           => ( leq(Af,product(composition(converse(composition(A0,composition(R,rTC(R)))),composition(A0,composition(R,rTC(R)))),ct_one_prime))
+              | leq(Af,product(composition(converse(composition(A0,composition(S,rTC(S)))),composition(A0,composition(S,rTC(S)))),ct_one_prime))
+              | ? [Ai] :
+                  ( leq(Ai,product(composition(converse(composition(A0,composition(R,rTC(R)))),composition(A0,composition(R,rTC(R)))),ct_one_prime))
+                  & leq(Af,product(composition(converse(composition(Ai,composition(S,rTC(S)))),composition(Ai,composition(S,rTC(S)))),ct_one_prime))
+                  & leq(Ai,ct_iden_U1)
+                  & leq(Ai,A)
+                  & one(Ai) ) ) ) ) ) )).
+
+fof(m10,conjecture,(
+    ! [A,B,C,W,Ap] :
+      ( ( leq(Ap,A)
+        & one(Ap)
+        & leq(W,composition(composition(A,ct_one),fork(ct_one_prime,composition(composition(B,ct_one),C)))) )
+     => leq(composition(converse(ct_pi),composition(product(composition(converse(composition(Ap,W)),composition(Ap,W)),ct_one_prime),ct_rho)),composition(composition(B,ct_one),C)) ) )).
+
+fof(m11b,conjecture,(
+    ! [A,B,R] :
+      ( leq(R,composition(composition(A,ct_one),B))
+     => leq(product(composition(converse(composition(A,R)),composition(A,R)),ct_one_prime),B) ) )).
+
+fof(m11b_v2,conjecture,(
+    ! [A,B,R] :
+      ( ( leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),B))
+        & leq(B,ct_iden_U1)
+        & leq(A,ct_iden_U1) )
+     => leq(product(composition(converse(composition(A,R)),composition(A,R)),ct_one_prime),B) ) )).
+
+fof(m12b,conjecture,(
+    ! [A,B,C] :
+      ( ( leq(A,C)
+        & leq(B,C) )
+     => leq(sum(A,B),C) ) )).
+
+fof(m13,conjecture,(
+    ! [A,B,R] :
+      ( leq(R,composition(composition(A,ct_one),B))
+     => leq(rTC(R),composition(composition(A,ct_one),B)) ) )).
+
+fof(m15,conjecture,(
+    ! [A,B,R,S,C] :
+      ( ( leq(C,A)
+        & one(C)
+        & leq(S,composition(composition(A,ct_one),B))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => ( leq(R,S)
+       => leq(product(composition(converse(composition(C,R)),composition(C,R)),ct_one_prime),product(composition(converse(composition(C,S)),composition(C,S)),ct_one_prime)) ) ) )).
+
+fof(m16,conjecture,(
+    ! [A,B] : leq(A,sum(A,B)) )).
+
+fof(m17,conjecture,(
+    ! [A,B,R,S] :
+      ( ( leq(S,composition(composition(A,ct_one),B))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => ( leq(R,S)
+       => leq(rTC(R),rTC(S)) ) ) )).
+
+fof(m18,conjecture,(
+    ! [A,X] :
+      ( ( none(A)
+        & some(X) )
+     => notLeq(X,A) ) )).
+
+fof(m19,conjecture,(
+    ! [A,B,R] :
+      ( leq(R,composition(composition(A,ct_one),B))
+     => leq(product(composition(composition(R,B),converse(composition(R,B))),ct_one_prime),A) ) )).
+
+fof(m1h0,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ( ( none(product(product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+          & none(product(product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime))) )
+       => composition(sum(R,S),rTC(sum(R,S))) = sum(sum(composition(R,rTC(R)),composition(S,rTC(S))),composition(composition(R,rTC(R)),composition(S,rTC(S)))) ) ) )).
+
+fof(m1m1,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ! [A0,Af] :
+          ( ( leq(Af,A)
+            & one(Af)
+            & leq(A0,A)
+            & one(A0) )
+         => ( ( leq(Af,product(composition(converse(composition(A0,composition(sum(R,S),rTC(sum(R,S))))),composition(A0,composition(sum(R,S),rTC(sum(R,S))))),ct_one_prime))
+              & none(product(product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+              & none(product(product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+              & leq(A0,product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime)) )
+           => leq(Af,product(composition(converse(composition(A0,composition(S,rTC(S)))),composition(A0,composition(S,rTC(S)))),ct_one_prime)) ) ) ) )).
+
+fof(m1m1_001,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ! [A0,Af] :
+          ( ( leq(Af,A)
+            & one(Af)
+            & leq(A0,A)
+            & one(A0) )
+         => ( ( leq(Af,product(composition(converse(composition(A0,rTC(sum(R,S)))),composition(A0,rTC(sum(R,S)))),ct_one_prime))
+              & none(product(product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+              & none(product(product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+              & leq(A0,product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime)) )
+           => leq(Af,product(composition(converse(composition(A0,rTC(S))),composition(A0,rTC(S))),ct_one_prime)) ) ) ) )).
+
+fof(m1m4,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ! [A,R,S] :
+          ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+            & leq(S,composition(composition(A,ct_one),A))
+            & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+            & leq(R,composition(composition(A,ct_one),A)) )
+         => ! [A0,Af] :
+              ( ( leq(Af,ct_iden_U1)
+                & leq(Af,A)
+                & one(Af)
+                & leq(A0,ct_iden_U1)
+                & leq(A0,A)
+                & one(A0) )
+             => ( ( leq(Af,product(composition(converse(composition(A0,composition(sum(R,S),rTC(sum(R,S))))),composition(A0,composition(sum(R,S),rTC(sum(R,S))))),ct_one_prime))
+                  & ! [Ai] :
+                      ( ( leq(Ai,ct_iden_U1)
+                        & leq(Ai,A)
+                        & one(Ai) )
+                     => ( ( leq(Ai,product(composition(converse(composition(A0,rTC(sum(R,S)))),composition(A0,rTC(sum(R,S)))),ct_one_prime))
+                          & leq(Af,product(composition(converse(composition(Ai,rTC(sum(R,S)))),composition(Ai,rTC(sum(R,S)))),ct_one_prime)) )
+                       => ~ leq(Ai,product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime)) ) ) )
+               => leq(Af,product(composition(converse(composition(A0,composition(R,rTC(R)))),composition(A0,composition(R,rTC(R)))),ct_one_prime)) ) ) ) ) )).
+
+fof(m1m5,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ! [A,R,S] :
+          ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+            & leq(S,composition(composition(A,ct_one),A))
+            & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+            & leq(R,composition(composition(A,ct_one),A)) )
+         => ! [A0,Af] :
+              ( ( leq(Af,ct_iden_U1)
+                & leq(Af,A)
+                & one(Af)
+                & leq(A0,ct_iden_U1)
+                & leq(A0,A)
+                & one(A0) )
+             => ( ( leq(Af,product(composition(converse(composition(A0,rTC(sum(R,S)))),composition(A0,rTC(sum(R,S)))),ct_one_prime))
+                  & ? [Ai] :
+                      ( ( ( leq(Ai,product(composition(converse(composition(A0,rTC(sum(R,S)))),composition(A0,rTC(sum(R,S)))),ct_one_prime))
+                          & leq(Af,product(composition(converse(composition(Ai,rTC(sum(R,S)))),composition(Ai,rTC(sum(R,S)))),ct_one_prime)) )
+                       => ~ leq(Ai,product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime)) )
+                      & leq(Ai,ct_iden_U1)
+                      & leq(Ai,A)
+                      & one(Ai) ) )
+               => ? [Aj] :
+                    ( leq(Aj,product(composition(converse(composition(A0,rTC(R))),composition(A0,rTC(R))),ct_one_prime))
+                    & leq(Af,product(composition(converse(composition(Aj,rTC(sum(R,S)))),composition(Aj,rTC(sum(R,S)))),ct_one_prime))
+                    & leq(Aj,product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime)) ) ) ) ) ) )).
+
+fof(m1m6,conjecture,(
+    ! [A,U] :
+      ( ( leq(U,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(U,composition(composition(A,ct_one),A)) )
+     => ! [I,J] :
+          ( ( leq(J,ct_iden_U1)
+            & leq(J,A)
+            & one(J)
+            & leq(I,ct_iden_U1)
+            & leq(I,A)
+            & one(I) )
+         => ( leq(I,product(composition(converse(composition(J,composition(U,rTC(U)))),composition(J,composition(U,rTC(U)))),ct_one_prime))
+           => ? [K] :
+                ( leq(K,product(composition(converse(composition(J,rTC(U))),composition(J,rTC(U))),ct_one_prime))
+                & leq(I,product(composition(converse(composition(K,U)),composition(K,U)),ct_one_prime))
+                & leq(K,ct_iden_U1)
+                & leq(K,A)
+                & one(K) ) ) ) ) )).
+
+fof(m1m7,conjecture,(
+    ! [A,U,T] :
+      ( ( leq(T,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(T,composition(composition(A,ct_one),A))
+        & leq(U,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(U,composition(composition(A,ct_one),A)) )
+     => ! [I,J] :
+          ( ( leq(J,ct_iden_U1)
+            & leq(J,A)
+            & one(J)
+            & leq(I,ct_iden_U1)
+            & leq(I,A)
+            & one(I) )
+         => ( leq(I,product(composition(converse(composition(J,rTC(U))),composition(J,rTC(U))),ct_one_prime))
+           => leq(I,product(composition(converse(composition(J,rTC(sum(U,T)))),composition(J,rTC(sum(U,T)))),ct_one_prime)) ) ) ) )).
+
+fof(m2,conjecture,(
+    ! [A,B,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(ct_iden_U1,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),B)) )
+     => ! [Ap,C,D] :
+          ( ( leq(D,A)
+            & one(D)
+            & leq(C,B)
+            & one(C)
+            & some(Ap)
+            & one(Ap) )
+         => ( ( leq(C,product(composition(converse(composition(Ap,R)),composition(Ap,R)),ct_one_prime))
+              & leq(D,product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime)) )
+           => some(product(product(composition(composition(R,B),converse(composition(R,B))),ct_one_prime),product(composition(composition(S,A),converse(composition(S,A))),ct_one_prime))) ) ) ) )).
+
+fof(m20,conjecture,(
+    ! [A,B,X] :
+      ( ( some(X)
+        & one(X) )
+     => ( leq(X,sum(A,B))
+       => ( leq(X,A)
+          | leq(X,B) ) ) ) )).
+
+fof(m21,conjecture,(
+    ! [A,B,C,D] :
+      ( ( leq(A,B)
+        & leq(C,D) )
+     => leq(composition(composition(A,ct_one),C),composition(composition(B,ct_one),D)) ) )).
+
+fof(m22,conjecture,(
+    ! [A,B,R,S] :
+      ( ( leq(S,composition(composition(A,ct_one),B))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => sum(product(composition(composition(R,B),converse(composition(R,B))),ct_one_prime),product(composition(composition(S,B),converse(composition(S,B))),ct_one_prime)) = product(composition(composition(sum(R,S),B),converse(composition(sum(R,S),B))),ct_one_prime) ) )).
+
+fof(m23,conjecture,(
+    ! [A,B,C] :
+      ( none(sum(A,B))
+    <=> ( none(A)
+        & none(B) ) ) )).
+
+fof(m23b,conjecture,(
+    ! [A,B,C,R,Ap] :
+      ( ( leq(Ap,A)
+        & one(Ap)
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => ( ( leq(Ap,C)
+          & none(product(product(composition(composition(R,B),converse(composition(R,B))),ct_one_prime),C)) )
+       => none(product(composition(converse(composition(Ap,R)),composition(Ap,R)),ct_one_prime)) ) ) )).
+
+fof(m24,conjecture,(
+    ! [A,B,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),B))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => sum(product(composition(converse(composition(A,R)),composition(A,R)),ct_one_prime),product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime)) = product(composition(converse(composition(A,sum(R,S))),composition(A,sum(R,S))),ct_one_prime) ) )).
+
+fof(m25,conjecture,(
+    ! [A,B,C] :
+      ( ( leq(A,C)
+        & leq(B,C) )
+     => leq(product(A,B),C) ) )).
+
+fof(m30,conjecture,(
+    ! [A,B,R,Ap] :
+      ( ( leq(Ap,ct_iden_U1)
+        & leq(Ap,A)
+        & one(Ap)
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => leq(Ap,product(composition(converse(composition(A,rTC(R))),composition(A,rTC(R))),ct_one_prime)) ) )).
+
+fof(m31,conjecture,(
+    ! [A,B,R,X,Y] :
+      ( ( leq(Y,ct_iden_U1)
+        & leq(Y,A)
+        & one(Y)
+        & leq(X,ct_iden_U1)
+        & leq(X,A)
+        & one(X)
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => ( leq(Y,product(composition(converse(composition(X,composition(R,rTC(R)))),composition(X,composition(R,rTC(R)))),ct_one_prime))
+       => leq(Y,product(composition(converse(composition(X,rTC(R))),composition(X,rTC(R))),ct_one_prime)) ) ) )).
+
+fof(m32,conjecture,(
+    ! [A,B,R,X,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),B))
+        & leq(X,ct_iden_U1)
+        & leq(X,A)
+        & one(X)
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => ( leq(X,product(composition(composition(R,B),converse(composition(R,B))),ct_one_prime))
+       => leq(X,product(composition(composition(sum(R,S),B),converse(composition(sum(R,S),B))),ct_one_prime)) ) ) )).
+
+fof(m4,conjecture,(
+    ! [A,U] :
+      ( ( leq(U,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(U,composition(composition(A,ct_one),A)) )
+     => ! [I,J] :
+          ( ( leq(J,A)
+            & one(J) )
+         => ( leq(I,product(composition(converse(composition(J,composition(U,rTC(U)))),composition(J,composition(U,rTC(U)))),ct_one_prime))
+           => ? [K] :
+                ( leq(K,product(composition(converse(composition(J,U)),composition(J,U)),ct_one_prime))
+                & leq(I,product(composition(converse(composition(K,rTC(U))),composition(K,rTC(U))),ct_one_prime))
+                & leq(K,A)
+                & one(K) ) ) ) ) )).
+
+fof(m5,conjecture,(
+    ! [A,R] :
+      ( ( leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A))
+        & leq(A,ct_iden_U1) )
+     => ( none(product(product(composition(converse(composition(A,R)),composition(A,R)),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+       => none(product(composition(R,rTC(R)),ct_iden_U2)) ) ) )).
+
+fof(m5m1,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ( none(product(product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime),product(composition(composition(R,A),converse(composition(R,A))),ct_one_prime)))
+       => none(product(composition(composition(R,rTC(R)),composition(S,rTC(S))),ct_iden_U2)) ) ) )).
+
+fof(m6m1r2,conjecture,(
+    ! [A,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),A))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ( ( none(R)
+          & none(S) )
+       => none(sum(R,S)) ) ) )).
+
+fof(m6m1r2b,conjecture,(
+    ! [R,S] :
+      ( ( none(R)
+        & none(S) )
+     => none(sum(R,S)) ) )).
+
+fof(m6m1r2c,conjecture,(
+    ! [R,S] :
+      ( none(sum(R,S))
+     => ( none(R)
+        & none(S) ) ) )).
+
+fof(m7,conjecture,(
+    ! [A,R,Ap,B,C,A,R,Ap,B,C] :
+      ( ( leq(C,ct_iden_U1)
+        & leq(C,A)
+        & one(C)
+        & leq(B,ct_iden_U1)
+        & leq(B,A)
+        & one(B)
+        & leq(Ap,ct_iden_U1)
+        & leq(Ap,A)
+        & one(Ap)
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ( ( ! [D] :
+              ( ( leq(D,ct_iden_U1)
+                & leq(D,A)
+                & one(D) )
+             => lone(product(composition(converse(composition(D,R)),composition(D,R)),ct_one_prime)) )
+          & leq(B,product(composition(converse(composition(Ap,composition(R,rTC(R)))),composition(Ap,composition(R,rTC(R)))),ct_one_prime))
+          & leq(C,product(composition(converse(composition(Ap,composition(R,rTC(R)))),composition(Ap,composition(R,rTC(R)))),ct_one_prime))
+          & B != C )
+       => ( leq(B,product(composition(converse(composition(C,composition(R,rTC(R)))),composition(C,composition(R,rTC(R)))),ct_one_prime))
+          | leq(C,product(composition(converse(composition(B,composition(R,rTC(R)))),composition(B,composition(R,rTC(R)))),ct_one_prime)) ) ) ) )).
+
+fof(m8,conjecture,(
+    ! [A,R] :
+      ( ( leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),A)) )
+     => ! [Ap,B] :
+          ( ( leq(B,ct_iden_U1)
+            & leq(B,A)
+            & one(B)
+            & leq(Ap,ct_iden_U1)
+            & leq(Ap,A)
+            & one(Ap) )
+         => ( ( leq(B,product(composition(converse(composition(Ap,rTC(R))),composition(Ap,rTC(R))),ct_one_prime))
+              & Ap != B )
+           => leq(B,product(composition(converse(composition(Ap,composition(R,rTC(R)))),composition(Ap,composition(R,rTC(R)))),ct_one_prime)) ) ) ) )).
+
+fof(m9,conjecture,(
+    ! [A,B,C] :
+      ( ( leq(A,B)
+        & leq(B,C) )
+     => leq(A,C) ) )).
+
+fof(m1b2,conjecture,(
+    ! [A,B,R,S] :
+      ( ( leq(S,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(S,composition(composition(A,ct_one),B))
+        & leq(R,composition(composition(ct_iden_U1,ct_one),ct_iden_U1))
+        & leq(R,composition(composition(A,ct_one),B)) )
+     => ( ( ! [Ap] :
+              ( ( leq(Ap,ct_iden_U1)
+                & leq(Ap,A)
+                & one(Ap) )
+             => lone(product(composition(converse(composition(A,R)),composition(A,R)),ct_one_prime)) )
+          & ! [Ap] :
+              ( ( leq(Ap,ct_iden_U1)
+                & leq(Ap,A)
+                & one(Ap) )
+             => ( lone(product(composition(converse(composition(A,S)),composition(A,S)),ct_one_prime))
+                & none(product(product(composition(composition(R,B),converse(composition(R,B))),ct_one_prime),product(composition(composition(S,B),converse(composition(S,B))),ct_one_prime))) ) ) )
+       => ! [Ap] :
+            ( ( leq(Ap,ct_iden_U1)
+              & leq(Ap,A)
+              & one(Ap) )
+           => lone(product(composition(converse(composition(A,sum(R,S))),composition(A,sum(R,S))),ct_one_prime)) ) ) ) )).
+
