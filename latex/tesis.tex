@@ -15,8 +15,29 @@
 \usepackage{bussproofs}
 \usepackage{float}
 \usepackage{etoolbox}
+\usepackage{calligra}
+\usepackage{textcomp}
+\usepackage{tabularx}
 
 \def \argentum{{\bf A}r_{\bf g}entum}
+\newcommand{\sem}[1]{{\calligra #1}}
+
+\newcommand{\hetero}{\texttt{HeteroGenius}}
+\newcommand{\dynamite}{\texttt{Dynamite}}
+\newcommand{\alloyanal}{\mbox{\texttt{Alloy}}\mbox{\texttt{Analyzer}}}
+\newcommand{\pvs}{\texttt{PVS}}
+\newcommand{\tnt}{\texttt{TNT}}
+\newcommand{\java}{\texttt{Java}}
+% Módulos
+\newcommand{\gui}{\emph{GUI}}
+\newcommand{\driver}{\emph{Analysis Driver}}
+\newcommand{\analrepo}{\emph{Repositorio}}
+\newcommand{\manager}{\emph{Analysis Manager}}
+\newcommand{\analaction}{\emph{analysis action}}
+\newcommand{\analactions}{\emph{analysis actions}}
+\newcommand{\jpvs}{\emph{J-PVS}}
+% Teórico
+\newcommand{\pdocfa}{\textsc{pdocfa}}
 
 \apptocmd{\thebibliography}{\csname phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
 
