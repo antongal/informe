@@ -1,16 +1,28 @@
 \chapter{Aportes}
 
-\input{arbolanalisis}
+Para brindar una presentaci'on m'as clara de los aportes de esta tesis, empezaremos se\~nalando algunas caracter'isticas, falencias y limitaciones de Heterogenius en las que hemos basado cada aporte de este trabajo.
 
-\newpage
-\input{heterogeneidad}
+En su versi'on inicial, Heterogenius presentaba algunas limitaciones. 
+A continuaci'on se detallan las que fueron tratadas en el presente trabajo.
 
-\newpage
+Lo primero que se puede notar es que el nivel de granularidad en la heterogeneidad de la herramienta no es completo. 
+Si bien Heterogenius permite realizar una demostraci'on en diferentes lenguajes, se limita a describir cada secuente utilizando sólo uno de ellos. 
+Debido a esto se puede decir que Heterogenius en realidad permite tener demostraciones heterogeneas con secuentes homogéneos. 
+
+Otro problema con el que nos encontramos es la incapacidad del 'arbol de an'alisis de documentar el proceso de an'alisis completo. El árbol solamente muestra las acciones y pasos que llevan al 'exito de una demostraci'on. En el momento del an'alisis cuando una rama no lleva al resultado deseado y se quieren probar otras acciones, es necesario borrar la rama que no di'o resultado. Esto lleva a que se pierdan partes del an'alisis que pueden ser 'utiles ya que documentan las acciones intentadas (que no dieron un resultado deseado) y os permite tener un historial de todo lo que se hizo en el an'alisis.
+
+El 'arbol de an'alisis tiene solamente un tipo de ramas, que representan acciones que se tienen que llevar a cabo para que el resultado se propague al nodo raiz. Esto limita la posibilidad de realizar demostraciones alternativas y experimentar en una demostraci'on con diferentes tipos de herramientas, acciones, etc.
+
+Debido a que las herramientas autom'aticas no siempre producen un resultado, decidimos que es necesario tambi'en documentar la aplicaci'on de las acciones a'un si no tienen un resultado definido. Todo esto aporta al objetivo general de documentar todas las acciones realizadas durante el an'alisis.
+
 \input{extension_fof}
 
-TODO: explicar la traduccion PDOCFA -> FOF
+todo{explicar la traduccion PDOCFA -> FOF}
 
-\newpage
+\input{heterogeneidad}
+
+\input{arbolanalisis}
+
 \input{implementacion}
 
 %á
