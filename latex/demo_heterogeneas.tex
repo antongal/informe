@@ -1,34 +1,28 @@
 \section{Demostraciones heterogéneas}
 \label{heterogenious proofs}
 
-En la gran variedad de lenguajes lógicos disponibles encontramos que cada uno de ellos es capaz de describir apropiadamente determinados comportamientos de un sistema, no pudiendo expresar en forma clara otros. Normalmente, la solución a esto es la elección de un único lenguaje que, presuntamente, se adapta mejor a las necesidades de diseño. 
+Hoy en dia existe una gran variedad de lenguajes l'ogicos cada uno con sus caracteristicas. Dependiendo de su poder expresivo, cada lenguaje puede describe mejor algunos aspectos del sistema pero no otros. Generalmente al elegir especificar el sistema en un solo lenguaje nos topamos con este tradeoff.
 
-En la década del 80 Joseph Goguen y Rod Burstall aportaron una formalización en teoría de categorías que permite caracterizar la teoría de modelos de un lenguaje lógico. Esta formalización se conoce con el nombre de \emph{institution} \cite{goguen:cmwlp84}. La motivación de este trabajo, explícita desde el comienzo, declara: 
-\begin{quotation} \em
-There is a population explosion among the logical systems being used in computer science. Examples include first order logic (with and without equality), equational logic, Horn clause logic, second order logic, higher order logic, infinitary logic, dynamic logic, process logic, temporal logic, and modal logic; moreover, there is a tendency for each theorem prover to have its own idiosyncratic logical system. [...] This paper shows how some parts of computer science can be done in any suitable logical system, by introducing the notion of an institution as a precise generalization of the informal notion of a ``logical system.''
-\end{quotation}
+Naturalmente surge la idea de combinar varios lenguajes y usar cada uno para describir aspectos del sistema donde cada lenguaje tiene una mayor ventaja en expresividad. Siguiendo 'este concepto se vuelve necesario poder traducir lo escrito de un lenguaje l'ogico a otro \cite{goguen:jacm-39_1}, \cite{meseguer:lc87}, \cite{tarlecki:sadt-rtdts95}.
 
-A su vez, las \emph{institutions} pueden ser relacionadas a través de distintos tipos de \emph{mappings}. En \cite{goguen:jacm-39_1} Goguen y Burstall introdujeron el concepto de \emph{instituítion morphism} mientras que en \cite{meseguer:lc87} Meseguer aportó la definición de \emph{instituítion representation}. Estos y otros mecanismos para relacionar \emph{institutions} fueron extensamente estudiados por Tarlecki en \cite{tarlecki:sadt-rtdts95}. La principal diferencia entre ellos es que cuando se observa la relación entre dos \emph{institutions} desde el punto de vista de un \emph{institution morphism} se está resaltando cómo una \emph{institution} que expresa una teoría de modelos con un poder expresivo mayor se construye a partir de otras que expresan uno potencialmente menor; cuando se la observa desde el punto de vista de un \emph{institution representation}, vemos cómo una \emph{institution} que expresa un poder expresivo potencialmente menor puede ser codificada en otra que expresa uno mayor. A partir de este último tipo de relación entre \emph{institutions} Tarlecki observa que:
-\begin{quotation} \em
-``... this suggests that we should strive at a development of a convenient to use proof theory (with support tools!) for a sufficiently rich `universal' institution, and then reuse it for other institutions linked to it by institution representations."
-\end{quotation}
+As'i se puede probar que dados los lenguajes l'ogicos $L'$ y $L$, con 
 
-El estudio de la posibilidad de interpretar un lenguaje lógico en otro, tal como lo propusieron Meseguer y, luego, Tarlecki no es una novedad. En el campo de la lógica y el álgebra existe desde mucho antes de ser formalizado como \emph{institution representation}. En general, si $L$ y $L'$ son lógicas y $\Sigma_L$ una signatura de $L$, un
-resultado de interpretabilidad de $L$ in $L'$ es presentado por:
 \begin{itemize}
-\item Una función $S$ de $\Sigma_L$ to $\Sigma_{L'}$, una signatura de $L'$.
-\item Una traducción $T_{L \to L'}$  de fórmulas en $\Sigma_L$ a fórmulas en $\Sigma_{L'}$.
-\item Una traducción $M_{L \to L'}$ de modelos de $\Sigma_L$ a modelos de $\Sigma_{L'}$ que satisfaga: $\forall \mathfrak{A} \in |\mathbf{Mod}_L(\Sigma_L)| \left( \mathfrak{A}\models_{L} \alpha\ \mbox{ iff }\ M_{L \to L'}(\mathfrak{A}) \models_{L'} T_{L \to L'}(\alpha) \right)$.
-\item Una traducción $M_{L' \to L}$ de modelos de $\Sigma_{L'}$ a modelos de $\Sigma_L$ que satisfaga: $\forall \mathfrak{B} \in |\mathbf{Mod}_{L'}(\Sigma_{L'})| \left(M_{L' \to L}(\mathfrak{B})\models_{L} \alpha\ \mbox{ iff }\ \mathfrak{B}\models_{L'} T_{L \to L'}(\alpha) \right)$.
+\item $L'$ un lenguaje con c'alculo completo.
+\item $L$ un lenguaje que se puede traducir a $L'$.
+\item $\alpha$ es un fórmula del lenguaje $L$.
+\item $T_{L \to L'}(\alpha)$ una traducci'on de $\alpha$ del lenguaje $L$ a $L'$ 
+\item $T_{L \to L'}(\Gamma)$ una traducci'on de f'ormulas de $\Gamma$ del lenguaje $L$ a $L'$.
 \end{itemize}
-Luego, es posible probar que: 
-$$\Gamma \models_L \alpha \mbox{ si y sólo si } T_{L \to L'}(\Gamma) \models_{L'} T_{L \to L'}(\alpha)$$
-A partir de lo dicho anteriormente es posible demostrar que si el lenguaje lógico $L'$ posee un cálculo completo y el lenguaje lógico $L$ se puede interpretar en el lenguaje lógico $L'$, entonces si $\alpha$ es un fórmula del lenguaje $L$, si es posible demostrar en el cálculo para el lenguaje $L'$ la fórmula $T_{L \to L'} (\alpha)$, entonces $\alpha$ es universalmente válida en la clase de modelos de $L$. Luego, obtenemos que:
+
+y es posible demostrar en el lenguaje $L'$ la fórmula $T_{L \to L'} (\alpha)$, entonces $\alpha$ es universalmente válida en la clase de modelos de $L$.
+
+Con lo cu'al se obtiene que
 $$\Gamma \models_L \alpha \mbox{ si y sólo si } T_{L \to L'}(\Gamma) \vdash_{L'} T_{L \to L'}(\alpha)$$
-Si adicionalmente considerásemos que $L$ también posee un cálculo, no necesariamente completo, resulta posible demostrar que:
+Adem'as si $L$ tambi'en posee un c'alculo no necesariamente completo, se obtiene que:
 $$\mbox{Si } T_{L \to L'}(\Gamma) \vdash_{L'} T_{L \to L'}(\alpha) \mbox{ entonces } \Gamma \vdash_L \alpha$$
 
-Como consecuencia directa se obtiene que es posible considerar un cálculo cuyo conjunto de reglas resulta ser la unión de las reglas del cálculo para $L$, las reglas del cálculo para $L'$ y la siguiente regla:
+Como consecuencia tiene sentido extender el c'alculo dando soporte a las reglas tanto del c'alculo del lenguaje $L$ como las del c'alculo del lenguaje $L'$ agregando una regla adicional para soportar las traducciones de un lenguaje a otro:
 
 \begin{center}
 	\AxiomC{$T_{L \to L'}(\Gamma) \vdash_{L'} T_{L \to L'}(\alpha)$}
@@ -37,6 +31,4 @@ Como consecuencia directa se obtiene que es posible considerar un cálculo cuyo 
 	\DisplayProof
 \end{center}
 
-Este tipo de cálculos ha sido explorado en varias artículos y en particular resulta ser un caso particular de estudiado por Borzyszkowski en \cite{borzyszkowski:tcs-286_2}. Así, el cálculo resultante es un cálculo completo para la lógica $L$ en el que es posible desarrollar una parte de la demostración utilizando las reglas asociadas al cálculo para $L$ y, en caso de ser necesario, finalizar las demostraciones a partir de aplicar la reglas \emph{translation} y cerrar el árbol de demostración utilizando las reglas para el cálculo $L'$.
-
-No perseguiremos en el presente trabajo la formalización completa de estos aspectos pero el lector interesado puede reconstruir estos aspectos a partir de la bibliografía citada.
+De 'esta f'orma es posible realizar demostraciones de problemas definidos en el lenguaje $L$ y luego pasar al lenguaje $L'$ aplicando la regla \textit{translation}. 'Este tipo de c'alculos fue estudiado por Borzyszkowski en \cite{borzyszkowski:tcs-286_2}
