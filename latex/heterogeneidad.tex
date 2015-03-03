@@ -1,88 +1,70 @@
 \section{Heterogeneidad Verdadera}
 \label{sec:heterogeneidad-verdadera}
 
-Para solucionar otra de las limitaciones presentes en Heterogenius extendimos el concepto de heterogeneidad para lograr tener demostraciones verdaderamente heterogeneas en lugar de demostraciones homogeneas en un 'arbol de an'alisis heterogeneo. 
+Para ampliar las capacidades de Heterogenius extendimos el concepto de heterogeneidad para lograr tener demostraciones verdaderamente heterogeneas en lugar de demostraciones heterogéneas pero con secuentes homogéneos. 
 
-La diferencia principal radica en que con la nueva implementaci'on, los secuentes pueden soportar f'ormulas de diferentes lenguajes. As'i un secuente puede ser de tipo homogeneo o heterogeneo. En el primer caso todas las f'ormulas del secuente usan el mismo lenguaje; en el segundo las f'ormulas son de lenguajes distintos.
+La diferencia principal radica en que, con la nueva implementaci'on, los secuentes pueden soportar f'ormulas de diferentes lenguajes. As'i un secuente puede ser de tipo homogéneo o heterogéneo. En el primer caso todas las f'ormulas del secuente usan el mismo lenguaje; en el segundo las f'ormulas son de lenguajes distintos.
 
-La ventaja de los secuentes heterogeneos es que se puede combinar f'ormulas (lemmas, propiedades, teoremas) provenientes de distintas especificaciones escritas en lenguajes diferentes. De 'este f'orma nos podemos abstraer del lenguaje en el que est'an escritas las f'ormulas y concentrarnos en el an'alisis.
+La ventaja de los secuentes heterogéneos es que se pueden combinar f'ormulas (lemmas, axiomas) provenientes de distintas especificaciones escritas en lenguajes diferentes. De esta forma nos podemos abstraer del lenguaje en el que están escritas y concentrarnos en el an'alisis.
 
-La principal limitaci'on de los secuentes heterogeneos es que las herramientas (calculadores de secuentes, buscadores de contraejemplos, demostradores autom'aticos) trabajan con secuentes escritos en un solo lenguaje, o sea secuentes homogeneos. Debido a 'esto se proveen nuevas operaciones para el manejo de f'ormulas dentro de un secuente:
+La principal limitaci'on de los secuentes heterogéneos es que las herramientas (calculadores de secuentes, buscadores de contraejemplos, demostradores autom'aticos) trabajan con secuentes escritos en un solo lenguaje, o sea secuentes homogéneos. Debido a esto se proveen nuevas operaciones para el manejo de f'ormulas dentro de un secuente:
 
 \subsection{Operaciones para el manejo de f'ormulas}
 
-Cada una de las siguientes operaciones puede cambiar o no la heterogeneidad de un secuente.  Dependiendo de los lenguajes de las f'ormulas del resultado, el secuente puede pasar a ser heterogeneo, homogeneo o mantener su tipo.
+Cada una de las siguientes operaciones puede cambiar o no la heterogeneidad de un secuente.  Dependiendo de los lenguajes de las f'ormulas del resultado, el secuente puede pasar a ser heterogéneo, homogéneo o mantener su tipo.
 
 \subsubsection{Proyecci'on}
 
-Dado un secuente, se selecciona un subconjunto de las f'ormulas que se quiere proyectar y el nuevo secuente se forma a partir de las f'ormulas seleccionadas.
+Se  permite seleccionar un subconjunto de las f'ormulas que se quiere proyectar sobre el secuente actual y el nuevo secuente se forma a partir de las f'ormulas seleccionadas.
+Dado un secuente: $$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
+%% \begin{prooftree}
+%% \AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
+%% \UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
+%% \end{prooftree}
+y un subconjunto $\mathcal{C} \subseteq \{1 \ldots m\}$, el secuente resultante de la proyecci'on es el siguiente:
+%% \begin{prooftree}
+%% \AxiomC{$\alpha_i$ con $i=1 \ldots n$ y $i \in \mathcal{C}$}
+%% \UnaryInfC{$\alpha_j$ con $j=n+1 \ldots m$ y $j \in \mathcal{C}$}
+%% \end{prooftree}
+$$\{\alpha_i \} \vdash \{\alpha_j\} \mbox{ con }i\in [1,n]\cap\mathcal{C} \mbox{ y } j\in [n+1, m]\cap\mathcal{C}$$
+%\vspace{1em}
 
-\begin{figure}[H]
+A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alogo mediante el cual el usuario puede marcar las f'ormulas que se quiere proyectar en el nuevo secuente.\todomm{Explicar c'omo es el secuente antes de la proyecci'on y c'omo es el secuente resultante. Hacer notar que es un secuente heterog'eneo.}
+
+\begin{figure}[tb]
 	\includegraphics[width=200px]{img/select.png}
 	\centering
-	\caption{Se marcan las f'ormulas que se quiere proyectar al nuevo secuente.}
+	\caption{Cuadro de di'alogo de proyecci'on de f'ormulas.}
+        \label{seq selection}
 \end{figure}
 
-Dado un secuente:
-
-\begin{prooftree}
-\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
-\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
-\end{prooftree}
-
-y un subconjunto $\mathcal{C} \subseteq \{1 \ldots m\}$, el secuente resultante:
-
-\begin{prooftree}
-\AxiomC{$\alpha_i$ con $i=1 \ldots n$ y $i \in \mathcal{C}$}
-\UnaryInfC{$\alpha_j$ con $j=n+1 \ldots m$ y $j \in \mathcal{C}$}
-\end{prooftree}
-
-\vspace{1em}
 \subsubsection{Introducci'on de antecedentes desde una fuente externa}
 
-'Esta operaci'on permite cargar desde un archivo de especificaci'on, ya sea \textit{Alloy} o \textit{FOF} axiomas e introducirlas como antecedentes del secuente analizado.
+Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea \textit{Alloy} o \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual.
 
 Dado un secuente:
-
-\begin{prooftree}
-\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
-\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
-\end{prooftree}
-
+$$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
 y un conjunto de f'ormulas nuevas $\{\beta_1 \ldots \beta_k\}$. El nuevo secuente es:
+$$ \alpha_1,\ldots,\alpha_n,\beta_1,\ldots, \beta_k \vdash \alpha_{n+1},\ldots,\alpha_m $$
+\todomm{Poner un ejemplo como en el caso anterior}
 
-\begin{prooftree}
-\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n,$ $\beta_1,\ldots, \beta_k$}
-\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
-\end{prooftree}
-
-\vspace{1em}
 \subsubsection{Traducci'on}
 
-Se extendi'o el concepto de traducciones $\rho$ para que se puedan traducir f'ormulas por separado. El secuente resultante contendr'a las f'ormulas del secuente analizado en el lenguaje seleccionado.
+Se extendi'o el concepto de traducciones $\rho$ para que se puedan traducir f'ormulas por separado, en lugar de traducir un secuente completo como en la versi'on anterior.
+El secuente resultante contendr'a las f'ormulas del secuente analizado en el lenguaje seleccionado.
 
-\begin{figure}[H]
+Dado un secuente $$ S: \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
+y una función  $\mathcal{T}:Formula\rightarrow Lenguaje$ que indica el lenguaje seleccionado para cada f'ormula del secuente $S$, el secuente resultante es:
+$$ S': \beta_1,\ldots,\beta_n \vdash \beta_{n+1},\ldots,\beta_m $$
+donde $\beta_{i} = \rho_{\mathcal{T}(\alpha_i)}(\alpha_i)$ y $\rho_l$ es la funci'on de traducci'on al lenguaje $l$.
+
+En la Figura \ref{GUI form translation} se puede ver un cuadro de di'alogo donde el usuario puede seleccionar, para cada f'ormula, el lenguaje al que se quiere traducir.
+
+\begin{figure}[tb]
 	\includegraphics[width=200px]{img/translate.png}
 	\centering
-	\caption{Para cada f'ormula se puede seleccionar el lenguaje al que se quiere traducir.}
+	\caption{Cuadro de di'alogo para la traducci'on de f'ormulas en un secuente.} \label{GUI form translation}
 \end{figure}
 
-Dado un secuente $S$
-
-\begin{prooftree}
-\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
-\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
-\end{prooftree}
-
-y una relacion $\mathcal{T}:Formula$ $\times$ $Lenguaje$ que indica el lenguaje seleccionado para cada f'ormula del secuente $S$, el secuente resultante $S'$ es:
-
-\begin{prooftree}
-\AxiomC{$\beta_1$,$\ldots$,$\beta_n$}
-\UnaryInfC{$\beta_{n+1}$,$\ldots$,$\beta_m$}
-\end{prooftree}
-
-donde $\beta_{i} = \rho(\alpha_i, \mathcal{T}(\alpha_i))$.
-
-con $\rho(\alpha, l) :$ $Formula$ $\times$ $Lenguaje$ $\rightarrow$ $Formula$: funci'on de traducci'on para la f'ormula $\alpha$ al lenguaje $l$.
 
 %á
