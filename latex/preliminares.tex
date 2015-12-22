@@ -2,6 +2,8 @@
 
 \input{calc_secuentes}
 
+\input{calculadores_secuentes}
+
 \input{demo_heterogeneas}
 
 
@@ -70,4 +72,133 @@ Especificaci'on t'ipica en el lenguaje \textit{TPTP-FOF}. La sintaxis contiene t
 
 En el ejemplo anterior la 'ultima f'ormula es de tipo \textit{conjecture}. 'Esto indica al demostrador que es la f'ormula que se quiere probar. Las otras f'ormulas, de tipo \textit{axiom} se interpretan como axiomas.
 
-%á
+
+\section{C'alculo por superposici'on}
+Es un c'alculo que permite razonar en l'ogica de primer 'orden. Se ha desarrollado a principios de 1990 y combina los principios de resoluci'on de primer 'orden con el manejo de igualdad basada en 'orden desarrollado en el contexto del algoritmo de completitud de \textit{Knuth-Bendix}\cite[knuthbendix]. Como la mayoria de calculos de l'ogica de primer 'orden, superposici'on trata de mostrar la insatisfacibilidad de un conjunto de clausulas realizando demostraciones por refutaci'on. Superposici'on es completo para la refutaci'on, o sea dada una cantidad ilimitada de recursos y una estrategia de derivaci'on justa, se va a llegar a una contradicci'on empezando por cualquier conjunto de clausulas insatisfacible.
+
+
+\section{E-Prover}
+E-Prover es un demostrador de teoremas de l'ogica de primer orden con igualdad. Se basa en el c'alculo por superposici'on. El demostrador acepta como entrada una lista de clausulas o f'ormulas de l'ogica de primer orden con una conjetura. El sistema intenta encontrar una demostraci'on para la conjetura asumiendo los axiomas especificados.
+
+Ya que E-Prover adem'as permite buscar un modelo se lo puede utilizar tambi'en como un buscador de contraejemplos.
+
+La principal t'ecnica usada es el c'alculo por superposici'on. El demostrador opera en cuatro fases distintas:
+\begin{itemize}
+\item Clausificaci'on: se transforman las f'ormulas de entrada en f'orma normal clausal de tal manera que la f'ormula resultante es insatisfacible si y s'olo si el problema original es demostrable. Se usa una variaci'on del algoritmo detallado en \cite{smallcnf2001}.
+
+\item Una etapa opcional de simplificaci'on de la forma clausal del problema.
+
+\item An'alisis del problema y selecci'on de par'ametros de b'usqueda 'optimos.
+
+\item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la clausula vacia y mostrar que la cl'ausula original es insatisfacible y el problema de entrada es demostrable. E-Prover implementa el algor'itmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsumci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de clausulas \cite{ijcai2001}.
+\end{itemize}
+
+\subsection{Busqueda de demostraci'on}
+
+E-Prover utiliza una variante del algoritmo de ``clausula dada'' \cite{dk97}. El estado de la demostraci'on se representa por dos conjuntos de clausulas: el conjunto \textbf{P} de clausulas procesadas (inicialmente vacio) y el conjunto \textbf{U} de clausulas sin procesar. Las clausulas en \textbf{U} se ordenan de acuerdo a una funci'on de evaluaci'on heuristica y se procesan en 'este 'orden.
+
+El procesamiento primero simplifica la clausula seleccionada \textit{g} con todas las clausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las clausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas clausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
+
+'Este procedimiento de busqueda de demostraci'on es diferente del algoritmo de ``clausula dada'' implementado por \texttt{Otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister} y forma parte adem'as del algoritmo principal de \texttt{Vampire} y \texttt{SPASS}.
+
+\subsection{Heuristicas}
+
+E-Prover usa una series de heur'isticas para: la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente la elecci'on de literales para la inferencia en las clausulas que tienen por lo menos un literal negativo.
+
+La selecci'on de las clausulas dadas es controlada por varias colas de prioridad de las cuales se seleccionan las clausulas en un esquema round robin pesado. Cada cola es ordenada de acuerdo a una funci'on de prioridad fija y una funci'on de evaluaci'on de clausula parametrizada. Las funciones de evaluaci'on de cl'ausulas pueden ser orientadas a objetivos, pueden estar enfocadas en algunos simbolos en particular y pueden tomar en cuenta el ordenamiento de t'erminos. 
+
+
+La selecci'on de literales es controlada por una de las cien estrategias de selecci'on que est'an codificadas en E-Prover. En el modo autom'atico el demostrador selecciona una de ellas.
+
+
+
+
+\section{SPASS}
+
+SPASS es un demostrador autom'atico de teoremas basado en saturaci'on para l'ogica de primer orden con igualdad. Como se menciona en la descripci'on oficial, SPASS es 'unico debido a que combina el c'alculo de superposici'on con reglas especificas de inferencia/reducci'on para tipos y una regla de partici'on para an'alisis de casos motivada por la regla $\beta$ del m'etodo de tableau analitico y el analisis de casos empleado en el procedimiento \textit{Davis-Putnam}. El 'enfasis de SPASS es en las diferentes t'ecnicas de inferencia/reducci'on/simplificaci'on y no en las heuristicas.
+
+Todo el funcionamiento interno de SPASS est'a basado en l'ogica de primer 'orden y consiste en reglas de inferencia que generan nuevas clausulas y reglas de reducci'on que reducen la cantidad de clausulas o las simplifican. Hay una gran variedad de reglas de inferencia y reducci'on para conjuntos de clausulas que pueden ser combinadas para ajustarse a varios calculos de primer orden completos y correctos. La particularidad de SPASS es que se introduce una regla nueva que es la regla de partici'on que soporta un an'alisis de casos explicito. De 'esta manera la regla de partici'on introduce una segunda dimensi'on en el m'etodo de demostraci'on de teoremas basado en saturaci'on.
+
+La tercera dimensi'on que se considera en SPASS son las restricciones, informaci'on extra que se adjunta a las clausulas restrigiendo su semantica y su uso respecto al calculo. Algunas de las restriciones son \textit{de 'orden}, forzando que los terminos substituidos satisfagan las funciones de restricci'on adjuntas y restricciones \textit{de tipo} que garantizan que la instanciaci'on de las variables corresponda al tipo especificado.
+
+
+\section{Mace4}
+
+Mace4 es un buscador de modelos finitos que realiza una busqueda por backtracking y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones.
+
+\subsection{Inicializaci'on}
+
+Mace4 siempre hace la b'usqueda sobre un modelo de dominio finito. Incluso cuando no se especifica un tamaño de dominio Mace4 itera sobre los posibles tamaño ejecutando la rutina de b'usqueda sobre cada dominio candidato.
+
+La inicializaci'on comienza con la creaci'on de matrices para las funciones. Para cada funci'on de aridad $k$ se crea una matriz $n^k$ donde $n$ es el tamaño del dominio.
+
+\subsection{B'usqueda}
+
+La busqueda se realiza con una recursi'on backtracking y su pseudocodigo es:
+
+\begin{verbatim}
+procedure search:
+  cell = select_cell()
+  top = last_value_to_consider()
+  foreach i (0 ... top)
+    ok = assign_and_propagate(cell,i)
+    if (ok):
+      search()
+      undo_assignments();
+\end{verbatim}
+
+Las partes mas importantes del algoritmo son las heuristicas de selecci'on de celdas; determinaci'on de los valores a asignar a la celda seleccionada; y propagaci'on de la asignacion.
+
+\subsubsection{Selecci'on de celdas}
+
+\begin{itemize}
+
+\item{Armado del conjunto de celdas candidatas}: Existen tres heuristicas para el armado del conjunto:
+
+\begin{itemize}
+\item 'Orden lineal. Se seleccionan todas las celdas abiertas.
+\item 'Orden concentrico. Sea $i$ el indice m'aximo mas chico de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo.
+\item 'Orden de banda concentrica. Todas las celdas con el indice m'aximo menor o igual al valor actual de restricci'on son candidatas. Si no se encuentra ninguna se revierte al 'orden concentrico.
+\end{itemize}
+
+
+\item{Selecci'on de la celda} Se utilizan cuatro m'etodos:
+
+\begin{itemize}
+\item{m'etodo 0} Se selecciona la primer celda candidata.
+\item{m'etodo 1} Se selecciona la candidata con el mayor n'umero de ocurrencias en el actual conjunto de clausulas.
+\item{m'etodo 2} Se selecciona la candidata que podria producir el mayor n'umero de propagaciones. La motivaci'on est'a en llenar la tabla lo antes posible.
+\item{m'etodo 3} Se selecciona la candidata que podria causar el mayor n'umero de contradicciones. La motivaci'on es cortar la mayor cantidad de caminos lo antes posible.
+\item{m'etodo 4} Se selecciona la candidata con la menor cantidad de valores posibles.
+\end{itemize}
+
+\end{itemize}
+
+
+\subsubsection{Asignaci'on de la celda}
+Una vez que se seleccionan las celdas abiertas, se debe determinar el conjunto de valores a considerar para la asignaci'on. Si se trata de una celda booleana siempre se prueba con $0$ y $1$. Si no, se prueba con todos los valores del dominio $[0,\dots,n-1]$ si no se est'a usando la heuristica \textit{LNH} (Least Number Heuristic). 'Esta heuristica fue usada por primera vez en \cite{zhang96} y \cite{zhang} y su objetivo es de tratar de eliminar alg'un isomorfismo en la b'usqueda. La idea principal es de mantener el dominio particionado en valores asimetricos y valores sim'etricos. Solo uno de los valores sim'etricos debe ser probado. En la practica 'esta heur'istica es efectiva en los niveles mas altos del 'arbol de busqueda.
+
+
+\subsubsection{Propagaci'on}
+
+\begin{itemize}
+
+\item{Propagaci'on Positiva}
+La propagaci'on positiva se aplica siempre al tener una asignaci'on. Por ejemplo si $f(2,3)=4$, entonces todas las ocurrencias de $f(2,3)$ pueden ser reemplazadas por $4$. Cada uno de 'estos reemplazos puede producir otros reemplazos en cadena. Por ejemplo $g(f(2,3))=5$ al ser reemplazado una vez termina siendo $g(4)=5$, pero 'esto nos genera una nueva asignaci'on y reemplazos posibles.
+
+\item{Propagaci'on Negativa}
+La propagaci'on negativa tiene como objetivo reducir la cantidad de posibles valores de una asignaci'on hasta tener un solo valor que se pueda asignar. Por ejemplo sabiendo que $f(2,3)=4$ y $f(2, g(5))\neq4$ se puede inferir que $g(5)\neq3$. Los cuatro tipos de clausulas que pueden producir propagaciones negativas son:
+
+\begin{tabular}{ |l|l| }
+Tipo & Ejemplo \\
+\hline
+Asignaci'on & $f(2,3)=4$ \\
+Casi asignaci'on & $f(2,g(5))=4$ \\
+Eliminaci'on & $f(2,3)\neq4$ \\
+Casi eliminaci'on & $f(2,g(5))\neq4$ \\
+\hline
+\end{tabular}
+
+La asignaci'on se empareja con casi eliminaci'on y la eliminaci'on con casi asignaci'on. Cualquiera de 'estas cuatro clausulas puede producir una propagaci'on negativa
+
+\end{itemize}

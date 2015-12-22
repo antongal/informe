@@ -15,7 +15,7 @@ Cada una de las siguientes operaciones puede cambiar o no la heterogeneidad de u
 
 \subsubsection{Proyecci'on}
 
-Se  permite seleccionar un subconjunto de las f'ormulas que se quiere proyectar sobre el secuente actual y el nuevo secuente se forma a partir de las f'ormulas seleccionadas.
+'Esta operaci'on  permite seleccionar un subconjunto de las f'ormulas que se quiere proyectar sobre el secuente actual y el nuevo secuente se forma a partir de las f'ormulas seleccionadas.
 Dado un secuente: $$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
 %% \begin{prooftree}
 %% \AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
@@ -29,7 +29,9 @@ y un subconjunto $\mathcal{C} \subseteq \{1 \ldots m\}$, el secuente resultante 
 $$\{\alpha_i \} \vdash \{\alpha_j\} \mbox{ con }i\in [1,n]\cap\mathcal{C} \mbox{ y } j\in [n+1, m]\cap\mathcal{C}$$
 %\vspace{1em}
 
-A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alogo mediante el cual el usuario puede marcar las f'ormulas que se quiere proyectar en el nuevo secuente.\todomm{Explicar c'omo es el secuente antes de la proyecci'on y c'omo es el secuente resultante. Hacer notar que es un secuente heterog'eneo.}
+Si se aplica una operaci'on de proyecci'on a un secuente homog'eneo el resultado siempre ser'a homog'eneo, pero si se empieza con un secuente heterogeneo el resultado puede ser un secuente homog'eneo, si se proyectan f'ormulas de un mismo lenguaje o un secuente heterog'eneo si la proyecci'on incluye f'ormulas de lenguajes diferentes.
+
+A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alogo mediante el cual el usuario puede marcar las f'ormulas que se quiere proyectar en el nuevo secuente.
 
 \begin{figure}[tb]
 	\includegraphics[width=200px]{img/select.png}
@@ -40,12 +42,15 @@ A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alo
 
 \subsubsection{Introducci'on de antecedentes desde una fuente externa}
 
-Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea \textit{Alloy} o \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual.
+'Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual.
 
 Dado un secuente:
 $$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
 y un conjunto de f'ormulas nuevas $\{\beta_1 \ldots \beta_k\}$. El nuevo secuente es:
 $$ \alpha_1,\ldots,\alpha_n,\beta_1,\ldots, \beta_k \vdash \alpha_{n+1},\ldots,\alpha_m $$
+
+'Esta operaci'on puede puede conservar o cambiar tanto la homogeneidad como la heterogeneidad del secuente inicial.
+
 \todomm{Poner un ejemplo como en el caso anterior}
 
 \subsubsection{Traducci'on}

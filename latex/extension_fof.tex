@@ -22,25 +22,25 @@ Junto a la integraci'on de TPTP-FOF, se incorporaron los siguientes mecanismos p
 
 \subsection{Herramientas incorporadas}
 
-Teniendo el soporte de \textit{TPTP-FOF} por parte del motor de c'alculo de secuentes de Heterogenius, integramos algunas de las herramientas mas difundidas en el 'ambito de demostradores autom'aticos de teoremas para el lenguaje \textit{TPTP-FOF}: \textit{SPASS}\todomm{AGregar referencia} como calculador de secuentes\todomm{Explicar qu'e es un calculador de secuentes en el cap'itulo de preliminares.}, \textit{Mace4}\todomm{Agregar referencia} como buscadores de contraejemplos, y \textit{E-Prover} \todomm{Agregar referencia} 
+Teniendo el soporte de \textit{TPTP-FOF} por parte del motor de c'alculo de secuentes de Heterogenius, integramos algunas de las herramientas mas difundidas en el 'ambito de demostradores autom'aticos de teoremas para el lenguaje \textit{TPTP-FOF}: \textit{SPASS} \cite{WDFKSW09} como calculador de secuentes, \textit{Mace4} \cite{m05} como buscadores de contraejemplos, y \textit{E-Prover} \cite{s13}. 
 
 \subsubsection{E-Prover}
 
-Es un demostrador autom'atico de teoremas de l'ogica de primer orden basado en el calculo por superposici'on\todomm{habr'ia que dar una explicaci'on muy b'asica de c'omo es este an;alisis, tipo wikipedia, pero al menos mencionarlo en la secci'on de preliminares}. Adem'as realiza b'usquedas de modelos por lo cual tambi'en se usa como un buscador de contraejemplos.
+Es un demostrador autom'atico de teoremas de l'ogica de primer orden basado en el calculo por superposici'on. Adem'as realiza b'usquedas de modelos por lo cual tambi'en se usa como un buscador de contraejemplos.
 
 \subsubsection{SPASS}
 
-Es un demostrador autom'atico de teoremas de l'ogica de primer orden con igualdad desarrollado por el Instituto Max Planck.\todomm{Explicar (al menos mencionar) en qu'e m'etodo de an'alisis est'a basado  (como se menciona para e-prover).}
+Es un demostrador autom'atico de teoremas de l'ogica de primer orden con igualdad desarrollado por el Instituto Max Planck.
 
 Desde el 2000, tanto \textit{SPASS} como \textit{E-Prover} ocupan los primeros lugares en la competencia anual de demostradores de teoremas \textit{CASC} (CADE ATP System Competition).
 
 \subsubsection{Mace4}
 
-Es un buscador de modelos finitos y contraejemplos para l'ogica de primer orden. Se seleccion'o debido a su notoriedad en el 'ambito de herramientas autom'aticas de l'ogica de primer orden.\todomm{Notoriedad en qu'e sentido? Explicar (al menos mencionar) en qu'e m'etodo de an'alisis est'a basado.}
+Es un buscador de modelos finitos y contraejemplos para l'ogica de primer orden. Es una herramienta popular en el 'ambito de demostradores de teoremas autom'aticos y se basa en una variaci'on del algoritmo \textit{DPLL/DavisPutnam-Logemann-Loveland}.
 
-\subsection{C'alculo de secuentes} \todomm{Esta subsecci'on hay que reescribirla. Esto no se deber'ia presentar como una modificaci'on al c'alculo de secuentes, sino como la introducci'on de nuevas acciones de demostraci'on de heterogenius.}
+\subsection{C'alculo de secuentes}
 
-Al introducir soporte para lenguajes de primer 'orden y herramientas autom'aticas fue necesario extender el c'alculo de secuentes agregando algunas reglas nuevas.
+Al introducir en Heterogenius soporte para lenguajes de l'ogica de primer 'orden y herramientas autom'aticas soportando 'estos lenguajes fue necesario tambi'en extender las acciones de demostraci'on de Heterogenius agregando tres reglas nuevas.
 
 Sea $\Gamma \vdash \alpha$ el secuente que se quiere analizar, se introducen las siguientes reglas:
 
@@ -71,7 +71,7 @@ Si de lo contrario, se logra encontrar un modelo de $\Gamma$ que no satisface $\
 \UnaryInfC{$\Gamma \vdash \alpha$}
 \end{prooftree}
 
-Por 'ultimo, debido a que la l'ogica de primer orden no es completa y la ejecuci'on de las herramientas autom'aticas est'a limitada por un timeout, un caso posible es el de no encontrar ni una demostraci'on ni un contraejemplo. En 'este caso no se sabe nada y el resultado es el mismo secuente.
+Por 'ultimo, debido a que la l'ogica de primer orden no es completa y la ejecuci'on de las herramientas autom'aticas est'a limitada por un timeout, es posible no encontrar ni una demostraci'on ni un contraejemplo. En 'este caso no se sabe nada y el resultado es el mismo secuente.
 
-Al usar alg'un demostrador autom'atico de teoremas se aplican las reglas 1 y 3. En cambio cuando se realiza una b'usqueda de contraejemplo, las reglas usadas son 2 y 3.
+Con 'estas reglas se cubren todos los casos, tanto de demostraci'on como los de refutaci'on de una teor'ia de l'ogica de primer 'orden. Al usar alg'un demostrador autom'atico de teoremas se aplican las reglas 1 y 3. En cambio cuando se realiza una b'usqueda de contraejemplo, las reglas usadas son 2 y 3.
 
