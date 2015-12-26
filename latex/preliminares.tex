@@ -74,7 +74,7 @@ En el ejemplo anterior la 'ultima f'ormula es de tipo \textit{conjecture}. 'Esto
 
 
 \section{C'alculo por superposici'on}
-Es un c'alculo que permite razonar en l'ogica de primer 'orden. Se ha desarrollado a principios de 1990 y combina los principios de resoluci'on de primer 'orden con el manejo de igualdad basada en 'orden desarrollado en el contexto del algoritmo de completitud de \textit{Knuth-Bendix}\cite[knuthbendix]. Como la mayoria de calculos de l'ogica de primer 'orden, superposici'on trata de mostrar la insatisfacibilidad de un conjunto de clausulas realizando demostraciones por refutaci'on. Superposici'on es completo para la refutaci'on, o sea dada una cantidad ilimitada de recursos y una estrategia de derivaci'on justa, se va a llegar a una contradicci'on empezando por cualquier conjunto de clausulas insatisfacible.
+Es un c'alculo que permite razonar en l'ogica de primer 'orden. Se ha desarrollado a principios de 1990 y combina los principios de resoluci'on de primer 'orden con el manejo de igualdad basada en 'orden desarrollado en el contexto del algoritmo de completitud de \textit{Knuth-Bendix}\cite{knuthbendix}. Como la mayoria de calculos de l'ogica de primer 'orden, superposici'on trata de mostrar la insatisfacibilidad de un conjunto de clausulas realizando demostraciones por refutaci'on. Superposici'on es completo para la refutaci'on, o sea dada una cantidad ilimitada de recursos y una estrategia de derivaci'on justa, se va a llegar a una contradicci'on empezando por cualquier conjunto de clausulas insatisfacible.
 
 
 \section{E-Prover}
@@ -176,7 +176,7 @@ Las partes mas importantes del algoritmo son las heuristicas de selecci'on de ce
 
 
 \subsubsection{Asignaci'on de la celda}
-Una vez que se seleccionan las celdas abiertas, se debe determinar el conjunto de valores a considerar para la asignaci'on. Si se trata de una celda booleana siempre se prueba con $0$ y $1$. Si no, se prueba con todos los valores del dominio $[0,\dots,n-1]$ si no se est'a usando la heuristica \textit{LNH} (Least Number Heuristic). 'Esta heuristica fue usada por primera vez en \cite{zhang96} y \cite{zhang} y su objetivo es de tratar de eliminar alg'un isomorfismo en la b'usqueda. La idea principal es de mantener el dominio particionado en valores asimetricos y valores sim'etricos. Solo uno de los valores sim'etricos debe ser probado. En la practica 'esta heur'istica es efectiva en los niveles mas altos del 'arbol de busqueda.
+Una vez que se seleccionan las celdas abiertas, se debe determinar el conjunto de valores a considerar para la asignaci'on. Si se trata de una celda booleana siempre se prueba con $0$ y $1$. Si no, se prueba con todos los valores del dominio $[0,\dots,n-1]$ si no se est'a usando la heuristica \textit{LNH} (Least Number Heuristic). 'Esta heuristica fue usada por primera vez en \cite{zhang95} y \cite{zhang96} y su objetivo es de tratar de eliminar alg'un isomorfismo en la b'usqueda. La idea principal es de mantener el dominio particionado en valores asimetricos y valores sim'etricos. Solo uno de los valores sim'etricos debe ser probado. En la practica 'esta heur'istica es efectiva en los niveles mas altos del 'arbol de busqueda.
 
 
 \subsubsection{Propagaci'on}
