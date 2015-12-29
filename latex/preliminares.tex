@@ -82,13 +82,13 @@ E-Prover es un demostrador de teoremas de l'ogica de primer orden con igualdad. 
 
 Ya que E-Prover adem'as permite buscar un modelo se lo puede utilizar tambi'en como un buscador de contraejemplos.
 
-La principal t'ecnica usada es el c'alculo por superposici'on. El demostrador opera en cuatro fases distintas:
+Internamente la principal t'ecnica usada es el c'alculo por superposici'on. El demostrador opera en cuatro fases distintas:
 \begin{itemize}
 \item Clausificaci'on: se transforman las f'ormulas de entrada en f'orma normal clausal de tal manera que la f'ormula resultante es insatisfacible si y s'olo si el problema original es demostrable. Se usa una variaci'on del algoritmo detallado en \cite{smallcnf2001}.
 
 \item Una etapa opcional de simplificaci'on de la forma clausal del problema.
 
-\item An'alisis del problema y selecci'on de par'ametros de b'usqueda 'optimos.
+\item An'alisis del problema y selecci'on de par'ametros de 'optimos para la b'usqueda.
 
 \item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la clausula vacia y mostrar que la cl'ausula original es insatisfacible y el problema de entrada es demostrable. E-Prover implementa el algor'itmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsumci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de clausulas \cite{ijcai2001}.
 \end{itemize}
