@@ -2,8 +2,154 @@
 
 \section{Ejemplo de demostraci'on con file system}
 
-TODO: aplicar las acciones del tutorial.
-http://www.dc.uba.ar/inv/grupos/rfm_folder/dynamite/tutorial
+Para demostrar el uso de Heterogenius en un caso real recurrimos a la demostraci'on de la propiedad \textit{NoDirAliases} definida en el archivo de especificaci'on Alloy \textit{$file\_system.als$} \ref{anexo_fs}.
+
+Lo primero que se hace al abrir Heterogenius es cargar la especificaci'on con la que se va a trabajar y seleccionar la propiedad que se quiere demostrar:
+
+\begin{figure}[H]
+	\includegraphics[width=250px]{img/ejemplo/1.png}
+	\centering
+	\caption{}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/2.png}
+	\centering
+	\caption{}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/3.png}
+	\centering
+	\caption{La propiedad cargada aparece como un 'unico nodo del 'arbol de demostraci'on}
+\end{figure}
+
+En la ventana \textit{Node Info} se puede ver el detalle del nodo seleccionado. As'i, la propiedad a demostrar es:
+
+\begin{verbatim}
+all o: one this/Dir | lone (contents.o)
+\end{verbatim}
+
+Lo primero que se puede hacer es aplicar una skolemizaci'on para eliminar el cuantificador universal:
+
+\begin{figure}[H]
+	\includegraphics[width=250px]{img/ejemplo/4.png}
+	\centering
+	\caption{Se selecciona 'Skolem all' desde la lista de estrategias.}
+\end{figure}
+
+La aplicaci'on de dicha acci'on crear'a un nodo nuevo en el 'arbol de demostraci'on con la nueva expresi'on a demostrar.
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/5.png}
+	\centering
+	\caption{}
+\end{figure}
+
+El siguiente paso ser'a separar el nodo en casos seg'un la expresi'on $oh\_1$ $in$ $Root$. Para 'esto se selecciona la opci'on \textbf{Case} desde la lista de estrategias y se ingresa la expresi'on:
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/6.png}
+	\centering
+	\caption{Se ingresa la expresi'on a usar para la separaci'on en casos.}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/7.png}
+	\centering
+	\caption{Nodo de la izquierda representa el caso 1}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/8.png}
+	\centering
+	\caption{Nodo de la derecha representa el caso 2}
+\end{figure}
+
+El nodo sobre el que se aplic'o la acci'on \textbf{Case} se subdivide en dos nodos hijos, cada uno representando un caso posible. Las ramas con lineas solidas indican que es necesario demostrar ambas ramas para concluir con la demostraci'on del nodo padre.
+
+\subsection{Demostraci'on del caso 1}
+
+Empecemos con la primer rama. Lo primero que se puede hacer es introducir uno de los lemmas definidos en el archivo de especificaci'on cargado. En particular se puede probar con el lemma \textit{RootHasNoParent}:
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/9.png}
+	\centering
+	\caption{Al seleccionar la opci'on \textbf{Use} de la lista de las estrategias se presenta un dialogo para elegiar el lemma a introducir.}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/10.png}
+	\centering
+	\caption{La aplicaci'on del lemma resulta en un nodo nuevo.}
+\end{figure}
+
+A continuaci'on se introduce el lemma: \textit{ParentDefinition}:
+
+%\begin{verbatim}
+%all d: Dir | d.parent = (contents.d) . Name
+%\end{verbatim}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/11.png}
+	\centering
+	\caption{}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/12.png}
+	\centering
+	\caption{Nodo resultante luego de introducir el lemma \textit{ParentDefinition}}
+\end{figure}
+
+Se introduce el lemma \textit{Lemma1} definido en el archivo de especificaci'on como:
+
+\begin{verbatim}
+all o: Dir | no contents.o . Name => no contents.o
+\end{verbatim}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/13.png}
+	\centering
+	\caption{}
+\end{figure}
+
+Para terminar con la demostraci'on de 'esta rama se aplica la estrategia \textbf{Reduce}
+
+\begin{figure}[H]
+	\includegraphics[width=350px]{img/ejemplo/14.png}
+	\centering
+	\caption{}
+\end{figure}
+
+\subsection{Demostraci'on del caso 2}
+
+El nodo a demostrar de la segunda rama es:
+
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$oh\_1$ $in$ $Root$}
+\noLine
+\UnaryInfC{$lone$ $(contents$ . $oh\_1)$}
+\end{prooftree}
+
+
+Lo primero que se puede hacer es aplicar la propiedad \textbf{OneParent} definia como:
+
+\begin{verbatim}
+all d: one this/Dir | (d !in this/Root) => (one (d . parent)
+		&& one (contents . d) )
+\end{verbatim}
+
+con lo cu'al 'esta expresi'on se agrega a las hip'otesis del nodo y aplicando a continuaci'on \textbf{reduce} y \textbf{grind} se llega a completar la demostraci'on de la rama:
+
+\begin{figure}[H]
+	\includegraphics[width=250px]{img/ejemplo/15.png}
+	\centering
+	\caption{Los nodos negros indican que las ramas est'an demostradas.}
+\end{figure}
+
+Ya que todos los pasos aplicados preserva la verdad y como los nodos hojas de ambas ramas quedaron demostrados, el nodo raiz del 'arbol de demostraci'on tambi'en queda demostrado.
 
 
 \section{B'usqueda de contraejemplo}
