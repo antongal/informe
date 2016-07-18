@@ -4,18 +4,28 @@ El cálculo de secuentes aparece en la década del `30 siendo los sistemas LK y 
 
 Las demostraciones en el c'alculo de secuentes se construyen en forma de un 'arbol donde sus nodos son secuentes y las aristas son aplicaciones de reglas de inferencia. Un secuente se puede ver como dos listas de f'ormulas y se nota $ \Gamma \vdash  \Delta$. La primer lista se denomina \textit{antecedente} y contiene a las hip'otesis. La segunda lista es el \textit{consecuente} y representa lo que se quiere demostrar.
 
-El secuente puede ser interpretado de 'esta manera: un secuente $\Gamma \vdash  \Delta$ es válido en un modelo semántico \sem{M}, si $\textrm{\sem{M}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \Rightarrow \bigvee_{\delta \in \Delta} \delta )$.
+El secuente puede ser interpretado de esta manera: un secuente $\Gamma \vdash  \Delta$ es válido en un modelo semántico \sem{M}, si 
+
+\begin{equation}
+\textrm{\sem{M}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \Rightarrow \bigvee_{\delta \in \Delta} \delta )
+\notag
+\end{equation}
 
 Adem'as un secuente puede ser:
 
 \begin{itemize}
 
 \item{Universalmente v'alido}: si es válido para todo modelo semántico.
-\item{Inv'alido} si existe un modelo semántico \sem{N} tal que $\textrm{\sem{N}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \wedge \bigwedge_{\delta \in \Delta} \neg\delta )$.
+\item{Inv'alido}, si existe un modelo semántico \sem{N} que es un \emph{contraejemplo} para dicho secuente y que satisface:
+
+\begin{equation}
+\textrm{\sem{N}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \wedge \bigwedge_{\delta \in \Delta} \neg\delta )
+\notag
+\end{equation}
 
 \end{itemize}
 
-Si un secuente es inv'alido, se dice que \sem{N} es un \emph{contraejemplo} para ese secuente.
+
 
 Una demostraci'on en el c'alculo de secuentes se realiza aplicando reglas de inferencia sobre los nodos hojas hasta llegar a un secuente trivial de la forma $\alpha \vdash \alpha$ con $\alpha$ una fórmula.
 
@@ -28,8 +38,7 @@ En general las reglas de inferencia tienen la siguiente forma:
 	\RightLabel{\scriptsize ($R$)}
 	\TrinaryInfC{$\Gamma \vdash \Delta $}
 \end{prooftree}
-
-y se interpreta como, dado un secuente hoja del árbol de demostración de la forma $\Gamma \vdash \Delta$, al aplicar la regla $R$ se modifica el árbol agregando $n$ nuevos nodos de la forma $\Gamma_{i}\vdash\Delta_{i}$ como hijos del secuente $\Gamma \vdash \Delta$.
+y se interpretan como, dado un secuente hoja del árbol de demostración de la forma $\Gamma \vdash \Delta$, al aplicar la regla $R$ se modifica el árbol agregando $n$ nuevos nodos de la forma $\Gamma_{i}\vdash\Delta_{i}$ como hijos del secuente $\Gamma \vdash \Delta$.
 
 Algunas de las reglas del c'alculo se presentan a continuaci'on:
 
@@ -72,4 +81,4 @@ Algunas de las reglas del c'alculo se presentan a continuaci'on:
 
 \vspace{2em}
 
-Existen diferentes versiones del c'alculo de secuentes, y la selecci'on de que versi'on usar depende de que lenguaje l'ogico se est'e utilizando para el an'alisis.
+Existen diferentes versiones del c'alculo de secuentes, y la elecci'on de cu'al usar depende del lenguaje l'ogico que se est'e utilizando para el an'alisis.

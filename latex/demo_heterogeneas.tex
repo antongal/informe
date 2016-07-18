@@ -1,11 +1,11 @@
 \section{Demostraciones heterogéneas}
 \label{heterogenious proofs}
 
-Hoy en dia existe una gran variedad de lenguajes l'ogicos cada uno con sus caracteristicas. Dependiendo de su poder expresivo, cada lenguaje puede describe mejor algunos aspectos del sistema pero no otros. Generalmente al elegir especificar el sistema en un solo lenguaje nos topamos con este tradeoff.
+Hoy en dia existe una gran variedad de lenguajes l'ogicos cada uno con sus caracter'isticas. Dependiendo de su poder expresivo, cada lenguaje puede describir mejor algunos aspectos del sistema pero no otros. Generalmente al elegir especificar un sistema utilizando un solo lenguaje nos topamos con este \textit{tradeoff}.
 
-Naturalmente surge la idea de combinar varios lenguajes y usar cada uno para describir aspectos del sistema donde cada lenguaje tiene una mayor ventaja en expresividad. Siguiendo 'este concepto se vuelve necesario poder traducir lo escrito de un lenguaje l'ogico a otro \cite{goguen:jacm-39_1}, \cite{meseguer:lc87}, \cite{tarlecki:sadt-rtdts95}.
+Naturalmente surge la idea de combinar varios lenguajes y usar cada uno para describir aspectos del sistema de modo de aprovechar mejor las caracter'isticas propias de cada uno. Siguiendo 'este concepto se vuelve necesario poder traducir lo escrito de un lenguaje l'ogico a otro \cite{goguen:jacm-39_1,meseguer:lc87,tarlecki:sadt-rtdts95}.
 
-As'i se puede probar que dados los lenguajes l'ogicos $L'$ y $L$, con 
+As'i se puede probar que dados los lenguajes l'ogicos $L'$ y $L$, tales que 
 
 \begin{itemize}
 \item $L'$ un lenguaje con c'alculo completo.
@@ -14,8 +14,7 @@ As'i se puede probar que dados los lenguajes l'ogicos $L'$ y $L$, con
 \item $T_{L \to L'}(\alpha)$ una traducci'on de $\alpha$ del lenguaje $L$ a $L'$ 
 \item $T_{L \to L'}(\Gamma)$ una traducci'on de f'ormulas de $\Gamma$ del lenguaje $L$ a $L'$.
 \end{itemize}
-
-y es posible demostrar en el lenguaje $L'$ la fórmula $T_{L \to L'} (\alpha)$, entonces $\alpha$ es universalmente válida en la clase de modelos de $L$.
+si es posible demostrar en el lenguaje $L'$ la fórmula $T_{L \to L'} (\alpha)$, entonces $\alpha$ es universalmente válida en la clase de modelos de $L$.
 
 Con lo cu'al se obtiene que
 $$\Gamma \models_L \alpha \mbox{ si y sólo si } T_{L \to L'}(\Gamma) \vdash_{L'} T_{L \to L'}(\alpha)$$
@@ -31,4 +30,4 @@ Como consecuencia tiene sentido extender el c'alculo dando soporte a las reglas 
 	\DisplayProof
 \end{center}
 
-De 'esta f'orma es posible realizar demostraciones de problemas definidos en el lenguaje $L$ y luego pasar al lenguaje $L'$ aplicando la regla \textit{translation}. 'Este tipo de c'alculos fue estudiado por Borzyszkowski en \cite{borzyszkowski:tcs-286_2}
+De esta forma es posible realizar demostraciones de problemas definidos en el lenguaje $L$ y luego pasar al lenguaje $L'$ aplicando la regla \textit{translation}. 'Este tipo de c'alculos fue estudiado por Borzyszkowski en \cite{borzyszkowski:tcs-286_2}.
