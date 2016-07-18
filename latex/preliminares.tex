@@ -9,9 +9,9 @@
 
 \section{Heterogenius}
 
-Heterogenius \cite{heterogenius} es un demostrador de teoremas heterog'eneo que, como su principal objetivo, permite realizar demostraciones interactivas mediante el c'alculo de secuentes, representando lo que se quiere demostrar en distintos lenguajes, aplicando reglas de c'alculo de secuentes y usando las herramientas autom'aticas externas. 
+Heterogenius \cite{heterogenius} es un demostrador de teoremas heterog'eneo que, como su principal objetivo, permite realizar demostraciones interactivas mediante el c'alculo de secuentes, representando lo que se quiere demostrar en distintos lenguajes, aplicando reglas de ese c'alculo y usando herramientas autom'aticas externas. 
 
-Su principal caracteristica es que soporta demostraciones heterogeneas, o sea las demostraciones pueden aceptar secuentes escritos en distintos lenguajes. Los lenguajes soportados actualmente son dos: \textit{Alloy} y \textit{PDOCFA}. Entre otras cosas Heterogenius presenta las siguientes caracteristicas:
+Su principal caracter'istica es que soporta demostraciones heterog'eneas. En otras palabras las demostraciones pueden realizarse utilizando secuentes escritos en distintos lenguajes. Los lenguajes soportados actualmente son dos: \textit{Alloy} \cite{alloy} y \textit{PDOCFA} \cite{pdocfa}. Entre otras, Heterogenius presenta las siguientes caracter'isticas:
 
 \begin{itemize}
 
@@ -19,15 +19,15 @@ Su principal caracteristica es que soporta demostraciones heterogeneas, o sea la
 
 \item Separa conceptualmente y arquitect'onicamente las herramientas utilizadas durante el an'alisis.
 
-\item Ofrece interacci'on entre varias herramientas externas.
+\item Ofrece interacci'on con varias herramientas externas.
 
 \item Posee una arquitectura modular y extensible.
 
-\item Posee una interfaz de usuario moderna e intuitiva.
+\item Posee una interfaz de usuario moderna que intenta ser más intuitiva que las interfaces textuales que aún son la tendencia predominante en los sistemas de demostración interactivos.
 
 \end{itemize}
 
-Adem'as de ser un demostrador interactivo, Heterogenius tambi'en es una plataforma en la cu'al se puede experimentar con lenguajes y herramientas autom'aticas nuevas.
+Debido a la extensibilidad fue uno de los conceptos que guiaron su diseño, Heterogenius sirve como  una plataforma en la cu'al se puede experimentar con lenguajes y herramientas autom'aticas nuevas.
 
 
 \section{TPTP-FOF}
@@ -88,24 +88,24 @@ Internamente la principal t'ecnica usada es el c'alculo por superposici'on. El d
 
 \item Una etapa opcional de simplificaci'on de la forma clausal del problema.
 
-\item An'alisis del problema y selecci'on de par'ametros de 'optimos para la b'usqueda.
+\item An'alisis del problema y selecci'on de par'ametros 'optimos para la b'usqueda.
 
-\item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la clausula vacia y mostrar que la cl'ausula original es insatisfacible y el problema de entrada es demostrable. E-Prover implementa el algor'itmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsumci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de clausulas \cite{ijcai2001}.
+\item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la cl'ausula vac'ia, lo que permite determinar que la cl'ausula original es insatisfacible y, por lo tanto, el problema de entrada es demostrable. E-Prover implementa el algoritmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsunci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de cl'ausulas \cite{ijcai2001}.
 \end{itemize}
 
-\subsection{Busqueda de demostraci'on}
+\subsection{B'usqueda de demostraci'on}
 
-E-Prover utiliza una variante del algoritmo de ``clausula dada'' \cite{dk97}. El estado de la demostraci'on se representa por dos conjuntos de clausulas: el conjunto \textbf{P} de clausulas procesadas (inicialmente vacio) y el conjunto \textbf{U} de clausulas sin procesar. Las clausulas en \textbf{U} se ordenan de acuerdo a una funci'on de evaluaci'on heuristica y se procesan en 'este 'orden.
+E-Prover utiliza una variante del algoritmo de ``cl'ausula dada'' \cite{dk97}. El estado de la demostraci'on se representa por dos conjuntos de cl'ausulas: el conjunto \textbf{P} de cl'ausulas procesadas (inicialmente vac'io) y el conjunto \textbf{U} de cl'ausulas sin procesar. Las cl'ausulas en \textbf{U} se ordenan de acuerdo a una funci'on de evaluaci'on he'uristica y se procesan en ese orden.
 
-El procesamiento primero simplifica la clausula seleccionada \textit{g} con todas las clausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las clausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas clausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
+El procesamiento primero simplifica la cl'ausula seleccionada \textit{g} con todas las cl'ausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las cl'ausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas cl'ausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
 
-'Este procedimiento de busqueda de demostraci'on es diferente del algoritmo de ``clausula dada'' implementado por \texttt{Otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister} y forma parte adem'as del algoritmo principal de \texttt{Vampire} y \texttt{SPASS}.
+Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister} y forma parte adem'as del algoritmo principal de \texttt{Vampire} y \texttt{SPASS}.
 
-\subsection{Heuristicas}
+\subsection{Heur'isticas}
 
-E-Prover usa una series de heur'isticas para: la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente la elecci'on de literales para la inferencia en las clausulas que tienen por lo menos un literal negativo.
+E-Prover usa una serie de heur'isticas para: la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente la elecci'on de literales para la inferencia en las cl'ausulas que tienen por lo menos un literal negativo.
 
-La selecci'on de las clausulas dadas es controlada por varias colas de prioridad de las cuales se seleccionan las clausulas en un esquema round robin pesado. Cada cola es ordenada de acuerdo a una funci'on de prioridad fija y una funci'on de evaluaci'on de clausula parametrizada. Las funciones de evaluaci'on de cl'ausulas pueden ser orientadas a objetivos, pueden estar enfocadas en algunos simbolos en particular y pueden tomar en cuenta el ordenamiento de t'erminos. 
+La selecci'on de las cl'ausulas dadas es controlada por varias colas de prioridad de las cuales se seleccionan las cl'ausulas en un esquema ``round robin pesado''. Cada cola es ordenada de acuerdo a una funci'on de prioridad fija y una funci'on de evaluaci'on de cl'ausula parametrizada. Las funciones de evaluaci'on de cl'ausulas pueden ser orientadas a objetivos, pueden estar enfocadas en algunos s'imbolos en particular y pueden tomar en cuenta el ordenamiento de t'erminos. 
 
 
 La selecci'on de literales es controlada por una de las cien estrategias de selecci'on que est'an codificadas en E-Prover. En el modo autom'atico el demostrador selecciona una de ellas.
