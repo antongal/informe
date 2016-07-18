@@ -17,20 +17,20 @@ Un ejemplo clásico de esta correlación está dado por los lenguajes de primer 
 Su expresividad impide que se pueda construir un programa que sea capaz de decidir sobre la verdad o falsedad de una sentencia cualquiera. 
 Sin embargo, se han desarrollado diversas herramientas que son capaces de realizar análisis automáticos para una gran cantidad de casos; como ejemplos pueden citarse: Mace4 \cite{m05}, E-Prover \cite{s13}, SPASS \cite{WDFKSW09}, entre muchos otros. 
 
-Por otro lado, la complejidad actual de los sistemas informáticos fuerza a los equipos de desarrollo a distribuir la tarea de relevar los requerimientos referidos a distintos aspecto de estos sistemas. 
-Es sabido que diferentes aspectos de un sistema de software son mejor capturados por lenguajes de diferentes características. 
+Por otro lado, la complejidad actual de los sistemas informáticos fuerza a los equipos de desarrollo a distribuir la tarea de relevar los requerimientos referidos a distintos aspectos de estos sistemas. 
+Es sabido que diferentes facetas de un sistema de software son mejor capturados por lenguajes de diferentes características. 
 Esta apreciación vale tanto para lenguajes semiformales, tales como la enorme diversidad de lenguajes diagramáticos de UML \cite{BRJ98}, como así también para lenguajes formales en donde diferentes lógicas resultan apropiadas para poner de relieve distintos comportamientos de un sistema informático.
-Algunos ejemplos son: \emph{linear temporal logics}, tanto su versión proposicional como la de primer orden o con operadores de pasado (\cite{Pnu77}, \cite{MP95}) utilizada para caracterizar propiedades de las ejecuciones de un sistema; \emph{lógicas dinámicas}, también en sus versiones proposicional y de primer orden (\cite{HKT00}). 
+Algunos ejemplos son: \emph{linear temporal logics}, tanto su versión proposicional como la de primer orden o con operadores de pasado \cite{Pnu77,MP95} utilizada para caracterizar propiedades de las ejecuciones de un sistema y \emph{lógicas dinámicas}, también en sus versiones proposicional y de primer orden \cite{HKT00}.
 Si bien esta práctica de construir especificaciones heterogéneas facilita la comprensión y documentación de los sistemas, impone una nueva dificultad a los métodos de análisis, que usualmente se aplican sobre un lenguaje único.
 
 Para salvar esta dificultad, desde hace ya algunos años, se ha estado trabajando en el desarrollo de fundamentos formales y herramientas de análisis de sistemas descriptos en forma heterogénea. 
-Del lado de los fundamentos formales encontramos los trabajos seminales en el campo de la especificación algebraica de software como son \cite{GB84}, \cite{GB92}, \cite{Tar96}, \cite{Dia02}. 
-Mientras que del lado de las herramientas se observan trabajos como \cite{Mos02}, \cite{DF96}, \cite{DF02}, \cite{LF06}. 
+Del lado de los fundamentos formales encontramos los trabajos seminales en el campo de la especificación algebraica de software como son \cite{GB84,GB92,Tar96,Dia02}. 
+Mientras que del lado de las herramientas se observan trabajos como \cite{Mos02,DF96,DF02,LF06}. 
 
 Otra dimensión de la heterogeneidad es la enorme diversidad de herramientas de análisis que existen hoy en día para cada lenguaje. 
 Así, dado un lenguaje de especificación o diseño de software particular, encontramos un verdadero ecosistema de herramientas que nos brindan la posibilidad de aplicar diferentes técnicas de validación y verificación de propiedades descriptas en ese lenguaje.
 Por lo tanto, es necesario brindar fundamentos formales a un concepto de análisis que permita la interrelación, estructurada formalmente, de estas técnicas. 
-En el desarrollo de Heterogenius \cite{heterogenius} se ha explorado la construcción de una herramienta de esas características, cuya racionalización formal tiene origen en $\argentum$ \cite{frias:relmics01}.
+En el desarrollo de Heterogenius \cite{heterogenius} se ha explorado la construcción de una herramienta de esas características, cuya racionalización formal tiene origen en $\argentum$ \cite{FBL01}.
 
 Heterogenious es hoy una herramienta que integra diversos lenguajes, vinculados por medio de traducciones que preservan la semántica de las especificaciones, facilitando el uso de diversas herramientas que permiten el análisis de propiedades en dichos lenguajes. Actualmente, una gran variedad de herramientas, tanto automáticas (demostradores, \emph{bounded model-checkers}, etc.) como semiautomáticas, permiten la utilización del lenguaje TPTP \cite{tptp} para la descripción de su entrada.
 Esto permite aplicar diversos métodos automáticos y semiautomáticos de análisis para especificaciones que pueden ser escritas directamente en dicho lenguaje o bien puedan ser traducidas a 'el preservando su semántica, al menos parcialmente.
@@ -39,30 +39,30 @@ Las contribuciones principales de esta tesis, que pueden leerse a modo de objeti
 
 \begin{itemize}
 \item \textbf{Extensi'on del 'arbol de an'alisis:} En \cite{heterogenius} se present'o como concepto la noción de \emph{árbol de análisis}: una generalización del concepto de árbol de prueba para lenguajes lógicos, pero que soporta la invocación a herramientas auxiliares de análisis completo o parcial.
-Si bien la utilización de dichas herramientas puede no tener como objetivo la conclusión del análisis, permite documentar el proceso y registrar informacion de utilidad cuando el proceso se encuentra aun en curso.
+Si bien la utilización de dichas herramientas puede no tener como objetivo la conclusión del análisis, permite documentar el proceso de demostraci'on y registrar informaci'on de utilidad cuando dicho proceso se encuentra a'un en curso.
 Si bien esta ampliación del concepto de árbol de prueba es una ganancia metodológica respecto de la utilización disociada de las herramientas disponibles para un cierto lenguaje, todavía es posible realizar ciertas mejoras vinculadas a una interpretación aun más general del concepto de análisis. Uno de estos elementos es la posibilidad de documentar en mayor profundidad el proceso de análisis a partir de tomar en cuenta los caminos alternativos tomados y en curso, decisiones que no produjeron ning'un resultado exitoso, etc.
 
-Para abordar esto se incluy'o un nuevo tipo de ramificaci'on, que permite soportar demostraciones alternativas, decisiones no exitosas, etc.
+Para subsanar esta falencia se incluy'o un nuevo tipo de ramificaci'on, que permite soportar demostraciones alternativas, decisiones no exitosas, etc.
 
 \item \textbf{Extensi'on de Heterogenius:} Heterogenius integra una variedad de lenguajes y herramientas. Debido al creciente n'umero de herramientas capaces de procesar lenguajes basados en la l'ogica de primer 'orden, y su uso en el an'alisis de software, se decidi'o extender Heterogenious con el objetivo de soportar el lenguaje de l'ogica de primer orden \emph{TPTP-FOF}. 'Este lenguaje est'a ampliamente difundido en la comunidad de investigadores dedicados a la implementación y uso de demostradores autom'aticos y semi-automáticos de teoremas y es soportado por numerosas herramientas. 
 Esta extensión abre un enorme abanico de posibilidades de interacci'on entre Heterogenius y software de an'alisis externo. 
 
 Para demostrar la utilidad de esta extensi'on se integraron los siguientes demostradores autom'aticos y buscadores de contraejemplos: E-Prover y SPASS (como demostradores autom'aticos de teoremas) y E-Prover y Mace4 (como buscadores de modelos). 
 
-En virtud de que Heterogenius es una plataforma de an'alisis heterogéneo y uno de sus objetivos es facilitar la interacci'on entre distintos lenguajes del sistema, se implement'o una traducción de las fórmulas de las \emph{Point-dense Omega Closure fork Algebras} \cite{LF06} (una extensión de las \emph{Fork Algebras} \cite{frias02}) a fórmulas de \emph{TPTP-FOF}. Si bien esta traducción no preserva totalmente la semántica del lenguaje de esta clase de álgebra aun así es posible derivar conclusiones de importancia para el análisis de especificaciones de software.
+En virtud de que Heterogenius es una plataforma de an'alisis heterogéneo y uno de sus objetivos es facilitar la interacci'on entre distintos lenguajes de especificaci'on, se implement'o una traducción de las fórmulas de las \emph{Point-dense Omega Closure fork Algebras} \cite{LF06} (una extensión de las \emph{Fork Algebras} \cite{frias02}) a fórmulas de \emph{TPTP-FOF}. Si bien esta traducción no preserva totalmente la semántica del lenguaje de esta clase de álgebra aun así es posible derivar conclusiones de importancia para el análisis de especificaciones de software.
 
 
 \item \textbf{Mayor \emph{granularidad} en la heterogeneidad:}
 
 La noción de árbol de análisis presentada en Heterogenius est'a basada en los 'arboles de demostración del c'alculo de secuentes.
 Si bien se presentar'a dicho c'alculo en la siguiente secci'on, por ahora basta con entender a los secuentes como colecciones de f'ormulas.
-Heterogenius se hab'ia creado como un demostrador heterogeneo pero con secuentes homogéneos. 
-De 'esta forma cada secuente solamente pod'ia tener f'ormulas del mismo lenguaje y las traducciones se realizaban sobre todas las f'ormulas del secuente. 
-Esto presenta una limitación muy fuerte ya que no permite ejercer un control m'as fino sobre los elementos descriptivos contenidos en los secuentes en virtud de no lograr el suficiente grado de heterogeneidad al lleva a cabo el an'alisis.
-De alguna forma, solo resultaba admisible la utilización de lenguajes diferentes en tanto estos fueran traducibles a un otro que resulte común.
+Heterogenius se hab'ia creado como un demostrador heterog'eneo pero con secuentes homogéneos. 
+De 'esta forma cada secuente solamente pod'ia tener f'ormulas del mismo lenguaje y las traducciones se realizaban sobre todas sus f'ormulas. 
+Esto presenta una limitación muy fuerte ya que no permite ejercer un control m'as fino sobre los elementos descriptivos contenidos en los secuentes en virtud de no lograr el suficiente grado de heterogeneidad al llevar a cabo el an'alisis.
+De alguna forma, s'olo resultaba admisible la utilización de lenguajes diferentes en tanto estos fueran traducibles a un otro que resulte común.
 
-Debido a esto, se ampli'o el concepto de heterogeneidad de forma de permitir la utilización de f'ormulas de distintos lenguajes en el mismo secuente y cuyas traducciones a otros lenguajes puedan realizarse en forma independiente de otras formulas presentes en el secuente.
+Debido a esto, se ampli'o el concepto de heterogeneidad de forma de permitir la utilización de f'ormulas de distintos lenguajes en el mismo secuente y cuyas traducciones a otros lenguajes puedan realizarse en forma independiente de otras f'ormulas presentes en el secuente.
 \end{itemize}
 
-El presente informe está organizado de la siguiente manera: en el Cap.~2 presentamos las nociones te'oricas que sirven de base al resto del trabajo.
+'Esta tesis está organizado de la siguiente manera: en el Cap.~2 presentamos las nociones te'oricas que sirven de base al resto del trabajo.
 En el Cap.~3 explicamos los aportes realizados durante el desarrollo de la tesis y la metodolog'ia utilizada para llevarlos a cabo. El Cap.~4 muestra un estudio emp'irico de las nuevas cualidades de Heterogenius. Finalmente, el Cap.~5 est'a dedicado a las conclusiones y trabajo futuro sobre esta línea de investigación.
