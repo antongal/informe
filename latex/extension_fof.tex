@@ -2,9 +2,7 @@
 
 Desde el a\~no 1996 se celebra anualmente la competencia de demostradores autom'aticos \emph{CADE ATP System Comptetion} \cite{casc} como parte de la conferencia internacional sobre deducci'on autom'atica CADE.
 Dicha competencia es uno de los principales eventos donde varios de los m'as famosos grupos de investigaci'on que trabajan en el desarrollo de herramientas de demostraci'on autom'atica se reunen para evaluar la \emph{performance} de sus sistemas.
-Gracias a ello, un gran n'umero de herramientas de demostraci'on autom'atica aceptan entradas escritas en el lenguaje propio de la competencia: \textit{TPTP-FOF} \cite{fof}.
-
-Es por ello que hemos decidido agregar el mencionado lenguaje al motor de Heterogenius, de modo de permitir la integraci'on con herramientas actuales y abrir el camino para la interacci'on con las futuras tecnologías que soporten TPTP-FOF.
+Gracias a ello, un gran n'umero de herramientas de demostraci'on autom'atica aceptan entradas escritas en el lenguaje propio de la competencia: \textit{TPTP-FOF} \cite{fof}. Es por ello que hemos decidido agregar el mencionado lenguaje al motor de Heterogenius, de modo de permitir la integraci'on con herramientas actuales y abrir el camino para la interacci'on con las futuras tecnologías que soporten TPTP-FOF.
 
 Junto a la integraci'on de TPTP-FOF, se incorporaron los siguientes mecanismos para poder usar las herramientas correspondientes.
 
@@ -22,46 +20,36 @@ Junto a la integraci'on de TPTP-FOF, se incorporaron los siguientes mecanismos p
 
 \subsection{Herramientas incorporadas}
 
-Teniendo el soporte de \textit{TPTP-FOF} por parte del motor de c'alculo de secuentes de Heterogenius, integramos algunas de las herramientas mas difundidas en el 'ambito de demostradores autom'aticos de teoremas para el lenguaje \textit{TPTP-FOF}: \textit{SPASS} \cite{WDFKSW09} con \textit{E-Prover} \cite{s13} como calculador de secuentes y \textit{Mace4} \cite{m05} con \textit{E-Prover} como buscadores de contraejemplos.
-
-\subsubsection{E-Prover}
-
-Es un demostrador autom'atico de teoremas de l'ogica de primer orden basado en el calculo por superposici'on. Adem'as realiza b'usquedas de modelos por lo cual tambi'en se usa como un buscador de contraejemplos.
+Teniendo el soporte de \textit{TPTP-FOF} por parte del motor de c'alculo de secuentes de Heterogenius, integramos algunas de las herramientas mas difundidas en el 'ambito de demostradores autom'aticos de teoremas para el lenguaje \textit{TPTP-FOF}: \textit{SPASS} \cite{WDFKSW09} y \textit{E-Prover} \cite{s13} como calculadores de secuentes y \textit{Mace4} \cite{m05} y \textit{E-Prover} como buscadores de contraejemplos.
 
 \subsubsection{SPASS}
 
-Es un demostrador autom'atico de teoremas de l'ogica de primer orden con igualdad desarrollado por el Instituto Max Planck.
-
 Desde el 2000, tanto \textit{SPASS} como \textit{E-Prover} ocupan los primeros lugares en la competencia anual de demostradores de teoremas \textit{CASC} (CADE ATP System Competition).
 
-\subsubsection{Mace4}
+\subsection{Modificaciones al c'alculo de Heterogenius}
 
-Es un buscador de modelos finitos y contraejemplos para l'ogica de primer orden. Es una herramienta popular en el 'ambito de demostradores de teoremas autom'aticos y se basa en una variaci'on del algoritmo \textit{DPLL/DavisPutnam-Logemann-Loveland}.
-
-\subsection{C'alculo de secuentes}
-
-Al introducir en Heterogenius soporte para lenguajes de l'ogica de primer 'orden y herramientas autom'aticas soportando 'estos lenguajes fue necesario tambi'en extender las acciones de demostraci'on de Heterogenius agregando tres reglas nuevas.
+Al introducir soporte para lenguajes de l'ogica de primer 'orden y herramientas autom'aticas de an'alisis de estos lenguajes, fue necesario tambi'en extender las acciones de demostraci'on de Heterogenius agregando tres reglas nuevas.
 
 Sea $\Gamma \vdash \alpha$ el secuente que se quiere analizar, se introducen las siguientes reglas:
 
 \begin{prooftree}
 \LeftLabel{\textbf{Regla 1:}}
 \AxiomC{$\Gamma \vdash \alpha$}
-\RightLabel{(si vale $\Gamma \vdash^{fof} \alpha$)}
+\RightLabel{\qquad si vale $\Gamma \vdash^{fof} \alpha$}
 \UnaryInfC{$\top$}
 \end{prooftree}
 
-'Esta regla indica que si se logra encontrar una demostraci'on del secuente $\Gamma \vdash \alpha$ con un demostrador autom'atico \textit{TPTP-FOF}, el resultado es $\top$ y se termina la demostraci'on.
+Esta regla indica que si se logra encontrar una demostraci'on del secuente $\Gamma \vdash \alpha$ con un demostrador autom'atico de primer orden, la rama se considera cerrada.
 
 
 \begin{prooftree}
 \LeftLabel{\textbf{Regla 2:}}
 \AxiomC{$\Gamma \vdash \alpha$}
-\RightLabel{(si existe $\mathcal{M} \in Mod^{fof}(\Gamma$) y $\mathcal{M} \nvDash^{fof} \alpha$ )}
+\RightLabel{\qquad si existe $\mathcal{M} \in Mod^{fof}(\Gamma$) y $\mathcal{M} \nvDash^{fof} \alpha$ }
 \UnaryInfC{$\bot$}
 \end{prooftree}
 
-Si de lo contrario, se logra encontrar un modelo de $\Gamma$ que no satisface $\alpha$, 'este modelo es un contraejemplo y el resultado del an'alisis es $\bot$.
+Si de lo contrario, se logra encontrar un modelo de $\Gamma$ que no satisface $\alpha$, este modelo es un contraejemplo y la rama contin'ua abierta.
 
 
 \begin{prooftree}
@@ -71,7 +59,7 @@ Si de lo contrario, se logra encontrar un modelo de $\Gamma$ que no satisface $\
 \UnaryInfC{$\Gamma \vdash \alpha$}
 \end{prooftree}
 
-Por 'ultimo, debido a que la l'ogica de primer orden no es completa y la ejecuci'on de las herramientas autom'aticas est'a limitada por un timeout, es posible no encontrar ni una demostraci'on ni un contraejemplo. En 'este caso no se sabe nada y el resultado es el mismo secuente.
+Por 'ultimo, debido a que la l'ogica de primer orden no es completa y la ejecuci'on de las herramientas autom'aticas est'a limitada por un \textit{timeout}, es posible no encontrar ni una demostraci'on ni un contraejemplo. En 'este caso no se puede concluir nada y el resultado es el mismo secuente.
 
-Con 'estas reglas se cubren todos los casos, tanto de demostraci'on como los de refutaci'on de una teor'ia de l'ogica de primer 'orden. Al usar alg'un demostrador autom'atico de teoremas se aplican las reglas 1 y 3. En cambio cuando se realiza una b'usqueda de contraejemplo, las reglas usadas son 2 y 3.
+Con 'estas reglas se cubren todos los casos, tanto de demostraci'on como los de refutaci'on de una f'ormula de primer 'orden. Al usar alg'un demostrador autom'atico de teoremas se aplican las reglas 1 y 3. En cambio cuando se realiza una b'usqueda de contraejemplo, las reglas usadas son 2 y 3.
 
