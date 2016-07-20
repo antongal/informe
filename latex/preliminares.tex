@@ -115,81 +115,90 @@ La selecci'on de literales es controlada por una de las cien estrategias de sele
 
 \section{SPASS}
 
-SPASS es un demostrador autom'atico de teoremas basado en saturaci'on para l'ogica de primer orden con igualdad. Como se menciona en la descripci'on oficial, SPASS es 'unico debido a que combina el c'alculo de superposici'on con reglas especificas de inferencia/reducci'on para tipos y una regla de partici'on para an'alisis de casos motivada por la regla $\beta$ del m'etodo de tableau analitico y el analisis de casos empleado en el procedimiento \textit{Davis-Putnam}. El 'enfasis de SPASS es en las diferentes t'ecnicas de inferencia/reducci'on/simplificaci'on y no en las heuristicas.
+SPASS es un demostrador autom'atico de teoremas basado en saturaci'on para l'ogica de primer orden con igualdad. Como se menciona en la descripci'on oficial, SPASS es 'unico debido a que combina el c'alculo de superposici'on con reglas espec'ificas de inferencia/reducci'on para tipos y una regla de partici'on para an'alisis de casos motivada por la regla $\beta$ del m'etodo de \textit{tableau} anal'itico y el an'alisis de casos empleado en el procedimiento \textit{Davis-Putnam}. El 'enfasis de SPASS est'a puesto en las diferentes t'ecnicas de inferencia, reducci'on, simplificaci'on, y no as'i en las heur'isticas.
 
-Todo el funcionamiento interno de SPASS est'a basado en l'ogica de primer 'orden y consiste en reglas de inferencia que generan nuevas clausulas y reglas de reducci'on que reducen la cantidad de clausulas o las simplifican. Hay una gran variedad de reglas de inferencia y reducci'on para conjuntos de clausulas que pueden ser combinadas para ajustarse a varios calculos de primer orden completos y correctos. La particularidad de SPASS es que se introduce una regla nueva que es la regla de partici'on que soporta un an'alisis de casos explicito. De 'esta manera la regla de partici'on introduce una segunda dimensi'on en el m'etodo de demostraci'on de teoremas basado en saturaci'on.
+Todo el funcionamiento interno de SPASS est'a basado en l'ogica de primer 'orden y consiste en reglas de inferencia que generan nuevas cl'ausulas y reglas de reducci'on que reducen la cantidad de cl'ausulas o las simplifican. Hay una gran variedad de reglas de inferencia y reducci'on para conjuntos de cl'ausulas que pueden ser combinadas para ajustarse a varios c'alculos de primer orden completos y correctos. La particularidad de SPASS es que se introduce una regla nueva que es la regla de partici'on que soporta un an'alisis de casos expl'icito. De 'esta manera la regla de partici'on introduce una segunda dimensi'on en el m'etodo de demostraci'on de teoremas basado en saturaci'on.
 
-La tercera dimensi'on que se considera en SPASS son las restricciones, informaci'on extra que se adjunta a las clausulas restrigiendo su semantica y su uso respecto al calculo. Algunas de las restriciones son \textit{de 'orden}, forzando que los terminos substituidos satisfagan las funciones de restricci'on adjuntas y restricciones \textit{de tipo} que garantizan que la instanciaci'on de las variables corresponda al tipo especificado.
+La tercera dimensi'on que se considera en SPASS son las restricciones, informaci'on extra que se adjunta a las cl'ausulas restrigiendo su sem'antica y su uso respecto al c'alculo. Algunas de las restriciones son \textit{de orden}, forzando que los t'erminos substituidos satisfagan las funciones de restricci'on adjuntas y restricciones \textit{de tipo} que garantizan que la instanciaci'on de las variables corresponda al tipo especificado.
 
 
 \section{Mace4}
 
-Mace4 es un buscador de modelos finitos que realiza una busqueda por backtracking y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones.
+Mace4 es un buscador de modelos finitos basado en \textit{backtracking} y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones.
 
 \subsection{Inicializaci'on}
 
-Mace4 siempre hace la b'usqueda sobre un modelo de dominio finito. Incluso cuando no se especifica un tamaño de dominio Mace4 itera sobre los posibles tamaño ejecutando la rutina de b'usqueda sobre cada dominio candidato.
+Mace4 siempre hace la b'usqueda sobre un modelo de dominio finito. Incluso cuando no se especifica un tamaño de dominio Mace4 itera sobre los posibles tamaños ejecutando la rutina de b'usqueda sobre cada dominio candidato.
 
 La inicializaci'on comienza con la creaci'on de matrices para las funciones. Para cada funci'on de aridad $k$ se crea una matriz $n^k$ donde $n$ es el tamaño del dominio.
 
 \subsection{B'usqueda}
 
-La busqueda se realiza con una recursi'on backtracking y su pseudocodigo es:
+La b'usqueda se realiza con una recursi'on backtracking y su pseudoc'odigo es:
 
+\begin{figure}[htbp]
+\makebox[\textwidth]{}{
+\small
 \begin{verbatim}
 procedure search:
   cell = select_cell()
   top = last_value_to_consider()
   foreach i (0 ... top)
-    ok = assign_and_propagate(cell,i)
-    if (ok):
+    if (assign_and_propagate(cell,i)):
       search()
       undo_assignments();
 \end{verbatim}
+\normalsize}
+\caption{Algor'itmo de b'usqueda utilizado en \textit{Mace4}.}
+\label{fig:mace4_busqueda}
+\end{figure}
 
-Las partes mas importantes del algoritmo son las heuristicas de selecci'on de celdas; determinaci'on de los valores a asignar a la celda seleccionada; y propagaci'on de la asignacion.
+Las partes m'as importantes del algor'itmo son las heuristicas de selecci'on de celdas; determinaci'on de los valores a asignar a la celda seleccionada; y propagaci'on de la asignacion.
 
 \subsubsection{Selecci'on de celdas}
 
 \begin{itemize}
 
-\item{Armado del conjunto de celdas candidatas}: Existen tres heuristicas para el armado del conjunto:
+\item{Armado del conjunto de celdas candidatas}: Existen tres heur'isticas para el armado del conjunto:
 
 \begin{itemize}
-\item 'Orden lineal. Se seleccionan todas las celdas abiertas.
-\item 'Orden concentrico. Sea $i$ el indice m'aximo mas chico de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo.
-\item 'Orden de banda concentrica. Todas las celdas con el indice m'aximo menor o igual al valor actual de restricci'on son candidatas. Si no se encuentra ninguna se revierte al 'orden concentrico.
+\item Orden lineal. Se seleccionan todas las celdas abiertas.
+\item Orden concentrico. Sea $i$ el 'indice m'aximo m'as chico de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo.
+\item Orden de banda conc'entrica. Todas las celdas con el 'indice m'aximo menor o igual al valor actual de restricci'on son candidatas. Si no se encuentra ninguna se revierte al orden conc'entrico.
 \end{itemize}
 
 
-\item{Selecci'on de la celda} Se utilizan cuatro m'etodos:
+\item{Selecci'on de la celda}. Se utilizan cuatro m'etodos:
 
 \begin{itemize}
-\item{m'etodo 0} Se selecciona la primer celda candidata.
-\item{m'etodo 1} Se selecciona la candidata con el mayor n'umero de ocurrencias en el actual conjunto de clausulas.
-\item{m'etodo 2} Se selecciona la candidata que podria producir el mayor n'umero de propagaciones. La motivaci'on est'a en llenar la tabla lo antes posible.
-\item{m'etodo 3} Se selecciona la candidata que podria causar el mayor n'umero de contradicciones. La motivaci'on es cortar la mayor cantidad de caminos lo antes posible.
-\item{m'etodo 4} Se selecciona la candidata con la menor cantidad de valores posibles.
+\item{m'etodo 0}: Se selecciona la primer celda candidata.
+\item{m'etodo 1}: Se selecciona la candidata con el mayor n'umero de ocurrencias en el actual conjunto de cl'ausulas.
+\item{m'etodo 2}: Se selecciona la candidata que podr'ia producir el mayor n'umero de propagaciones. La motivaci'on est'a en llenar la tabla lo antes posible.
+\item{m'etodo 3}: Se selecciona la candidata que podr'ia causar el mayor n'umero de contradicciones. La motivaci'on es cortar la mayor cantidad de caminos lo antes posible.
+\item{m'etodo 4}: Se selecciona la candidata con la menor cantidad de valores posibles.
 \end{itemize}
 
 \end{itemize}
 
 
 \subsubsection{Asignaci'on de la celda}
-Una vez que se seleccionan las celdas abiertas, se debe determinar el conjunto de valores a considerar para la asignaci'on. Si se trata de una celda booleana siempre se prueba con $0$ y $1$. Si no, se prueba con todos los valores del dominio $[0,\dots,n-1]$ si no se est'a usando la heuristica \textit{LNH} (Least Number Heuristic). 'Esta heuristica fue usada por primera vez en \cite{zhang95} y \cite{zhang96} y su objetivo es de tratar de eliminar alg'un isomorfismo en la b'usqueda. La idea principal es de mantener el dominio particionado en valores asimetricos y valores sim'etricos. Solo uno de los valores sim'etricos debe ser probado. En la practica 'esta heur'istica es efectiva en los niveles mas altos del 'arbol de busqueda.
+Una vez que se seleccionan las celdas abiertas, se debe determinar el conjunto de valores a considerar para la asignaci'on. Si se trata de una celda booleana siempre se prueba con $0$ y $1$. Si no, se prueba con todos los valores del dominio $[0,\dots,n-1]$ si no se est'a usando la heur'istica \textit{LNH} (Least Number Heuristic). Esta heur'istica fue usada por primera vez en \cite{zhang95} y \cite{zhang96} y su objetivo es tratar de eliminar alg'un isomorfismo en la b'usqueda. La idea principal es de mantener el dominio particionado en valores asimetricos y valores sim''etricos. S'olo uno de los valores sim'etricos debe ser probado. En la pr'actica esta heur'istica es efectiva en los niveles m'as altos del 'arbol de b'usqueda.
 
 
 \subsubsection{Propagaci'on}
 
 \begin{itemize}
 
-\item{Propagaci'on Positiva}
-La propagaci'on positiva se aplica siempre al tener una asignaci'on. Por ejemplo si $f(2,3)=4$, entonces todas las ocurrencias de $f(2,3)$ pueden ser reemplazadas por $4$. Cada uno de 'estos reemplazos puede producir otros reemplazos en cadena. Por ejemplo $g(f(2,3))=5$ al ser reemplazado una vez termina siendo $g(4)=5$, pero 'esto nos genera una nueva asignaci'on y reemplazos posibles.
+\item{Propagaci'on Positiva}:
+La propagaci'on positiva se aplica siempre al tener una asignaci'on. Por ejemplo si $f(2,3)=4$, entonces todas las ocurrencias de $f(2,3)$ pueden ser reemplazadas por $4$. Cada uno de estos reemplazos puede producir otros reemplazos en cadena. Por ejemplo $g(f(2,3))=5$ al ser reemplazado una vez termina siendo $g(4)=5$, pero esto genera una nueva asignaci'on y reemplazos posibles.
 
-\item{Propagaci'on Negativa}
+\item{Propagaci'on Negativa}:
 La propagaci'on negativa tiene como objetivo reducir la cantidad de posibles valores de una asignaci'on hasta tener un solo valor que se pueda asignar. Por ejemplo sabiendo que $f(2,3)=4$ y $f(2, g(5))\neq4$ se puede inferir que $g(5)\neq3$. Los cuatro tipos de clausulas que pueden producir propagaciones negativas son:
 
+\medskip
+\begin{center}
 \begin{tabular}{ |l|l| }
+\hline
 Tipo & Ejemplo \\
 \hline
 Asignaci'on & $f(2,3)=4$ \\
@@ -198,7 +207,9 @@ Eliminaci'on & $f(2,3)\neq4$ \\
 Casi eliminaci'on & $f(2,g(5))\neq4$ \\
 \hline
 \end{tabular}
+\end{center}
+\medskip
 
-La asignaci'on se empareja con casi eliminaci'on y la eliminaci'on con casi asignaci'on. Cualquiera de 'estas cuatro clausulas puede producir una propagaci'on negativa
+La asignaci'on se empareja con casi eliminaci'on y la eliminaci'on con casi asignaci'on. Cualquiera de estas cuatro cl'ausulas puede producir una propagaci'on negat'iva
 
 \end{itemize}
