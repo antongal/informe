@@ -7,18 +7,6 @@ Para demostrar el uso de Heterogenius en un caso real recurrimos a la demostraci
 Lo primero que se hace al abrir Heterogenius es cargar la especificaci'on con la que se va a trabajar y seleccionar la propiedad que se quiere demostrar:
 
 \begin{figure}[H]
-	\includegraphics[width=250px]{img/ejemplo/1.png}
-	\centering
-	\caption{}
-\end{figure}
-
-\begin{figure}[H]
-	\includegraphics[width=350px]{img/ejemplo/2.png}
-	\centering
-	\caption{}
-\end{figure}
-
-\begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/3.png}
 	\centering
 	\caption{La propiedad cargada aparece como un 'unico nodo del 'arbol de demostraci'on}
@@ -49,12 +37,6 @@ La aplicaci'on de dicha acci'on crear'a un nodo nuevo en el 'arbol de demostraci
 El siguiente paso ser'a separar el nodo en casos seg'un la expresi'on $oh\_1$ $in$ $Root$. Para 'esto se selecciona la opci'on \textbf{Case} desde la lista de estrategias y se ingresa la expresi'on:
 
 \begin{figure}[H]
-	\includegraphics[width=350px]{img/ejemplo/6.png}
-	\centering
-	\caption{Se ingresa la expresi'on a usar para la separaci'on en casos.}
-\end{figure}
-
-\begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/7.png}
 	\centering
 	\caption{Nodo de la izquierda representa el caso 1}
@@ -70,7 +52,7 @@ El nodo sobre el que se aplic'o la acci'on \textbf{Case} se subdivide en dos nod
 
 \subsection{Demostraci'on del caso 1}
 
-Empecemos con la primer rama. Lo primero que se puede hacer es introducir uno de los lemmas definidos en el archivo de especificaci'on cargado. En particular se puede probar con el lemma \textit{RootHasNoParent}:
+Empecemos con la primer rama. Lo primero que se puede hacer es introducir uno de los lemas definidos en el archivo de especificaci'on cargado. En particular se puede probar con el lema \textit{RootHasNoParent}:
 
 \begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/9.png}
@@ -86,23 +68,13 @@ Empecemos con la primer rama. Lo primero que se puede hacer es introducir uno de
 
 A continuaci'on se introduce el lemma: \textit{ParentDefinition}:
 
-%\begin{verbatim}
-%all d: Dir | d.parent = (contents.d) . Name
-%\end{verbatim}
-
-\begin{figure}[H]
-	\includegraphics[width=350px]{img/ejemplo/11.png}
-	\centering
-	\caption{}
-\end{figure}
-
 \begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/12.png}
 	\centering
 	\caption{Nodo resultante luego de introducir el lemma \textit{ParentDefinition}}
 \end{figure}
 
-Se introduce el lemma \textit{Lemma1} definido en el archivo de especificaci'on como:
+Se introduce el lema \textit{Lemma1} definido en el archivo de especificaci'on como:
 
 \begin{verbatim}
 all o: Dir | no contents.o . Name => no contents.o
@@ -141,7 +113,7 @@ all d: one this/Dir | (d !in this/Root) => (one (d . parent)
 		&& one (contents . d) )
 \end{verbatim}
 
-con lo cu'al 'esta expresi'on se agrega a las hip'otesis del nodo y aplicando a continuaci'on \textbf{reduce} y \textbf{grind} se llega a completar la demostraci'on de la rama:
+con lo cu'al esta expresi'on se agrega a las hip'otesis del nodo y aplicando a continuaci'on \textbf{reduce} y \textbf{grind} se llega a completar la demostraci'on de la rama:
 
 \begin{figure}[H]
 	\includegraphics[width=250px]{img/ejemplo/15.png}
@@ -149,7 +121,7 @@ con lo cu'al 'esta expresi'on se agrega a las hip'otesis del nodo y aplicando a 
 	\caption{Los nodos negros indican que las ramas est'an demostradas.}
 \end{figure}
 
-Ya que todos los pasos aplicados preserva la verdad y como los nodos hojas de ambas ramas quedaron demostrados, el nodo raiz del 'arbol de demostraci'on tambi'en queda demostrado.
+Ya que todos los pasos aplicados preserva la verdad y como los nodos hojas de ambas ramas quedaron demostrados, el nodo ra'iz del 'arbol de demostraci'on tambi'en queda demostrado.
 
 
 \section{B'usqueda de contraejemplo}
@@ -164,15 +136,9 @@ assert ConjeturaFalsa {
 
 La especificaci'on que se usa para este ejemplo es \textit{file$\_$system.als} \ref{anexo_fs}
 
-Lo primero que se hace es cargar el archivo de especificaci'on que contiene dicha conjecura (\textbf{File$\rightarrow$New Analysis$\rightarrow$Alloy}). Una vez hecha la carga, lo que se quiere demostrar aparece en el nodo raiz:
+Lo primero que se hace es cargar el archivo de especificaci'on que contiene dicha conjecura (\textbf{File$\rightarrow$New Analysis$\rightarrow$Alloy}). Una vez hecha la carga, lo que se quiere demostrar aparece en el nodo ra'iz:
 
-\begin{figure}[H]
-	\includegraphics[width=350px]{img/conjetura_falsa_1.png}
-	\centering
-	\caption{El nodo representa al secuente en el lenguaje \textit{Alloy}}
-\end{figure}
-
-A continuaci'on, como se quiere hacer el an'alisis con herramientas de \textit{TPTP-FOF}, es necesario traducir el secuente analizado a \textit{PDOCFA} y luego a \textit{TPTP-FOF}. Las traducciones se realizan seleccionando la opci'on \textbf{$\rho$-translate to PDOCFA} del menu que aparece al hacer click derecho sobre el nodo raiz; y luego aplicando \textbf{$\rho$-translate to TPTP-FOF} haciendo click derecho sobre el nodo resultante de la operaci'on anterior. 
+A continuaci'on, como se quiere hacer el an'alisis con herramientas de \textit{TPTP-FOF}, es necesario traducir el secuente analizado a \textit{PDOCFA} y luego a \textit{TPTP-FOF}. Las traducciones se realizan seleccionando la opci'on \textbf{$\rho$-translate to PDOCFA} del men'u que aparece al hacer click derecho sobre el nodo ra'iz; y luego aplicando \textbf{$\rho$-translate to TPTP-FOF} haciendo click derecho sobre el nodo resultante de la operaci'on anterior. 
 
 'Esto crea dos nodos nuevos en el 'arbol, representando cada acci'on realizada y mostrando el secuente resultante de las acciones aplicadas:
 
@@ -184,7 +150,7 @@ A continuaci'on, como se quiere hacer el an'alisis con herramientas de \textit{T
 
 Intuitivamente sospechamos que la conjetura debe ser falsa, ya que est'a diciendo que ``todos los directorios tienen alg'un contenido''. Teniendo 'esto en cuenta, primero probamos realizar una b'usqueda de un contraejemplo con \textit{EProver}, haciendo click derecho sobre el nodo hoja y seleccionando \textbf{Counter Example$\rightarrow$Find Counter Example using EProver for TPTP-FOF}.
 
-Luego de unos segundos el sistema indica que no se pudo encontrar un contraejemplo. 'Este mensaje no indica que el contraejemplo no existe y solamente nos dice que la herramienta no lo encontr'o. Con lo cu'al se puede seguir buscando con otra herramienta.
+Luego de unos segundos el sistema indica que no se pudo encontrar un contraejemplo. Este mensaje no indica que el contraejemplo no existe y solamente nos dice que la herramienta no lo encontr'o. Con lo cu'al se puede seguir buscando con otra herramienta.
 
 C'omo ya se realiz'o una acci'on sobre el nodo hoja y no queremos perder la informaci'on del resultado de 'esta acci'on, lo que se hace es crear una rama alternativa para seguir con la demostraci'on manteniendo los resultados en una rama aparte. Al hacer click derecho sobre el nodo y seleccionando \textbf{Modify Tree$\rightarrow$Create an alternative branch} se abren dos ramas salientes del nodo seleccionado. Cada rama est'a representada por una copia del nodo y puede ser analizada en forma independiente del resto.
 
@@ -194,7 +160,7 @@ C'omo ya se realiz'o una acci'on sobre el nodo hoja y no queremos perder la info
 	\caption{Nodo celeste indica que no se encontr'o un contraejemplo.}
 \end{figure}
 
-'Esta ramificaci'on representada con una l'inea punteada se interpreta como un camino alternativo. Alcanza con llegar a un resultado en una de las ramas para afirmar que el resultado vale para el nodo raiz de la ramificaci'on.
+'Esta ramificaci'on representada con una l'inea punteada se interpreta como un camino alternativo. Alcanza con llegar a un resultado en una de las ramas para afirmar que el resultado vale para el nodo ra'iz de la ramificaci'on.
 
 Para seguir buscando se intenta una b'usqueda de contraejemplo con otra herramienta, \textit{Mace4}. Al hacer click sobre el nodo de la rama derecha y seleccionando \textbf{Counter Example$\rightarrow$Find a counter example using Mace4} se lanza la operaci'on.
 
@@ -206,16 +172,14 @@ Para seguir buscando se intenta una b'usqueda de contraejemplo con otra herramie
 	\caption{El nodo rojo indica que se encontr'o un contraejemplo}
 \end{figure}
 
-Al encontrar un contraejemplo en una ramificaci'on alternativa, se puede afirmar que existe un contraejemplo para el nodo raiz de la ramificaci'on. Luego el contraejemplo es para el secuente en el lenguaje \textit{TPTP-FOF}, pero como es un lenguaje menos expresivo que \textit{PDOCFA} entonces tambi'en existe un contraejemplo para el secuente en \textit{PDOCFA}. Adem'as como la traducci'on entre \textit{Alloy} y \textit{PDOCFA} es sin p'erdida de precisi'on, existe un contraejemplo para el secuente original en \textit{Alloy}. Con lo cu'al se concluye que la conjetura es falsa.
+Al encontrar un contraejemplo en una ramificaci'on alternativa, se puede afirmar que existe un contraejemplo para el nodo ra'iz de la ramificaci'on. Luego el contraejemplo es para el secuente en el lenguaje \textit{TPTP-FOF}, pero como es un lenguaje menos expresivo que \textit{PDOCFA} entonces tambi'en existe un contraejemplo para el secuente en \textit{PDOCFA}. Adem'as como la traducci'on entre \textit{Alloy} y \textit{PDOCFA} es sin p'erdida de precisi'on, existe un contraejemplo para el secuente original en \textit{Alloy}. Con lo cu'al se concluye que la conjetura es falsa.
 
 
 \section{Analisis de lemas XXX}
 \label{analisis_lemas}
 Como parte del an'alisis y evaluaci'on de los demostradores de teoremas integrados (\textit{EProver} y \textit{SPASS}) evaluamos un conjunto de lemas correspondientes a XXX \ref{anexo_lemas_fof}.
 
-Los lemas se definieron como f'ormulas \textit{PDOCFA}, se aplic'o una traducci'on-$\rho$ a \textit{TPTP-FOF} y se trat'o de demostrar cada lema por separado. C'omo la traducci'on entre \textit{PDOCFA} y \textit{TPTP-FOF} no es exacta, fue necesario especificar un par'ametro numerico $n$ que indica la cantidad de desarrollos que se hacen de la clausura reflexotransitiva.
-
-Para 'estos ejemplo probamos con el par'ametro $n$=$5$, $10$, $20$ y $50$. En todos los casos obtuvimos los mismos resultados:
+Los lemas se definieron como f'ormulas \textit{PDOCFA}, se aplic'o una traducci'on-$\rho$ a \textit{TPTP-FOF} y se trat'o de demostrar cada lema por separado. C'omo la traducci'on entre \textit{PDOCFA} y \textit{TPTP-FOF} no es exacta, fue necesario especificar un par'ametro numerico $n$ que indica la cantidad de desarrollos que se hacen de la clausura reflexotransitiva. Para 'estos ejemplos probamos con el par'ametro $n$=$5$, $10$, $20$ y $50$. En todos los casos obtuvimos los mismos resultados:
 
 \vspace{1em}
 

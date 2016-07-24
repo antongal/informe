@@ -1,17 +1,23 @@
-\section{Heterogeneidad Verdadera}
+\section{Heterogeneidad Completa}
 \label{sec:heterogeneidad-verdadera}
 
-Para ampliar las capacidades de Heterogenius extendimos el concepto de heterogeneidad para lograr tener demostraciones verdaderamente heterog'eneas en lugar de demostraciones heterogéneas pero con secuentes homogéneos. 
+Para ampliar las capacidades de Heterogenius extendimos el concepto de heterogeneidad para lograr tener demostraciones completamente heterog'eneas en lugar de demostraciones heterogéneas pero con secuentes homogéneos. 
 
 La diferencia principal radica en que, con la nueva implementaci'on, los secuentes pueden soportar f'ormulas de diferentes lenguajes. As'i un secuente puede ser de tipo homogéneo o heterogéneo. En el primer caso todas las f'ormulas del secuente usan el mismo lenguaje; en el segundo las f'ormulas son de lenguajes distintos.
 
 La ventaja de los secuentes heterogéneos es que se pueden combinar f'ormulas (lemmas, axiomas) provenientes de distintas especificaciones escritas en lenguajes diferentes. De esta forma nos podemos abstraer del lenguaje en el que están escritas y concentrarnos en el an'alisis.
 
-La principal limitaci'on de los secuentes heterogéneos es que las herramientas (calculadores de secuentes, buscadores de contraejemplos, demostradores autom'aticos) trabajan con secuentes escritos en un solo lenguaje, o sea secuentes homogéneos. Debido a esto se proveen nuevas operaciones para el manejo de f'ormulas dentro de un secuente:
+La principal limitaci'on de los secuentes heterogéneos es que las herramientas (calculadores de secuentes, buscadores de contraejemplos, demostradores autom'aticos) trabajan con secuentes escritos en un solo lenguaje, o sea secuentes homogéneos. Debido a esto se proveen nuevas operaciones para el manejo de f'ormulas dentro de un secuente.
 
 \subsection{Operaciones para el manejo de f'ormulas}
 
-Cada una de las siguientes operaciones puede cambiar o no la heterogeneidad de un secuente.  Dependiendo de los lenguajes de las f'ormulas del resultado, el secuente puede pasar a ser heterogéneo, homogéneo o mantener su tipo.
+Cada una de las siguientes operaciones puede cambiar o no la heterogeneidad de un secuente.  Dependiendo de los lenguajes de las f'ormulas del resultado, el secuente puede pasar a ser heterogéneo, homogéneo o mantener su tipo. Las nuevas operaciones que permiten disponer de un mayor control sobre la heterogeneidad de los secuentes son:
+
+\begin{itemize}
+\item Proyecci'on
+\item Introducci'on de antecedentes desde una fuente externa
+\item Traducci'on
+\end{itemize}
 
 \subsubsection{Proyecci'on}
 
@@ -42,7 +48,7 @@ A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alo
 
 \subsubsection{Introducci'on de antecedentes desde una fuente externa}
 
-'Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual.
+Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual.
 
 Dado un secuente:
 $$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
@@ -55,32 +61,25 @@ $$ \alpha_1,\ldots,\alpha_n,\beta_1,\ldots, \beta_k \vdash \alpha_{n+1},\ldots,\
 \centering
 \parbox{5cm}{
 \includegraphics[width=5cm]{img/add_antecedents_1.png}	
-\caption{Menu contextual para seleccionar la fuente de las f'ormulas a introducir.}}
-\qquad
-\begin{minipage}{5cm}
-\includegraphics[width=5cm]{img/add_antecedents_2.png}
-\caption{Dialogo para seleccionar las f'ormulas.}
-\end{minipage}	
+\caption{Men'u contextual para seleccionar la fuente de las f'ormulas a introducir.}}
 \end{figure}
 
 
 \subsubsection{Traducci'on}
 
-Se extendi'o el concepto de traducciones $\rho$ para que se puedan traducir f'ormulas por separado, en lugar de traducir un secuente completo como en la versi'on anterior.
+Se extendi'o el concepto de traducciones para que se puedan traducir f'ormulas por separado, en lugar de traducir un secuente completo como en la versi'on anterior.
 El secuente resultante contendr'a las f'ormulas del secuente analizado en el lenguaje seleccionado.
 
 Dado un secuente $$ S: \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
 y una función  $\mathcal{T}:Formula\rightarrow Lenguaje$ que indica el lenguaje seleccionado para cada f'ormula del secuente $S$, el secuente resultante es:
 $$ S': \beta_1,\ldots,\beta_n \vdash \beta_{n+1},\ldots,\beta_m $$
-donde $\beta_{i} = \rho_{\mathcal{T}(\alpha_i)}(\alpha_i)$ y $\rho_l$ es la funci'on de traducci'on al lenguaje $l$.
+donde $\beta_{i} = \rho_{\mathcal{T}(\alpha_i)}(\alpha_i)$ y $\rho_l$ es la funci'on de traducci'on al lenguaje $L$.
 
 En la Figura \ref{GUI form translation} se puede ver un cuadro de di'alogo donde el usuario puede seleccionar, para cada f'ormula, el lenguaje al que se quiere traducir.
 
-\begin{figure}[tb]
+\begin{figure}[tbh]
 	\includegraphics[width=200px]{img/translate.png}
 	\centering
 	\caption{Cuadro de di'alogo para la traducci'on de f'ormulas en un secuente.} \label{GUI form translation}
 \end{figure}
 
-
-%á
