@@ -6,10 +6,14 @@ Las demostraciones en el c'alculo de secuentes se construyen en forma de un 'arb
 
 El secuente puede ser interpretado de esta manera: un secuente $\Gamma \vdash  \Delta$ es válido en un modelo semántico \sem{M}, si 
 
+\begin{figure}[ht]
 \begin{equation}
 \textrm{\sem{M}} \vDash (\bigwedge_{\gamma \in \Gamma} \gamma \Rightarrow \bigvee_{\delta \in \Delta} \delta )
 \notag
 \end{equation}
+\end{figure}
+
+Decidimos no definir en detalle el modelo semántico, ya que, tomando como gu'ia la idea descripta en esta secci'on, pueden desarrollarse c'alculos de esta naturaleza para distintos formalismos.
 
 Adem'as un secuente puede ser:
 
@@ -27,7 +31,7 @@ Adem'as un secuente puede ser:
 
 
 
-Una demostraci'on en el c'alculo de secuentes se realiza aplicando reglas de inferencia sobre los nodos hojas hasta llegar a un secuente trivial de la forma $\alpha \vdash \alpha$ con $\alpha$ una fórmula.
+Una demostraci'on en el c'alculo de secuentes se realiza aplicando reglas de inferencia sobre los nodos hojas hasta llegar a un secuente trivial de la forma $\alpha \vdash \alpha$.
 
 En general las reglas de inferencia tienen la siguiente forma:
 

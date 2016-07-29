@@ -1,0 +1,34 @@
+\section{Alloy}
+
+\textit{Alloy}\cite{alloy} es un lenguaje de especificaci'on declarativo que permite definir dominios de datos a trav'es de conjuntos de elementos at'omicos, y expresar propiedades sobre las relaciones definidas a partir de esos dominios. Este lenguaje se basa en la l'ogica de primer orden y la extiende con la clausura reflexo-transitiva del operador de composici'on de relaciones binarias, y posee una sem'antica basada en conjuntos y relaciones.
+
+Los modelos Alloy est'an estructurados en m'odulos. Las signaturas (identificadas con la palabra clave \textbf{sig}) denotan dominios de datos. Una signatura puede ser abstracta, en cuyo caso solo contendr'a elementos de las signaturas que heredan de ella. En Alloy la herencia se identifica con la palabra clave \textbf{extends}. Las signaturas pueden contener atributos, los cuales en \textit{Alloy} son llamados \textbf{fields}.
+
+Una vez definidos los dominios, se pueden especificar restricciones sobre ellos. En \textit{Alloy} los axiomas son llamados \textbf{facts}. Para simplificar la escritura de las f'ormulas, se pueden introducir funciones, identificadas como \textbf{fun}, y predicados, notados \textbf{pred}.
+
+Los t'erminos denotan relaciones, y se construyen utilizando signaturas, atributos de signaturas, y constantes tales como \textbf{univ} (el conjunto de todos los objetos en el modelo), \textbf{iden} (la relaci'on binaria identidad definida sobre el conjunto \textbf{univ}), y \textbf{none} (el conjunto vacio).
+
+Utilizando operadores relacionales se pueden construir t'erminos m'as complejos. Contamos con la operaci'on de diferencia, uni'on, intersecci'on y composici'on ($-$, $+$, $\&$ respectivamente). La traspuesta de una relaci'on binaria $R$ (notada en Alloy con $\backsim{R}$) invierte los elementos de las tuplas de $R$. La clausura transitiva y la reflexo-transitiva de relaciones binarias se identifican con  $\hat{}$ y $*$ respectivamente.
+
+Las f'ormulas at'omicas se construyen utilizando igualdades e inclusiones entre t'erminos. Utilizando conectivos y cuantificadores est'andares de la l'ogica de primer orden se puede construir f'ormulas m'as complejas.
+
+Tambi'en se pueden utilizar abreviaturas para simplificar las f'ormulas. Por ejemplo, la palabra clave \textbf{no} fuerza que el t'ermino anotado con ella denote una relaci'on vac'ia. De manera similar, la aparici'on de \textbf{one} implica que el termino denota una relaci'on \textit{singleton} (con s'olo un par). La palabra clave \textbf{lone} hace que un t'ermino denote un conjunto con cardinalidad a lo sumo uno.
+
+Alloy permite especificar propiedades que uno espera que valgan en el modelo, a traves de sentencias llamadas assertions.
+
+
+\section{Alloy Analyzer}
+
+Los modelos definidos con el lenguaje \textit{Alloy} pueden ser analizados con \textit{Alloy Analyzer}.
+Esta herramienta analiza los modelos Alloy autom'aticamente utilizando \textit{SAT}-\textit{solvers} externos, ya sea buscando contraejemplos de una aserci'on determinada, o generando una instancia del modelo.
+
+Para que el \textit{Alloy Analyzer} pueda traducir los modelos \textit{Alloy} a f'ormulas de la l'ogica proposicional, el usuario debe proveer cotas para el tamaño de los dominios de datos. Estas cotas son llamadas \textbf{scopes}.
+
+
+Como se mencion'o anteriormente el lenguaje \textit{Alloy} extiende a la l'ogica de primer orden, por lo que determinar la veracidad de una aserci'on no es decidible \cite{meseguer:lc87,church}. 
+
+Resulta que, el an'alisis mediante \textit{SAT}-\textit{solvers} es v'alido 'uniicamente para las estructuras sem'anticas cuyos dominios de datos cumplen con las cotas establecidas mediante los \textit{scopes}. Es decir, si no se encuentra un contraejemplo, puede de todas maneras existir uno si se consideran cotas m'as grandes. Aunque son evidentes las limitaciones de esta t'ecnica de an'alisis, suele resultar muy 'util a la hora de escribir modelos. Seg'un la \textit{small scope hypothesis} \cite{smallscope} una gran proporci'on de los errores introducidos en un modelo pueden encontrarse en instancias pequeñas.
+
+Con lo cual, el tipo de an'alisis ofrecido por el \textit{AlloyAnalyzer} es adecuado en la mayor'ia de los casos. Sin embargo en algunas situaciones puede no ser suficiente, por ejemplo en el modelado de sistemas cr'iticos. Se han diseñado e implementado herramientas que permiten complementar el an'alisis de \textit{SAT-solving} con la demostraci'on interactiva de teoremas \textit{Alloy}. Por ejemplo, \textit{Dynamite} \cite{pdocfa} y \textit{Heterogenius} \cite{heterogenius} son herramientas que permiten utilizar c'alculo de secuentes para construir las demostraciones de las aserciones de \textit{Alloy}.
+
+En el contexto de \textit{Heterogenius}, \textit{AlloyAnalyzer} se utiliza como un buscador de contraejemplos. Esto se logra negando la f'ormula que se quiere demostrar y utilizando a \textit{AlloyAnalyzer} para buscar un modelo. Si se puede encontrar un modelo, entonces dicho modelo resulta el contraejemplo de la especificaci'on analizada. Si no se logra encontrar uno, no se puede asegurar la validez de la especificaci'on.
