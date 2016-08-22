@@ -36,63 +36,58 @@ Debido a la extensibilidad fue uno de los conceptos que guiaron su diseño, Hete
 
 \section{TPTP-FOF}
 
-\textit{TPTP} (mil problemas para demostradores autom'aticos, por sus siglas en ingles) \cite{tptp} es una biblioteca de problemas para demostradores autom'aticos de teoremas. La principal motivaci'on para \textit{TPTP} es permitir el testeo y evaluaci'on de diferentes sistemas de demostradores autom'aticos de teoremas. Los problemas est'an en cuatro lenguajes: \textit{THF}, \textit{TFF}, \textit{FOF} y \textit{CNF}.
+Anualmente se realiza la competencia \textit{CASC} (CADE ATP System Competition \cite{casc}), una competencia de demostradores autom'aticos de teoremas donde los sistemas participanetes compiten analizando la mayor cantidad de problemas de un mismo conjunto en la menor cantidad de tiempo posible. 'Esta competencia resulta una muy buena prueba para evaluar el funcionamiento de las herramientas autom'aticas disponibles.
 
-Anualmente se realiza la competencia \textit{CASC} (CADE ATP System Competition \cite{casc}), una competencia de demostradores autom'aticos de teoremas donde los sistemas participanetes compiten para probar la mayor cantidad de problemas de \textit{TPTP}. 'Esta competencia resulta una muy buena prueba para evaluar el funcionamiento de las herramientas autom'aticas disponibles.
+\todo{Agregar al menos un párrafo de historia de CASC. Mencionar desde cuándo se hace y quién la organiza (si no me equivoco es la misma persona siempre, más allá de que cambien los colaboradores). Decir que varios de los principales desarrolladores de demostradores automáticos participan de la competencia,}
 
-\textit{FOF} \cite{fof} es un lenguaje de l'ogica de primer 'orden con igualdad. Su elecci'on de \textit{FOF} est'a motivada  por su difundido uso y soporte que tiene de las herramientas autom'aticas y su expresividad a nivel de sintaxis. Una especificaci'on de \textit{TPTP-FOF} es una lista de f'ormulas que adem'as tienen un nombre y un tipo. Por ejemplo:
+\textit{TPTP} (mil problemas para demostradores autom'aticos, por sus siglas en ingl'es) \cite{tptp} es una biblioteca de problemas para demostradores autom'aticos. La principal motivaci'on para \textit{TPTP} es permitir el testeo y evaluaci'on de diferentes sistemas de demostraci'on autom'atica de teoremas.
 
+Los problemas est'an expresados en cuatro lenguajes: \textit{THF} (Types Higher Order Form), \textit{TFF} (Types First Order Form), \textit{FOF} (First Order Form) y \textit{CNF} (Clause Normal Form). \textit{FOF} \cite{fof} es un lenguaje de l'ogica de primer 'orden con igualdad. Una especificaci'on de \textit{TPTP-FOF} es una lista de f'ormulas que adem'as tienen un nombre y un tipo. Por ejemplo:
+
+\todo{Poner el ejemplo en una figura. Usar un par de párrafos para explicar de qué se trata el ejemplo. Elegir al menos un par de fórmulas y explicar qué están diciendo.}
+
+\begin{figure}[htbp]
+\makebox[\textwidth]{}{
+\small
 \begin{verbatim}
-fof(john,axiom,( 
-    human(john) )).
+fof(john,axiom,( human(john) )).
 
 fof(all_created_equal,axiom,( 
-    ! [H1,H2] : 
-      ( ( human(H1) 
-         & human(H2) ) 
-     => created_equal(H1,H2) ) )). 
+    ![H1,H2] : ( ( human(H1) & human(H2) )
+	    => created_equal(H1,H2) ) )). 
 
-fof(john_failed,axiom,( 
-    grade(john) = f )). 
+fof(john_failed,axiom,( grade(john) = f )). 
 
-fof(someone_got_an_a,axiom,( 
-    ? [H] : 
-      ( human(H) 
-      & grade(H) = a ) )). 
+fof(someone_got_an_a,axiom,( ?[H] : ( human(H) & grade(H) = a ) )). 
 
-fof(distinct_grades,axiom,( 
-    a != f )). 
+fof(distinct_grades,axiom,( a != f )). 
 
-fof(grades_not_human,axiom,( 
-    ! [G] : ~ human(grade(G)) )). 
+fof(grades_not_human,axiom,( ![G] : ~ human(grade(G)) )). 
 
-fof(someone_not_john,conjecture,( 
-    ? [H] : 
-      ( human(H) 
-      & H != john ) )). 
+fof(someone_not_john,conjecture,( ?[H] : ( human(H) & H != john ) )). 
 \end{verbatim}
-
-Especificaci'on t'ipica en el lenguaje \textit{TPTP-FOF}. La sintaxis contiene todos los elementos de la l'ogica de primer 'orden. \textbf{![X]} es el cuantificador universal sobre la variable \textit{X}; \textbf{?[X]} es el cuantificador existencial sobre la variable \textit{X}. \textit{$human()$}, \textit{$grade()$}, \textit{$created\_equal()$} son predicados; las variables empiezan con una letra mayuscula y las constantes con minuscula. Los operadores disponibles son $\sim$, $|$, $\&$, $=>$, $<=>$, $=$ y $!=$ y corresponden con la negaci'on, la disyunci'on, la conjunci'on, la implicaci'on, la doble implicaci'on, la igualdad y la desigualdad.
+\normalsize}
+\caption{Especificaci'on t'ipica en el lenguaje \textit{TPTP-FOF}. La sintaxis contiene todos los elementos de la l'ogica de primer 'orden. \textbf{![X]} es el cuantificador universal sobre la variable \textit{X}; \textbf{?[X]} es el cuantificador existencial sobre la variable \textit{X}. \textit{$human()$}, \textit{$grade()$}, \textit{$created\_equal()$} son predicados; las variables empiezan con una letra mayuscula y las constantes con minuscula. Los operadores disponibles son $\sim$, $|$, $\&$, $=>$, $<=>$, $=$ y $!=$ y corresponden con la negaci'on, la disyunci'on, la conjunci'on, la implicaci'on, la doble implicaci'on, la igualdad y la desigualdad.}
+\end{figure}
 
 En el ejemplo anterior la 'ultima f'ormula es de tipo \textit{conjecture}. 'Esto indica al demostrador que es la f'ormula que se quiere probar. Las otras f'ormulas, de tipo \textit{axiom} se interpretan como axiomas.
 
-
-\section{C'alculo por superposici'on}
-Es un c'alculo que permite razonar en l'ogica de primer 'orden. Se ha desarrollado a principios de 1990 y combina los principios de resoluci'on de primer 'orden con el manejo de igualdad basada en 'orden desarrollado en el contexto del algoritmo de completitud de \textit{Knuth-Bendix}\cite{knuthbendix}. Como la mayoria de calculos de l'ogica de primer 'orden, superposici'on trata de mostrar la insatisfacibilidad de un conjunto de clausulas realizando demostraciones por refutaci'on. Superposici'on es completo para la refutaci'on, o sea dada una cantidad ilimitada de recursos y una estrategia de derivaci'on justa, se va a llegar a una contradicci'on empezando por cualquier conjunto de clausulas insatisfacible.
-
-
 \section{E-Prover}
-E-Prover es un demostrador de teoremas de l'ogica de primer orden con igualdad. Se basa en el c'alculo por superposici'on. El demostrador acepta como entrada una lista de clausulas o f'ormulas de l'ogica de primer orden con una conjetura. El sistema intenta encontrar una demostraci'on para la conjetura asumiendo los axiomas especificados.
+\todo{Agrupar la explicación de EProver, SPASS y Mace4 en una  subsección. Introducirla diciendo que allí vamos a explicar someramente el funcionamiento de las herramientas con las que extendimos Heterogenius}
 
-Ya que E-Prover adem'as permite buscar un modelo se lo puede utilizar tambi'en como un buscador de contraejemplos.
+E-Prover es un demostrador de teoremas de l'ogica de primer orden con igualdad. El demostrador acepta como entrada una lista de cl'ausulas o f'ormulas de l'ogica de primer orden con una conjetura. El sistema intenta encontrar una demostraci'on para la conjetura asumiendo los axiomas especificados.
 
-Internamente la principal t'ecnica usada es el c'alculo por superposici'on. El demostrador opera en cuatro fases distintas:
+Ya que E-Prover adem'as permite generar modelos se lo puede utilizar tambi'en como un buscador de contraejemplos.
+
+Internamente la principal t'ecnica usada es el c'alculo por superposici'on. Es un c'alculo que permite razonar en l'ogica de primer orden. Se ha desarrollado a principios de 1990 y combina los principios de resoluci'on de primer orden con el manejo de igualdad basada en orden desarrollado en el contexto del algoritmo de completitud de \textit{Knuth-Bendix}\cite{knuthbendix}. Como la mayor'ia de c'alculos de l'ogica de primer orden, superposici'on trata de mostrar la insatisfacibilidad de un conjunto de cl'ausulas realizando demostraciones por refutaci'on. Superposici'on es completo para la refutaci'on, o sea dada una cantidad ilimitada de recursos y una estrategia de derivaci'on justa, se va a llegar a una contradicci'on empezando por cualquier conjunto de clausulas insatisfacible.
+
+El demostrador opera en cuatro fases distintas:
 \begin{itemize}
 \item Clausificaci'on: se transforman las f'ormulas de entrada en f'orma normal clausal de tal manera que la f'ormula resultante es insatisfacible si y s'olo si el problema original es demostrable. Se usa una variaci'on del algoritmo detallado en \cite{smallcnf2001}.
 
 \item Una etapa opcional de simplificaci'on de la forma clausal del problema.
 
-\item An'alisis del problema y selecci'on de par'ametros 'optimos para la b'usqueda.
+\item An'alisis del problema y selecci'on de par'ametros 'optimos para la b'usqueda. \todo{Explicar búsqueda de qué.}
 
 \item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la cl'ausula vac'ia, lo que permite determinar que la cl'ausula original es insatisfacible y, por lo tanto, el problema de entrada es demostrable. E-Prover implementa el algoritmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsunci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de cl'ausulas \cite{ijcai2001}.
 \end{itemize}
@@ -112,7 +107,7 @@ E-Prover usa una serie de heur'isticas para: la elecci'on del ordenamiento de t'
 La selecci'on de las cl'ausulas dadas es controlada por varias colas de prioridad de las cuales se seleccionan las cl'ausulas en un esquema ``round robin pesado''. Cada cola es ordenada de acuerdo a una funci'on de prioridad fija y una funci'on de evaluaci'on de cl'ausula parametrizada. Las funciones de evaluaci'on de cl'ausulas pueden ser orientadas a objetivos, pueden estar enfocadas en algunos s'imbolos en particular y pueden tomar en cuenta el ordenamiento de t'erminos. 
 
 
-La selecci'on de literales es controlada por una de las cien estrategias de selecci'on que est'an codificadas en E-Prover. En el modo autom'atico el demostrador selecciona una de ellas.
+La selecci'on de literales es controlada por una de las cien estrategias de selecci'on que est'an codificadas en E-Prover. En el modo autom'atico el demostrador selecciona una de ellas. \todo{selecciona, ¿De qué manera? ¿Al azar?}
 
 
 
@@ -128,7 +123,7 @@ La tercera dimensi'on que se considera en SPASS son las restricciones, informaci
 
 \section{Mace4}
 
-Mace4 es un buscador de modelos finitos basado en \textit{backtracking} y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones.
+Mace4 es un buscador de modelos finitos basado en \textit{backtracking} y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland} \todo{referencia}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones.
 
 \subsection{Inicializaci'on}
 
@@ -165,9 +160,10 @@ Las partes m'as importantes del algor'itmo son las heuristicas de selecci'on de 
 
 \item{Armado del conjunto de celdas candidatas}: Existen tres heur'isticas para el armado del conjunto:
 
+\todo{Quitar este nivel de itemizado. Escribir como texto común.}
 \begin{itemize}
 \item Orden lineal. Se seleccionan todas las celdas abiertas.
-\item Orden concentrico. Sea $i$ el 'indice m'aximo m'as chico de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo.
+\item Orden concentrico. Sea $i$ el 'indice m'aximo m'as chico \todo{no entendí lo del “índice máximo más chico”. ¿Lo podrías explicar con más detalle”} de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo.
 \item Orden de banda conc'entrica. Todas las celdas con el 'indice m'aximo menor o igual al valor actual de restricci'on son candidatas. Si no se encuentra ninguna se revierte al orden conc'entrico.
 \end{itemize}
 

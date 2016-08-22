@@ -1,0 +1,6 @@
+\section{Introducci'on de demostradores autom'aticos de primer orden}
+
+Uno de los objetivos de este trabajo es la introducci'on en Heterogenius de una nueva funcionalidad que permita aplicar un demostrador autom'atico de primer orden a un secuente dado siempre que sea posible, es decir si el secuente es expresable en l'ogica de primer orden.
+
+En el contexto de Heterogenius, los \textit{calculadores de secuentes} son objetos capaces de transformar un secuente en otro mediante la aplicaci'on de alguna de las reglas del c'alculo de secuentes o una sucesi'on de dichas reglas.
+Dado que el objetivo de una demostraci'on en el c'alculo de secuentes es llegar a un nodo trivial $\alpha \vdash \alpha$ es natural, en Heterogenius, representar a los demostradores autom'aticos como calculadores de secuentes. As'i si se encuentra una demostraci'on de la traducci'on de un secuente de alto orden a un secuento de primer orden, se puede decir que el secuente es v'alido en todos los modelos de primer orden y en la herramienta se indica este hecho ``cerrando'' la rama con un nodo trivial $\alpha \vdash \alpha$, pero para un reporte mas minucioso de la situaci'on se deber'ia informar de la existencia de una demostraci'on ``de primer orden''. En caso de no poder encontrar una demostraci'on el resultado ser'a que se agregar'a un nodo conteniendo una copia del secuente inicial.
