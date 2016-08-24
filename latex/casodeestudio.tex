@@ -1,11 +1,24 @@
 \chapter{Casos de Estudio}
-
+\todomm{intro}
 \section{Ejemplo de demostraci'on con file system}
+\todomm{Reescribir esta sección siguiendo las guías que vas a ver más adelante. Además, así como está no se ven las funcionalidades nuevas. Incluir alguna búsqueda de contraejemplos, bifurcación en alternivas de demostración y traducción de fórmulas en este mismo ejemplo.}
 
-Para demostrar el uso de Heterogenius en un caso real recurrimos a la demostraci'on de la propiedad \textit{NoDirAliases} definida en el archivo de especificaci'on Alloy \textit{$file\_system.als$} \ref{anexo_fs}.
+\todomm{Explicá también de qué se trata la especificación}
+Para demostrar \todomm{Hablar de “ejemplo de uso”}el uso de Heterogenius en un caso real recurrimos a la demostraci'on de la propiedad \textit{NoDirAliases} definida en el archivo de especificaci'on Alloy \textit{$file\_system.als$} \ref{anexo_fs}. \todomm{No poner el número de anexo solo. Decir que la especificación puede encontrarse en ese apéndice y que es una adaptación del ejemplo homónimo del libro de jackson (y poner referencia)
+
+@book{Jackson:2006:SAL:1146359,
+ author = {Jackson, Daniel},
+ title = {Software Abstractions: Logic, Language, and Analysis},
+ year = {2006},
+ isbn = {0262101149},
+ publisher = {The MIT Press},
+} 
+
+Esta también es la referencia para cuando hables de Alloy}
 
 Lo primero que se hace al abrir Heterogenius es cargar la especificaci'on con la que se va a trabajar y seleccionar la propiedad que se quiere demostrar:
 
+\todomm{De este tipo de figuras, donde aparecen las tres ventanas de heterogeniuos, sólo poner una. Explicar para qué sirve cada ventana y después sólo mostrar los árboles.}
 \begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/3.png}
 	\centering
@@ -28,6 +41,7 @@ Lo primero que se puede hacer es aplicar una skolemizaci'on para eliminar el cua
 
 La aplicaci'on de dicha acci'on crear'a un nodo nuevo en el 'arbol de demostraci'on con la nueva expresi'on a demostrar.
 
+\todomm{No poner cada paso como una firgura aparte. Simplemente intercalar los árboles (pequeños) en el texto }
 \begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/5.png}
 	\centering
@@ -36,6 +50,7 @@ La aplicaci'on de dicha acci'on crear'a un nodo nuevo en el 'arbol de demostraci
 
 El siguiente paso ser'a separar el nodo en casos seg'un la expresi'on $oh\_1$ $in$ $Root$. Para 'esto se selecciona la opci'on \textbf{Case} desde la lista de estrategias y se ingresa la expresi'on:
 
+\todomm{de las siguientes 2 figuras poner las ventanas con formulas y un arbol}
 \begin{figure}[H]
 	\includegraphics[width=350px]{img/ejemplo/7.png}
 	\centering
@@ -135,6 +150,7 @@ assert ConjeturaFalsa {
 \end{verbatim}
 
 La especificaci'on que se usa para este ejemplo es \textit{file$\_$system.als} \ref{anexo_fs}
+\todomm{ref}
 
 Lo primero que se hace es cargar el archivo de especificaci'on que contiene dicha conjecura (\textbf{File$\rightarrow$New Analysis$\rightarrow$Alloy}). Una vez hecha la carga, lo que se quiere demostrar aparece en el nodo ra'iz:
 
@@ -142,6 +158,7 @@ A continuaci'on, como se quiere hacer el an'alisis con herramientas de \textit{T
 
 'Esto crea dos nodos nuevos en el 'arbol, representando cada acci'on realizada y mostrando el secuente resultante de las acciones aplicadas:
 
+\todomm{mostrar sólo el árbol y el secuente}
 \begin{figure}[H]
 	\includegraphics[width=350px]{img/conjetura_falsa_2.png}
 	\centering
@@ -176,11 +193,14 @@ Al encontrar un contraejemplo en una ramificaci'on alternativa, se puede afirmar
 
 
 \section{Analisis de lemas XXX}
+\todomm{XXX: Mencionar que estos lemas forman parte de las demostraciones realizadas con Dynamite.}
 \label{analisis_lemas}
 Como parte del an'alisis y evaluaci'on de los demostradores de teoremas integrados (\textit{EProver} y \textit{SPASS}) evaluamos un conjunto de lemas correspondientes a XXX \ref{anexo_lemas_fof}.
 
 Los lemas se definieron como f'ormulas \textit{PDOCFA}, se aplic'o una traducci'on-$\rho$ a \textit{TPTP-FOF} y se trat'o de demostrar cada lema por separado. C'omo la traducci'on entre \textit{PDOCFA} y \textit{TPTP-FOF} no es exacta, fue necesario especificar un par'ametro numerico $n$ que indica la cantidad de desarrollos que se hacen de la clausura reflexotransitiva. Para 'estos ejemplos probamos con el par'ametro $n$=$5$, $10$, $20$ y $50$. En todos los casos obtuvimos los mismos resultados:
 
+\todomm{Esta tabla no dá información. Sacarla y en su lugar poner el código alloy de las fórmulas evaluadas, como para que el lector sepa el tipo de fórmulas con los que estuvimos trabajando.
+Luego de eso, mencionar la lista de los lemas que pudieron ser demostrados automáticamente.}
 \vspace{1em}
 
 \begin{tabular}{| l | l | l |}

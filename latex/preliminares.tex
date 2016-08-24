@@ -19,7 +19,8 @@ Su principal caracter'istica es que soporta demostraciones heterog'eneas. En otr
 
 \begin{itemize}
 
-\item Pone en pr'actica la idea de \textit{'arbol de an'alisis} el cu'al es el elemento principal donde se realiza el proceso de demostraci'on.
+\item Pone en pr'actica la idea de \textit{'arbol de an'alisis} el cu'al es el elemento principal donde se realiza el proceso de demostraci'on. 
+\todomm{Acá lo que debería decir es que el árbol de análisis es un concepto que extiende a la idea de árbol de demostración (como en el cálculo de secuentes). Esto tiene que estar explicado en el paper de Manu. Si no, avisanos.}
 
 \item Separa conceptualmente y arquitect'onicamente las herramientas utilizadas durante el an'alisis.
 
@@ -96,12 +97,14 @@ El demostrador opera en cuatro fases distintas:
 
 E-Prover utiliza una variante del algoritmo de ``cl'ausula dada'' \cite{dk97}. El estado de la demostraci'on se representa por dos conjuntos de cl'ausulas: el conjunto \textbf{P} de cl'ausulas procesadas (inicialmente vac'io) y el conjunto \textbf{U} de cl'ausulas sin procesar. Las cl'ausulas en \textbf{U} se ordenan de acuerdo a una funci'on de evaluaci'on he'uristica y se procesan en ese orden.
 
+\todomm{Siguiente parrafo: Fijate si no podés poner esto como un pseudocódigo en una figura.}
 El procesamiento primero simplifica la cl'ausula seleccionada \textit{g} con todas las cl'ausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las cl'ausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas cl'ausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
 
-Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister} y forma parte adem'as del algoritmo principal de \texttt{Vampire} y \texttt{SPASS}.
+Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter}\todomm{ref} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister}\todomm{ref} y forma parte adem'as del algoritmo principal de \texttt{Vampire}\todomm{ref} y \texttt{SPASS}\todomm{ref}.
 
 \subsection{Heur'isticas}
 
+\todomm{Itemizar. Si es posible, dentro del texto.  “[…] heurísticas para: (1) la elección […]; (2) la elección […]”}
 E-Prover usa una serie de heur'isticas para: la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente la elecci'on de literales para la inferencia en las cl'ausulas que tienen por lo menos un literal negativo.
 
 La selecci'on de las cl'ausulas dadas es controlada por varias colas de prioridad de las cuales se seleccionan las cl'ausulas en un esquema ``round robin pesado''. Cada cola es ordenada de acuerdo a una funci'on de prioridad fija y una funci'on de evaluaci'on de cl'ausula parametrizada. Las funciones de evaluaci'on de cl'ausulas pueden ser orientadas a objetivos, pueden estar enfocadas en algunos s'imbolos en particular y pueden tomar en cuenta el ordenamiento de t'erminos. 

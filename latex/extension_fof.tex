@@ -1,5 +1,7 @@
 \section{Extendiendo Heterogenius con demostradores de primer orden}
 
+\todomm{Parrafo siguiente: Esto se puede usar como la reseña histórica que te mencionaba más arriba (en el capítulo anterior). Si la vas a usar, hay que sacarla de acá y hacer referencia a ella. Algo como: “Tal como se mencionó en el capítulo anterior, la competencia CASC ha adquirido una gran reputación en los últimos años”.}
+
 Desde el a\~no 1996 se celebra anualmente la competencia de demostradores autom'aticos \emph{CADE ATP System Comptetion} \cite{casc} como parte de la conferencia internacional sobre deducci'on autom'atica CADE.
 Dicha competencia es uno de los principales eventos donde varios de los m'as famosos grupos de investigaci'on que trabajan en el desarrollo de herramientas de demostraci'on autom'atica se reunen para evaluar la \emph{performance} de sus sistemas.
 Gracias a ello, un gran n'umero de herramientas de demostraci'on autom'atica aceptan entradas escritas en el lenguaje propio de la competencia: \textit{TPTP-FOF} \cite{fof}. Es por ello que hemos decidido agregar el mencionado lenguaje al motor de Heterogenius, de modo de permitir la integraci'on con herramientas actuales y abrir el camino para la interacci'on con las futuras tecnologías que soporten TPTP-FOF.
@@ -18,6 +20,8 @@ Junto a la integraci'on de TPTP-FOF, se incorporaron los siguientes mecanismos p
 
 ...\todomm{Esto lo escribo yo}
 
+\todomm{Acá hay que explicar qué es un calculador de secuentes. Y se puede agregar el párrafo que está en el capítulo anterior. La explicación la podés encontrar en el paper de Manu y en su tesis.}
+
 \subsection{Herramientas incorporadas}
 
 Teniendo el soporte de \textit{TPTP-FOF} por parte del motor de c'alculo de secuentes de Heterogenius, integramos algunas de las herramientas mas difundidas en el 'ambito de demostradores autom'aticos de teoremas para el lenguaje \textit{TPTP-FOF}: \textit{SPASS} \cite{WDFKSW09} y \textit{E-Prover} \cite{s13} como calculadores de secuentes y \textit{Mace4} \cite{m05} y \textit{E-Prover} como buscadores de contraejemplos.
@@ -31,6 +35,7 @@ Desde el 2000, tanto \textit{SPASS} como \textit{E-Prover} ocupan los primeros l
 Al introducir soporte para lenguajes de l'ogica de primer 'orden y herramientas autom'aticas de an'alisis de estos lenguajes, fue necesario tambi'en extender las acciones de demostraci'on de Heterogenius agregando tres reglas nuevas.
 
 Sea $\Gamma \vdash \alpha$ el secuente que se quiere analizar, se introducen las siguientes reglas:
+\todomm{En el capítulo anterior se dijo que las reglas se leen de manera inversa a como se leen aquí.}
 
 \begin{prooftree}
 \LeftLabel{\textbf{Regla 1:}}

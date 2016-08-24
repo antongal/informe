@@ -6,6 +6,7 @@ Para lograr esto permitimos que también los secuentes sean heterogéneos, es de
 
 En el 'arbol de an'alisis este cambio se refleja en la visualizaci'on de los nodos. Los nodos con secuentes heterogéneos se marcan con una \textit{H} mientras los nodos homogéneos no.
 
+\todomm{Mencionar la figura en el text}
 \begin{figure}[tbh]
 	\includegraphics[width=50px]{img/hetero_homo.png}
 	\centering
@@ -16,8 +17,9 @@ En el 'arbol de an'alisis este cambio se refleja en la visualizaci'on de los nod
 \subsubsection{Ramas alternativas}
 
 Para permitir documentar todas las acciones aplicadas as'i como la creaci'on de caminos de an'alisis alternativos introdujimos la noci'on de \textit{ramificaci'on alternativa}.
-Las ramas alternativas representan la existencia de m'ultiples caminos en los que se subdivide el an'alisis para lograr un resultado. En la interfaz de usuario de Heterogenius este tipo de ramas se representa con lineas punteadas y su significado sem'antico es el de una disyunci'on. Se corresponde con un camino alternativo en una demostraci'on.
+Las ramas alternativas representan la existencia de m'ultiples caminos en los que se subdivide el an'alisis para lograr un resultado. En la interfaz de usuario de Heterogenius este tipo de ramas se representa con lineas punteadas y su significado sem'antico es el de una disyunci'on \todomm{No entiendo esta frase. ¿Disyunción en qué sentido?}. Se corresponde con un camino alternativo en una demostraci'on.
 
+\todomm{Siempre que puedas, no pongas figuras en la mitad de la página.}
 \begin{figure}[htb]
 	\includegraphics[width=180px]{img/ramas_alternativas_2.png}
 	\centering
@@ -26,8 +28,9 @@ Las ramas alternativas representan la existencia de m'ultiples caminos en los qu
 \end{figure}
 
 Un nodo con hijos conectados por ramas alternativas se entiende que vale si \textit{\textbf{alguna}} de las ramas valen. Esto es diferente de la ramificaci'on normal (lineas continuas) que indica que el nodo padre vale si todos sus hijos valen.
+\todomm{parrafo anterior: ¿Qué significa que un nodo “vale”? Reescribir el párrafo en términos de la “demostrabilidad” de la propiedad que se está analizando.}
 
-Al aplicar una ramificaci'on alternativa a un nodo del 'arbol de an'alisis, el nodo es copiado y agregado como sus propios hijos. Esto nos permite trabajar sobre las copias del nodo original. Cuando es necesario tambi'en se puede agregar ramas alternativas durante un an'alisis.
+Al aplicar una ramificaci'on alternativa a un nodo del 'arbol de an'alisis, el nodo es copiado y agregado como sus propios hijos \todomm{No me queda claro qué estás queriendo decir acá. ¿La copia del nodo es agregado como si fuera uno de sus hijos o se copia tanto el nodo como todos sus hijos?}. Esto nos permite trabajar sobre las copias del nodo original. Cuando es necesario tambi'en se puede agregar ramas alternativas durante un an'alisis.
  
 La principal ventaja de usar caminos alternativos es la de poder documentar todo el an'alisis que se realiz'o y las decisiones tomadas, incluso las decisiones que no llevaron al cumplimiento del objetivo. Por otro lado tambi'en nos permite experimentar con diferentes formas de probar lo mismo.
 En las Fig.~\ref{alter1} y \ref{alter2} se muestran ejemplos de estos usos.
@@ -42,6 +45,8 @@ En las Fig.~\ref{alter1} y \ref{alter2} se muestran ejemplos de estos usos.
 
 
 \subsubsection{Nueva Clasificaci'on de Acciones}
+
+\todomm{Esta explicación de cómo era el árbol de análisis de Heterogenius en la versión anterior debería estar en la sección 2.4 (Preliminares-Heterogenius)}
 
 Como se ha mencionado, el elemento principal del proceso de demostración en Heterogenius es el 'arbol de an'alisis. All'i es donde se realizan todas las acciones y es donde se refleja el camino tomado para lograr una demostraci'on exitosa. Cada nodo del 'arbol representa un secuente en alg'un lenguaje soportado por Heterogenius. Las aristas se corresponden con las acciones aplicadas a cada secuente. Dependiendo del lenguaje en el que est'e el secuente se habilitan distintas acciones, pero en general se las puede dividir en tres categor'ias:
 
