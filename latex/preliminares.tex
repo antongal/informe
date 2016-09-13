@@ -20,7 +20,7 @@ Su principal caracter'istica es que soporta demostraciones heterog'eneas. En otr
 \begin{itemize}
 
 \item Pone en pr'actica la idea de \textit{'arbol de an'alisis} el cu'al es el elemento principal donde se realiza el proceso de demostraci'on. 
-\todomm{Acá lo que debería decir es que el árbol de análisis es un concepto que extiende a la idea de árbol de demostración (como en el cálculo de secuentes). Esto tiene que estar explicado en el paper de Manu. Si no, avisanos.}
+\todoag{Acá lo que debería decir es que el árbol de análisis es un concepto que extiende a la idea de árbol de demostración (como en el cálculo de secuentes). Esto tiene que estar explicado en el paper de Manu. Si no, avisanos. - no encontre la explicacion}
 
 \item Separa conceptualmente y arquitect'onicamente las herramientas utilizadas durante el an'alisis.
 
@@ -100,7 +100,7 @@ E-Prover utiliza una variante del algoritmo de ``cl'ausula dada'' \cite{dk97}. E
 \todomm{Siguiente parrafo: Fijate si no podés poner esto como un pseudocódigo en una figura.}
 El procesamiento primero simplifica la cl'ausula seleccionada \textit{g} con todas las cl'ausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las cl'ausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas cl'ausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
 
-Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter}\todomm{ref} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister}\todomm{ref} y forma parte adem'as del algoritmo principal de \texttt{Vampire}\todomm{ref} y \texttt{SPASS}\todomm{ref}.
+Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter}\cite{otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister}\cite{BH96} y forma parte adem'as del algoritmo principal de \texttt{Vampire} \cite{vampire} y \texttt{SPASS}\cite{spass}.
 
 \subsection{Heur'isticas}
 

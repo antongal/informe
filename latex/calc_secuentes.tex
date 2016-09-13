@@ -46,21 +46,37 @@ En general las reglas de inferencia tienen la siguiente forma:
 \end{prooftree}
 y se interpretan como, dado un secuente hoja del árbol de demostración de la forma $\Gamma \vdash \Delta$, al aplicar la regla $R$ se modifica el árbol agregando $n$ nuevos nodos de la forma $\Gamma_{i}\vdash\Delta_{i}$ como hijos del secuente $\Gamma \vdash \Delta$.
 
-\todomm{Mejor ponelas como una figura (creo que antes estaban como figura y te las hice cambiar; perdón si pasó eso, no me gustó cómo quedó).
+\todoag{Mejor ponelas como una figura (creo que antes estaban como figura y te las hice cambiar; perdón si pasó eso, no me gustó cómo quedó - No entendi que quiere decir como figura, cada axioma en un figure ??).
 Además explicá alguna de las reglas. Tratá de poner la idea, la intuición. Por qué parecen ser razonables. Esto debería estar en el libro que te pasé. Si te cuesta encontarles sentido, avisá y lo charlamos.}
 
 Algunas de las reglas del c'alculo se presentan a continuaci'on:
-
-\todomm{Agregar más reglas. Al menos la regla de corte (cut-rule). Ver nota en página 19.}
 
 \vspace{2em}
 
 \begin{tabularx}{\textwidth}{Xc Xc}
 	
+	%Left OR
+	\AxiomC{$\Gamma \alpha \vdash \Delta $}
+	\AxiomC{$\Gamma \beta \vdash \Delta $}
+	\RightLabel{\scriptsize (left $\vee$)}
+	\BinaryInfC{$\Gamma, \alpha \vee \beta \vdash \Delta $}
+	\DisplayProof
+
+    &
+
 	%Right OR
 	\AxiomC{$\Gamma \vdash \alpha, \beta, \Delta $}
 	\RightLabel{\scriptsize (right $\vee$)}
 	\UnaryInfC{$\Gamma \vdash (\alpha \vee \beta), \Delta $}
+	\DisplayProof
+	
+    \\ & \\
+    
+    %Left THEN
+	\AxiomC{$\Gamma \vdash \alpha, \Delta $}
+	\AxiomC{$\Gamma \vdash \beta, \Delta $}
+	\RightLabel{\scriptsize (left $\rightarrow$)}
+	\BinaryInfC{$\Gamma, (\alpha \rightarrow \beta)  \vdash \Delta $}
 	\DisplayProof
 	
 	&
@@ -73,10 +89,26 @@ Algunas de las reglas del c'alculo se presentan a continuaci'on:
 	
 	\\ & \\
 	
+	%Left NOT
+	\AxiomC{$\Gamma \vdash \alpha,\Delta $}
+	\RightLabel{\scriptsize (left $\neg$)}
+	\UnaryInfC{$\Gamma, \neg\alpha \vdash \Delta $}
+	\DisplayProof
+	
+	&
+	
 	%Right NOT
 	\AxiomC{$\Gamma , \alpha \vdash \Delta $}
 	\RightLabel{\scriptsize (right $\neg$)}
 	\UnaryInfC{$\Gamma \vdash (\neg\alpha) , \Delta $}
+	\DisplayProof
+	
+    \\ & \\
+    
+    %Left AND
+	\AxiomC{$\Gamma, \alpha, \beta, \vdash \Delta $}
+	\RightLabel{\scriptsize (left $\wedge$)}
+	\UnaryInfC{$\Gamma, \alpha \wedge \beta \vdash \Delta $}
 	\DisplayProof
 	
 	&
@@ -88,8 +120,19 @@ Algunas de las reglas del c'alculo se presentan a continuaci'on:
 	\BinaryInfC{$\Gamma \vdash (\alpha \wedge \beta) , \Delta $}
 	\DisplayProof
 	
+	\\ & \\	
+	
+	%Cut rule
+	\AxiomC{$\Gamma \vdash \alpha, \Delta $}
+	\AxiomC{$\Gamma' \vdash \alpha, \Delta' $}
+	\RightLabel{\scriptsize (cut rule)}
+	\BinaryInfC{$\Gamma,\Gamma' \vdash \Delta,\Delta' $}
+	\DisplayProof
+	
 \end{tabularx}
 
 \vspace{2em}
+
+
 
 Existen diferentes versiones del c'alculo de secuentes, y la elecci'on de cu'al usar depende del lenguaje l'ogico que se est'e utilizando para el an'alisis.
