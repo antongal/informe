@@ -8,9 +8,8 @@ Debido a los cambios introducidos fue necesario \textit{refactorizar} el diseño
 
 Por otro lado los traductores (subclases de \textit{Translator}) deben implementar los tres m'etodos  abstractos definidos en la clase padre. Cada uno de 'estos m'etodos permite un control m'as fino de las traducciones al separar el secuente en sus partes, que son: una referencia de skolemizac'ion, una especificaci'on y la f'ormula analizada.
 
-\todomm{Respetar márgenes. Poner figuras apaisadas en hojas aparte si es necesario.}
 \begin{figure}[H]
-	\includegraphics[width=400px]{img/arq_traductores.png}
+	\includegraphics[width=400px, angle=90]{img/arq_traductores.png}
 \end{figure}
 
 Se proveen los traductores de \textit{Alloy} a \textit{PDOCFA}, de \textit{PDOCFA} a \textit{TPTP-FOF} asi como el \textit{CompoundTranslator} que permite componer los traductores para lograr traducciones transitivas, por ejemplo de \textit{Alloy} a \textit{TPTP-FOF}.
@@ -31,9 +30,8 @@ Al ejecutar un demostrador autom'atico con la entrada preparada de este modo, se
 
 Para integrar las herramientas autom'aticas, tanto los demostradores de teoremas como los buscadores de contraejemplos fue necesario \textit{refactorizar} y extender el diseño de algunas partes de la arquitectura de Heterogenius. Algunos de los objetivos y criterios que se usaron durante el rediseño fueron lograr abstraer las herramientas usadas y hacer un diseño lo suficientemente extensible y abierto para la integraci'on con nuevas herramientas en el futuro.
 
-\todomm{Respetar márgenes. Poner figuras apaisadas en hojas aparte si es necesario.}
 \begin{figure}[H]
-	\includegraphics[width=450px]{img/arq_prover.png}
+	\includegraphics[width=450px, angle=90]{img/arq_prover.png}
 	\centering
 	\caption{Demostradores autom'aticos usados como calculadores de secuentes.}
 \end{figure}
@@ -74,9 +72,8 @@ Encontrar un modelo para una especificaci'on armada de 'este modo implica la exi
 
 Tambi'en como en el caso de los demostradores autom'aticos fue necesario \textit{refactorizar} el diseño de los buscadores de contraejemplos para permitir una mayor flexibilidad a la hora de agregar nuevas herramientas con soporte de \textit{TPTP-FOF}.
 
-\todomm{margenes}
 \begin{figure}[H]
-	\includegraphics[width=450px]{img/arq_ce.png}
+	\includegraphics[width=450px, angle=90]{img/arq_ce.png}
 	\centering
 	\caption{Buscadores de contraejemplos.}
 \end{figure}
