@@ -101,7 +101,7 @@ El demostrador opera en cuatro fases distintas:
 
 \item Una etapa opcional de simplificaci'on de la forma clausal del problema.
 
-\item An'alisis del problema y selecci'on de par'ametros 'optimos para la b'usqueda. \todo{Explicar búsqueda de qué.}
+\item An'alisis del problema y selecci'on de par'ametros 'optimos para la b'usqueda de una demostraci'on.
 
 \item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la cl'ausula vac'ia, lo que permite determinar que la cl'ausula original es insatisfacible y, por lo tanto, el problema de entrada es demostrable. E-Prover implementa el algoritmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsunci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de cl'ausulas \cite{ijcai2001}.
 \end{itemize}
@@ -117,14 +117,12 @@ Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de `
 
 \subsection{Heur'isticas}
 
-\todomm{Itemizar. Si es posible, dentro del texto.  “[…] heurísticas para: (1) la elección […]; (2) la elección […]”}
-E-Prover usa una serie de heur'isticas para: la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente la elecci'on de literales para la inferencia en las cl'ausulas que tienen por lo menos un literal negativo.
+E-Prover usa una serie de heur'isticas para: (1) la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; (2) la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente (3) la elecci'on de literales para la inferencia en las cl'ausulas que tienen por lo menos un literal negativo.
 
 La selecci'on de las cl'ausulas dadas es controlada por varias colas de prioridad de las cuales se seleccionan las cl'ausulas en un esquema ``round robin pesado''. Cada cola es ordenada de acuerdo a una funci'on de prioridad fija y una funci'on de evaluaci'on de cl'ausula parametrizada. Las funciones de evaluaci'on de cl'ausulas pueden ser orientadas a objetivos, pueden estar enfocadas en algunos s'imbolos en particular y pueden tomar en cuenta el ordenamiento de t'erminos. 
 
 
-La selecci'on de literales es controlada por una de las cien estrategias de selecci'on que est'an codificadas en E-Prover. En el modo autom'atico el demostrador selecciona una de ellas. \todo{selecciona, ¿De qué manera? ¿Al azar?}
-
+La selecci'on de literales es controlada por una de las cien heur'isticas de selecci'on que est'an codificadas en E-Prover.
 
 
 
@@ -139,7 +137,7 @@ La tercera dimensi'on que se considera en SPASS son las restricciones, informaci
 
 \section{Mace4}
 
-Mace4 es un buscador de modelos finitos basado en \textit{backtracking} y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland} \todo{referencia}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones.
+Mace4 es un buscador de modelos finitos basado en \textit{backtracking} y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland} \cite{dpll}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones \cite{mace4_manual}.
 
 \subsection{Inicializaci'on}
 
@@ -172,17 +170,11 @@ Las partes m'as importantes del algor'itmo son las heuristicas de selecci'on de 
 
 \subsubsection{Selecci'on de celdas}
 
+La selecci'on de celdas se divide en dos fases. La primera determina el conjunto de celdas candidatas. La segunda fase elige una celdas del conjunto de candidatas previamente preparadas.
+
 \begin{itemize}
 
-\item{Armado del conjunto de celdas candidatas}: Existen tres heur'isticas para el armado del conjunto:
-
-\todo{Quitar este nivel de itemizado. Escribir como texto común.}
-\begin{itemize}
-\item Orden lineal. Se seleccionan todas las celdas abiertas.
-\item Orden concentrico. Sea $i$ el 'indice m'aximo m'as chico \todo{no entendí lo del “índice máximo más chico”. ¿Lo podrías explicar con más detalle”} de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo.
-\item Orden de banda conc'entrica. Todas las celdas con el 'indice m'aximo menor o igual al valor actual de restricci'on son candidatas. Si no se encuentra ninguna se revierte al orden conc'entrico.
-\end{itemize}
-
+\item{Armado del conjunto de celdas candidatas}: Existen tres heur'isticas para el armado del conjunto: \textit{Orden lineal}, se seleccionan todas las celdas abiertas; \textit{Orden concentrico}, sea $i$ el 'indice m'aximo m'as chico \todoag{no entendí lo del “índice máximo más chico”. ¿Lo podrías explicar con más detalle - yo tampoco, se explica asi en el manual: https://goo.gl/ZLVbZp”} de una celda abierta, se seleccionan todas las celdas con el 'indice $i$ m'aximo; \textit{Orden de banda conc'entrica}, todas las celdas con el 'indice m'aximo menor o igual al valor actual de restricci'on son candidatas. Si no se encuentra ninguna se revierte al orden conc'entrico.
 
 \item{Selecci'on de la celda}. Se utilizan cuatro m'etodos:
 
