@@ -19,11 +19,11 @@
 \usepackage{textcomp}
 \usepackage{tabularx}
 \usepackage{cite}
-%\usepackage{filecontents}
-%\usepackage{fancyvrb}
+\usepackage{verbatimbox}
 
 \usepackage{todonotes}
 \usepackage{marginnote}
+\usepackage{verbatim}
 
 \newcommand{\todomm}[1]{\todo[fancyline, backgroundcolor=yellow]{#1 {}}}
 \newcommand{\todoag}[1]{\todo[fancyline, backgroundcolor=green]{#1 {}}}
@@ -61,6 +61,20 @@
     linkcolor=black,
     urlcolor=black
 }
+
+
+\makeatletter
+\newcommand*{\inputverbatim}[1]{%
+    \begingroup
+    \let\do\@makeother
+    \dospecials
+    \obeyspaces% To get normal spaces not a symbol
+    \input{#1}%
+    \endgroup
+}
+\makeatother
+
+
 
 \begin{document}
 

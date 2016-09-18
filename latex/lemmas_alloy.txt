@@ -1,0 +1,316 @@
+M1:
+	FORALL (A: Carrier| Leq(A,univ),
+		   R: Carrier|  ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ) ,
+		   S: Carrier|  ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) ):
+	  (FORALL (a0: Carrier|  (  ( Leq(a0,univ) AND Leq(a0,A) )  AND One(a0) ), 
+			   af: Carrier|  (  ( Leq(af,univ) AND Leq(af,A) )  AND One(af) ) ) : 
+		  ( ( ( ( ( Leq(af,Navigation(a0,TC(sum(R,S)),1,2)) AND
+			None(product(Navigation(A,S,1,2),Navigation(R,A,2,1))) ) AND
+		    None(product(Navigation(S,A,2,1),Navigation(R,A,2,1))) )
+		  IMPLIES 
+			Leq(af,Navigation(a0,TC(R),1,2)) ) OR 
+			Leq(af,Navigation(a0,TC(S),1,2)) ) OR
+			(EXISTS (ai: Carrier|  (  ( Leq(ai,univ) AND Leq(ai,A) )  AND One(ai) ) ) : 
+				( Leq(ai,Navigation(a0,TC(R),1,2)) AND Leq(af,Navigation(ai,TC(S),1,2)) ) ) ) ))
+		 
+M10:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   C: Carrier| Leq(C,univ), 
+		   W: Carrier| Leq(W,CartesianProduct(A,CartesianProduct(B,C,1,1),1,2)), 
+		   a: Carrier| ( Leq(a,A) AND One(a) ) ) : 
+	  Leq(Navigation(a,W,1,3),CartesianProduct(B,C,1,1))
+		 
+
+		
+M11b:	
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| Leq(R,CartesianProduct(A,B,1,1))) : Leq(Navigation(a,R,1,2),B))
+		 
+M12b:
+ FORALL (A,B,C: Carrier):( Leq(A,C) AND Leq(B,C) ) => Leq(sum(A, B),C)
+		
+M13:	
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| Leq(R,CartesianProduct(A,B,1,1))) : 
+	  Leq(RTC(R),CartesianProduct(A,B,1,1))
+		 
+		
+M15:
+	THEOREM FORALL (A: Carrier| Leq(A,univ), 
+				   B: Carrier| Leq(B,univ), 
+				   R: Carrier| Leq(R,CartesianProduct(A,B,1,1)), 
+				   S: Carrier| Leq(S,CartesianProduct(A,B,1,1)), 
+				   C: Carrier| ( Leq(C,A) AND One(C) ) ) :  
+			( Leq(R,S) IMPLIES Leq(Navigation(C,R,1,2),Navigation(C,S,1,2)) )
+		 
+M16:
+	FORALL (A,B: Carrier) : Leq(A,sum(A, B))
+		
+M17:
+	THEOREM FORALL (A: Carrier| Leq(A,univ), 
+				    B: Carrier| Leq(B,univ), 
+				    R: Carrier| Leq(R,CartesianProduct(A,B,1,1)), 
+				    S: Carrier| Leq(S,CartesianProduct(A,B,1,1))) :  
+		 	Leq(R,S) IMPLIES Leq(RTC(R),RTC(S))  
+		 
+M18:
+	FORALL (A,x: Carrier) : (None(A) & Some(x)) => NotLeq(x,A)
+		
+M19:
+	FORALL (A: Carrier| Leq(A,univ), 
+		    B: Carrier| Leq(B,univ), 
+		    R: Carrier| Leq(R,CartesianProduct(A,B,1,1))) : Leq(Navigation(R,B,2,1),A)
+		 
+		
+M1h0:
+	FORALL (A: Carrier| Leq(A,univ), 
+			R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ), 
+			S: Carrier| ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) ) : 
+	  (  ( None(product(Navigation(A,S,1,2),Navigation(R,A,2,1))) 
+			AND None(product(Navigation(S,A,2,1),Navigation(R,A,2,1))) )  
+      IMPLIES  
+      	( TC(sum(R,S)) = sum(sum(TC(R),TC(S)),Navigation(TC(R),TC(S),2,2)) )  ))
+		 
+		
+M1M1:
+	FORALL (A: Carrier| Leq(A,univ), 
+			R: Carrier | ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ),
+			S: Carrier | ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) )
+	:(FORALL (a0: Carrier | ( ( Leq(a0,univ) AND Leq(a0,A) ) AND One(a0) ),
+			  af: Carrier | ( ( Leq(af,univ) AND Leq(af,A) ) AND One(af) ) )
+		: ( ( ( ( Leq(af,Navigation(a0,TC(sum(R,S)),1,2)) AND
+				  None(product(Navigation(A,S,1,2),Navigation(R,A,2,1))) ) AND
+				  None(product(Navigation(S,A,2,1),Navigation(R,A,2,1))) ) AND
+				  Leq(a0,Navigation(S,A,2,1)) )
+						IMPLIES Leq(af,Navigation(a0,TC(S),1,2)) ) ))
+		 
+
+M1M1b:
+		
+	FORALL (A: Carrier| Leq(A,univ), 
+			R: Carrier | ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ),
+			S: Carrier | ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) )
+	:(FORALL (a0: Carrier | ( ( Leq(a0,univ) AND Leq(a0,A) ) AND One(a0) ),
+			  af: Carrier | ( ( Leq(af,univ) AND Leq(af,A) ) AND One(af) ) )
+		: ( ( ( ( Leq(af,Navigation(a0,RTC(sum(R,S)),1,2)) AND
+				  None(product(Navigation(A,S,1,2),Navigation(R,A,2,1))) ) AND
+				  None(product(Navigation(S,A,2,1),Navigation(R,A,2,1))) ) AND
+				  Leq(a0,Navigation(S,A,2,1)) )
+						IMPLIES Leq(af,Navigation(a0,RTC(S),1,2)) ) ))
+		 
+
+M1M4:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ) , 
+		   S: Carrier| ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) ) : 
+	  (FORALL (a0: Carrier|  (  ( Leq(a0,univ) AND Leq(a0,A) )  AND One(a0) ) , 
+			   af: Carrier|  (  ( Leq(af,univ) AND Leq(af,A) )  AND One(af) ) ) : 
+		  (  
+			 ( Leq(af,Navigation(a0,TC(sum(R,S)),1,2)) AND 
+		  	 (FORALL (ai: Carrier|  (  ( Leq(ai,univ) AND Leq(ai,A) ) AND One(ai) ) ) :  
+					(  ( Leq(ai,Navigation(a0,RTC(sum(R,S)),1,2)) AND 
+					Leq(af,Navigation(ai,RTC(sum(R,S)),1,2)) ) 
+					IMPLIES NOT ( Leq(ai,Navigation(S,A,2,1)) )  ) ) )
+			IMPLIES Leq(af,Navigation(a0,TC(R),1,2)) ) )
+		 
+		
+M1M5:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ) , 
+		   S: Carrier| ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) ) : 
+	  (FORALL (a0: Carrier|  (  ( Leq(a0,univ) AND Leq(a0,A) )  AND One(a0) ) , 
+			   af: Carrier|  (  ( Leq(af,univ) AND Leq(af,A) )  AND One(af) ) ) : 
+		  (
+			 ( Leq(af,Navigation(a0,RTC(sum(R,S)),1,2))) AND 
+		  	 (EXISTS (ai: Carrier|  (  ( Leq(ai,univ) AND Leq(ai,A) ) AND One(ai) ) ) :  
+					(  ( Leq(ai,Navigation(a0,RTC(sum(R,S)),1,2)) AND 
+						 Leq(af,Navigation(ai,RTC(sum(R,S)),1,2)) ) AND
+						 Leq(ai,Navigation(S,A,2,1)) ) ) 
+		  )  
+		 	IMPLIES (EXISTS (aj: Carrier|  (  ( Leq(aj,univ) AND Leq(aj,A) )  AND One(aj) ) ) : 
+				(  ( Leq(aj,Navigation(a0,RTC(R),1,2)) AND 
+					 Leq(af,Navigation(aj,RTC(sum(R,S)),1,2)) ) AND 
+					 Leq(aj,Navigation(S,A,2,1)) ) ) ) )) 
+		 
+		
+M1M6:
+	FORALL (A: Carrier| Leq(A,univ), 
+				    U: Carrier| ( Leq(U,CartesianProduct(univ,univ,1,1)) AND Leq(U,CartesianProduct(A,A,1,1)) ) ): 
+	   (FORALL (i: Carrier|  (  ( Leq(i,univ) AND Leq(i,A) )  AND One(i) ) , 
+				j: Carrier|  (  ( Leq(j,univ) AND Leq(j,A) )  AND One(j) ) ) :
+		(Leq(i,Navigation(j,TC(U),1,2))
+		IMPLIES 
+			(EXISTS (k: Carrier|  (  ( Leq(k,univ) AND Leq(k,A) )  AND One(k) ) ) : 
+				(Leq(k,Navigation(j,RTC(U),1,2)) AND Leq(i,Navigation(k,U,1,2)) ) ) ) )
+		 
+
+M1M7:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   U: Carrier| (Leq(U,CartesianProduct(univ,univ,1,1)) AND Leq(U,CartesianProduct(A,A,1,1)) ),
+		   T: Carrier| (Leq(T,CartesianProduct(univ,univ,1,1)) AND Leq(T,CartesianProduct(A,A,1,1)) ) ) : 
+	  (FORALL (i: Carrier|  (  ( Leq(i,univ) AND Leq(i,A) )  AND One(i) ) , 
+			   j: Carrier|  (  ( Leq(j,univ) AND Leq(j,A) )  AND One(j) ) ) : 
+		  ( Leq(i,Navigation(j,RTC(U),1,2)) IMPLIES Leq(i,Navigation(j,RTC(sum(U,T)),1,2)) ) ))
+		 
+		
+M2:	
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(univ,B)) ) , 
+		   S: Carrier| ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(univ,A)) ) ) : 
+	  (FORALL (a: (atom), 
+			   c: Carrier| ( ( Leq(c,univ) AND Leq(c,B) )  AND One(c) ) , 
+			   d: Carrier| ( ( Leq(d,univ) AND Leq(d,A) )  AND One(d) ) ) :  
+			(  ( Leq(c,Navigation(a,R,1,2)) AND Leq(d,Navigation(A,S,1,2)) )  IMPLIES 
+					Some(product(Navigation(R,B,2,1),Navigation(S,A,2,1))) ) ))
+		 
+M20:
+ 	atom(X) = One(X)
+	FORALL (A: Carrier| Leq(A,univ), B: Carrier| Leq(B,univ), x: (atom)):
+		 ( Leq(x,sum(A,B)) => ( Leq(x,A) OR Leq(x,B) ))
+		
+M21:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   C: Carrier| Leq(C,univ), 
+		   D: Carrier| Leq(D,univ)) :
+  ( ( Leq(A,B) AND Leq(C,D) )  IMPLIES Leq(CartesianProduct(A,C,1,1),CartesianProduct(B,D,1,1)) ) )
+		 
+M22:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| Leq(R,CartesianProduct(A,B,1,1)), 
+		   S: Carrier| Leq(S,CartesianProduct(A,B,1,1))) : 
+	  ( sum(Navigation(R,B,2,1),Navigation(S,B,2,1)) = Navigation(sum(R,S),B,2,1) )
+		 
+M23:
+	FORALL (A: Carrier| Leq(A,univ), B: Carrier| Leq(B,univ)) :
+		( None(sum(A,B)) IFF  ( None(A) AND None(B) )  ) )
+		 
+		
+M23b:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   C: Carrier| Leq(C,univ), 
+		   R: Carrier| Leq(R,CartesianProduct(A,B,1,1)), 
+		   a: Carrier|  ( Leq(a,A) AND One(a) ) ) :
+	 ( ( Leq(a,C) AND None(product(Navigation(R,B,2,1),C)) ) IMPLIES None(Navigation(a,R,1,2)) )
+		 
+
+M24:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,B,1,1)) ) , 
+		   S: Carrier|  ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,B,1,1)) ) ) :
+		( sum(Navigation(a,R,1,2),Navigation(A,S,1,2)) = Navigation(A,sum(R,S),1,2) ) )
+		 
+
+M25:
+	FORALL (A: Carrier, B: Carrier, C: Carrier) :  
+			( (Leq(A,C)) AND (Leq(B,C)) )  IMPLIES (Leq(product(A, B),C)) )
+		 
+M30:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| (Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,B,1,1)) ), 
+		   a: Carrier| (( Leq(a,univ) AND Leq(a,A) )  AND One(a) ) ) : 
+	  Leq(a,Navigation(a,RTC(R),1,2)))
+		 
+M31:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier|  ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,B,1,1)) ),
+		   x: Carrier|  (  ( Leq(x,univ) AND Leq(x,A) )  AND One(x) ),
+		   y: Carrier|  (  ( Leq(y,univ) AND Leq(y,A) )  AND One(y) ) ) : 
+	  ( Leq(y,Navigation(x,TC(R),1,2)) IMPLIES Leq(y,Navigation(x,RTC(R),1,2)) )
+		 
+		
+M32:
+	FORALL (A: Carrier| Leq(A,univ),
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier|  ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,B,1,1)) ),
+		   S: Carrier|  ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,B,1,1)) ),
+		   x: Carrier|  (  ( Leq(x,univ) AND Leq(x,A) )  AND One(x) ) ) : 
+	  ( Leq(x,Navigation(R,B,2,1)) IMPLIES Leq(x,Navigation(sum(R,S),B,2,1)) ) )
+		 
+		
+M4:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   U: Carrier| ( Leq(U,CartesianProduct(univ,univ,1,1)) AND Leq(U,CartesianProduct(A,A,1,1)) ) ) : 
+	  (FORALL (i: Carrier|  (  ( Leq(i,univ) AND Leq(i,A) )  AND One(i) ) , 
+			   j: Carrier|  (  ( Leq(j,univ) AND Leq(j,A) )  AND One(j) ) ) :  
+			( Leq(i,Navigation(j,TC(U),1,2)) IMPLIES 
+				(EXISTS (k: Carrier|  (  ( Leq(k,univ) AND Leq(k,A) )  AND One(k) ) ) :  
+					( Leq(k,Navigation(j,U,1,2)) AND Leq(i,Navigation(k,RTC(U),1,2)) ) ) ) )
+		 
+		
+M5FORALL:
+	(A: Carrier| Leq(A,univ), 
+		   R: Carrier|  ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ) ) : 
+  ( None(product(Navigation(a,R,1,2),Navigation(R,A,2,1))) IMPLIES None(product(TC(R),iden)) ) )
+		 
+
+		
+M5M1:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ),
+		   S: Carrier| ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) ) : 
+   ( None(product(Navigation(A,S,1,2),Navigation(R,A,2,1))) 
+   IMPLIES None(product(Navigation(TC(R),TC(S),2,2),iden)) ) )
+		 
+
+M6M1r2:
+	FORALL (A: Carrier| Leq(A,univ),
+		   R: Carrier| ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ),
+		   S: Carrier| ( Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,A,1,1)) ) ): 
+		(  ( None(R) AND None(S) )  IMPLIES None(sum(R,S)) ) )
+		 
+M6M1r2b:
+	FORALL (R: Carrier, S: Carrier ) :  (  ( None(R) AND None(S) )  IMPLIES None(sum(R,S)) ) )
+		 
+		
+M6M1r2c:
+	FORALL (R: Carrier, S: Carrier ) :  (  None(sum(R,S)) IMPLIES ( None(R) AND None(S) ) ) )
+		 
+		
+M7:
+	FORALL (A: Carrier| Leq(A,univ),
+		   R: Carrier|  ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ) ,
+		   a: Carrier|  (  ( Leq(a,univ) AND Leq(a,A) )  AND One(a) ),
+		   b: Carrier|  (  ( Leq(b,univ) AND Leq(b,A) )  AND One(b) ),
+		   c: Carrier|  (  ( Leq(c,univ) AND Leq(c,A) )  AND One(c) ) ):
+		((((((FORALL (d: Carrier|  (  ( Leq(d,univ) AND Leq(d,A) )  AND One(d) ) ): Lone(Navigation(d,R,1,2)))
+		AND 
+			Leq(b,Navigation(a,TC(R),1,2)) ) AND 
+			Leq(c,Navigation(a,TC(R),1,2)) )  AND NotEquals(b,c) ) 
+	    IMPLIES Leq(b,Navigation(c,TC(R),1,2)) )  OR Leq(c,Navigation(b,TC(R),1,2)) ) )
+		 
+		
+M8:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   R: Carrier|  ( Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,A,1,1)) ) ) : 
+    (FORALL (a: Carrier|  (  ( Leq(a,univ) AND Leq(a,A) )  AND One(a) ) , 
+    		    b: Carrier|  (  ( Leq(b,univ) AND Leq(b,A) )  AND One(b) ) ) : 
+    	    (  ( Leq(b,Navigation(a,RTC(R),1,2)) AND NotEquals(a,b) )
+    			IMPLIES Leq(b,Navigation(a,TC(R),1,2)) ) )
+		 
+M9:
+	Forall(A,B,C : Carrier) : (Leq(A,B) AND Leq(B,C)) => Leq(A,C)
+
+Mb2:
+	FORALL (A: Carrier| Leq(A,univ), 
+		   B: Carrier| Leq(B,univ), 
+		   R: Carrier| (Leq(R,CartesianProduct(univ,univ,1,1)) AND Leq(R,CartesianProduct(A,B,1,1)) ),
+		   S: Carrier| (Leq(S,CartesianProduct(univ,univ,1,1)) AND Leq(S,CartesianProduct(A,B,1,1)) ) ) :
+	   (( ( (FORALL (a: Carrier|  (  ( Leq(a,univ) AND Leq(a,A) )  AND One(a) ) ) : 
+			Lone(Navigation(a,R,1,2))) 
+		    AND 
+			(FORALL (a: Carrier|  (  ( Leq(a,univ) AND Leq(a,A) )  AND One(a) ) ) : 
+				Lone(Navigation(A,S,1,2))) ) AND None(product(Navigation(R,B,2,1),Navigation(S,B,2,1))) 
+	    )
+		IMPLIES (FORALL (a: Carrier|  (  ( Leq(a,univ) AND Leq(a,A) )  AND One(a) ) ) : 
+		    Lone(Navigation(A,sum(R,S),1,2))) ) )
+		 
