@@ -23,26 +23,27 @@ Cada una de las siguientes operaciones puede cambiar o no la heterogeneidad de u
 
 'Esta operaci'on  permite seleccionar un subconjunto de las f'ormulas que se quiere proyectar sobre el secuente actual y el nuevo secuente se forma a partir de las f'ormulas seleccionadas.
 Dado un secuente:
-\todomm{Expresar estas operaciones con los mismos diagramas con los que se explican las reglas de inferencia del cálculo de suecuentes}
-$$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
-%% \begin{prooftree}
-%% \AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
-%% \UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
-%% \end{prooftree}
+
+%$$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
+\begin{prooftree}
+\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
+\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
+\end{prooftree}
+
 y un subconjunto $\mathcal{C} \subseteq \{1 \ldots m\}$, el secuente resultante de la proyecci'on es el siguiente:
-%% \begin{prooftree}
-%% \AxiomC{$\alpha_i$ con $i=1 \ldots n$ y $i \in \mathcal{C}$}
-%% \UnaryInfC{$\alpha_j$ con $j=n+1 \ldots m$ y $j \in \mathcal{C}$}
-%% \end{prooftree}
-$$\{\alpha_i \} \vdash \{\alpha_j\} \mbox{ con }i\in [1,n]\cap\mathcal{C} \mbox{ y } j\in [n+1, m]\cap\mathcal{C}$$
+
+\begin{prooftree}
+\AxiomC{$\alpha_i$ con $i=1 \ldots n$ y $i \in \mathcal{C}$}
+\UnaryInfC{$\alpha_j$ con $j=n+1 \ldots m$ y $j \in \mathcal{C}$}
+\end{prooftree}
+%$$\{\alpha_i \} \vdash \{\alpha_j\} \mbox{ con }i\in [1,n]\cap\mathcal{C} \mbox{ y } j\in [n+1, m]\cap\mathcal{C}$$
 %\vspace{1em}
 
 Si se aplica una operaci'on de proyecci'on a un secuente homog'eneo el resultado siempre ser'a homog'eneo, pero si se empieza con un secuente heterogeneo el resultado puede ser un secuente homog'eneo, si se proyectan f'ormulas de un mismo lenguaje o un secuente heterog'eneo si la proyecci'on incluye f'ormulas de lenguajes diferentes.
 
-A modo de ejemplo, en la Fig.~\ref{seq selection} \todomm{Mencionar también que en el secuente de la figura se ven fórmulas en Alloy y en FOF} se muestra el cuadro de di'alogo mediante el cual el usuario puede marcar las f'ormulas que se quiere proyectar en el nuevo secuente.
+A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alogo mediante el cual el usuario puede seleccionar las f'ormulas que se quiere proyectar en el nuevo secuente. Notar que el secuente presentado es heterog'eneo y contiene formulas tanto en \textit{Alloy} como en \textit{TPTP-FOF}.
 
-\todomm{Estas figuras están muy pegadas. Fijate si podés separarlas un poco. Poner alguna en la base de la página, o en la página siguiente}
-\begin{figure}[tb]
+\begin{figure}[]
 	\includegraphics[width=200px]{img/select.png}
 	\centering
 	\caption{Cuadro de di'alogo de proyecci'on de f'ormulas.}
@@ -52,22 +53,29 @@ A modo de ejemplo, en la Fig.~\ref{seq selection} \todomm{Mencionar también que
 \subsubsection{Introducci'on de antecedentes desde una fuente externa}
 \todomm{En esta sección hay que aclarar que esta introducción de fórmulas es una generalización de la regla de corte (Cut-rule), la cual debe ser mencionada en el capítulo anterior. Hay que dejar claro que esta introducción de fórmulas provoca que el árbol se divida en dos ramas: la primera conteniendo las nuevas fórmulas como hipótesis y la segunda conteniéndolas como tesis. Esta implementada de esa manera, ¿no?}
 
-Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual.
+Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual. Esto se logra a trav'ez del men'u contextual que se muestra en la Fig. \ref{seleccion_formulas_para_introducir}.
 
-\todomm{Expresar estas operaciones con los mismos diagramas con los que se explican las reglas de inferencia del cálculo de suecuentes}
 Dado un secuente:
-$$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
+\begin{prooftree}
+\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
+\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
+\end{prooftree}
+%$$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
 y un conjunto de f'ormulas nuevas $\{\beta_1 \ldots \beta_k\}$. El nuevo secuente es:
-$$ \alpha_1,\ldots,\alpha_n,\beta_1,\ldots, \beta_k \vdash \alpha_{n+1},\ldots,\alpha_m $$
+\begin{prooftree}
+\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n,\beta_1,\ldots, \beta_k$}
+\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
+\end{prooftree}
+%$$ \alpha_1,\ldots,\alpha_n,\beta_1,\ldots, \beta_k \vdash \alpha_{n+1},\ldots,\alpha_m $$
 
 'Esta operaci'on puede puede conservar o cambiar tanto la homogeneidad como la heterogeneidad del secuente inicial.
 
-\todomm{No hay mención a la figura 3.2 en el texto. Hacer mención.}
 \begin{figure}
 \centering
 \parbox{5cm}{
 \includegraphics[width=5cm]{img/add_antecedents_1.png}	
 \caption{Men'u contextual para seleccionar la fuente de las f'ormulas a introducir.}}
+\label{seleccion_formulas_para_introducir}
 \end{figure}
 
 
@@ -77,18 +85,24 @@ Se extendi'o el concepto de traducciones para que se puedan traducir f'ormulas p
 El secuente resultante contendr'a las f'ormulas del secuente analizado en el lenguaje seleccionado.
 
 Dado un secuente 
-\todomm{Expresar estas operaciones con los mismos diagramas con los que se explican las reglas de inferencia del cálculo de suecuentes}
 
-$$ S: \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
+%$$ S: \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $$
+\begin{prooftree}
+\AxiomC{$\alpha_1$,$\ldots$,$\alpha_n$}
+\UnaryInfC{$\alpha_{n+1}$,$\ldots$,$\alpha_m$}
+\end{prooftree}
 y una función  $\mathcal{T}:Formula\rightarrow Lenguaje$ que indica el lenguaje seleccionado para cada f'ormula del secuente $S$, el secuente resultante es:
-$$ S': \beta_1,\ldots,\beta_n \vdash \beta_{n+1},\ldots,\beta_m $$
+%$$ S': \beta_1,\ldots,\beta_n \vdash \beta_{n+1},\ldots,\beta_m $$
+\begin{prooftree}
+\AxiomC{$\beta_1$,$\ldots$,$\beta_n$}
+\UnaryInfC{$\beta_{n+1}$,$\ldots$,$\beta_m$}
+\end{prooftree}
 donde 
 \todomm{Que esta explicación de la traducción coincida con la notación usada en el capítulo anterior. Cambiar esta o la otra según lo prefieras.}
 $\beta_{i} = \rho_{\mathcal{T}(\alpha_i)}(\alpha_i)$ y $\rho_l$ es la funci'on de traducci'on al lenguaje $L$.
 
-En la Figura \ref{GUI form translation} se puede ver un cuadro de di'alogo donde el usuario puede seleccionar, para cada f'ormula, el lenguaje al que se quiere traducir.
+En la Fig. \ref{GUI form translation} se puede ver un cuadro de di'alogo donde el usuario puede seleccionar, para cada f'ormula, el lenguaje al que se quiere traducir.
 
-\todomm{¿“include” o “translate”?}
 \begin{figure}[tbh]
 	\includegraphics[width=200px]{img/translate.png}
 	\centering
