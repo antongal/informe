@@ -1,10 +1,6 @@
 \section{Extendiendo Heterogenius con demostradores de primer orden}
 
-\todomm{Parrafo siguiente: Esto se puede usar como la reseña histórica que te mencionaba más arriba (en el capítulo anterior). Si la vas a usar, hay que sacarla de acá y hacer referencia a ella. Algo como: “Tal como se mencionó en el capítulo anterior, la competencia CASC ha adquirido una gran reputación en los últimos años”.}
-
-Desde el a\~no 1996 se celebra anualmente la competencia de demostradores autom'aticos \emph{CADE ATP System Comptetion} \cite{casc} como parte de la conferencia internacional sobre deducci'on autom'atica CADE.
-Dicha competencia es uno de los principales eventos donde varios de los m'as famosos grupos de investigaci'on que trabajan en el desarrollo de herramientas de demostraci'on autom'atica se reunen para evaluar la \emph{performance} de sus sistemas.
-Gracias a ello, un gran n'umero de herramientas de demostraci'on autom'atica aceptan entradas escritas en el lenguaje propio de la competencia: \textit{TPTP-FOF} \cite{fof}. Es por ello que hemos decidido agregar el mencionado lenguaje al motor de Heterogenius, de modo de permitir la integraci'on con herramientas actuales y abrir el camino para la interacci'on con las futuras tecnologías que soporten TPTP-FOF.
+Tal como se mencionó en el capítulo \ref{capitulo:TPTP-FOF}, la competencia \textit{CASC} ha adquirido una gran reputación en los últimos años.
 
 Junto a la integraci'on de TPTP-FOF, se incorporaron los siguientes mecanismos para poder usar las herramientas correspondientes.
 
@@ -35,13 +31,12 @@ Desde el 2000, tanto \textit{SPASS} como \textit{E-Prover} ocupan los primeros l
 Al introducir soporte para lenguajes de l'ogica de primer 'orden y herramientas autom'aticas de an'alisis de estos lenguajes, fue necesario tambi'en extender las acciones de demostraci'on de Heterogenius agregando tres reglas nuevas.
 
 Sea $\Gamma \vdash \alpha$ el secuente que se quiere analizar, se introducen las siguientes reglas:
-\todomm{En el capítulo anterior se dijo que las reglas se leen de manera inversa a como se leen aquí.}
 
 \begin{prooftree}
 \LeftLabel{\textbf{Regla 1:}}
-\AxiomC{$\Gamma \vdash \alpha$}
+\AxiomC{$\top$}
 \RightLabel{\qquad si vale $\Gamma \vdash^{fof} \alpha$}
-\UnaryInfC{$\top$}
+\UnaryInfC{$\Gamma \vdash \alpha$}
 \end{prooftree}
 
 Esta regla indica que si se logra encontrar una demostraci'on del secuente $\Gamma \vdash \alpha$ con un demostrador autom'atico de primer orden, la rama se considera cerrada.
@@ -49,9 +44,9 @@ Esta regla indica que si se logra encontrar una demostraci'on del secuente $\Gam
 
 \begin{prooftree}
 \LeftLabel{\textbf{Regla 2:}}
-\AxiomC{$\Gamma \vdash \alpha$}
+\AxiomC{$\bot$}
 \RightLabel{\qquad si existe $\mathcal{M} \in Mod^{fof}(\Gamma$) y $\mathcal{M} \nvDash^{fof} \alpha$ }
-\UnaryInfC{$\bot$}
+\UnaryInfC{$\Gamma \vdash \alpha$}
 \end{prooftree}
 
 Si de lo contrario, se logra encontrar un modelo de $\Gamma$ que no satisface $\alpha$, este modelo es un contraejemplo y la rama contin'ua abierta.
