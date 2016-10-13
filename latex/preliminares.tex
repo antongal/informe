@@ -112,10 +112,37 @@ El demostrador opera en cuatro fases distintas:
 
 E-Prover utiliza una variante del algoritmo de ``cl'ausula dada'' \cite{dk97}. El estado de la demostraci'on se representa por dos conjuntos de cl'ausulas: el conjunto \textbf{P} de cl'ausulas procesadas (inicialmente vac'io) y el conjunto \textbf{U} de cl'ausulas sin procesar. Las cl'ausulas en \textbf{U} se ordenan de acuerdo a una funci'on de evaluaci'on he'uristica y se procesan en ese orden.
 
-\todomm{Siguiente parrafo: Fijate si no podés poner esto como un pseudocódigo en una figura.}
-El procesamiento primero simplifica la cl'ausula seleccionada \textit{g} con todas las cl'ausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las cl'ausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas cl'ausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
 
-Este procedimiento de b'usqueda de demostraci'on es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter}\cite{otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister}\cite{BH96} y forma parte adem'as del algoritmo principal de \texttt{Vampire} \cite{vampire} y \texttt{SPASS}\cite{spass}.
+%El procesamiento primero simplifica la cl'ausula seleccionada \textit{g} con todas las cl'ausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las cl'ausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas cl'ausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
+
+\begin{figure}
+\begin{lstlisting}[mathescape=true,escapeinside={@}{@}]
+
+@\textbf{U}@: clausulas sin procesar. Inicialmente clausulas de la especificacion.
+@\textbf{P}@: clausulas procesadas. Inicialmente vacio.
+
+mientras @\textbf{U}@ $\neq$ {}
+  @\textbf{g}@ = eliminar(@\textbf{U}@)
+  @\textbf{g}@ = simplificar(@\textbf{g}@, @\textbf{P}@)
+  si @\textbf{g}@ == vacia:
+    Se encontro una demostracion.
+  
+  si @\textbf{g}@ no es redundante respecto a @\textbf{P}@:
+    @\textbf{T}@ = {@\textbf{c}@ $\in$ @\textbf{P}@ | @\textbf{c}@ redundante o simplificable respecto a @\textbf{g}@}
+    @\textbf{P}@ = (@\textbf{P}@ \ @\textbf{T}@) $\cup$ {@\textbf{g}@}
+    @\textbf{T}@ = @\textbf{T}@ $\cup$ generar(@\textbf{g}@, @\textbf{P}@)
+    para cada @\textbf{c}@ $\in$ @\textbf{T}@:
+      @\textbf{c}@ = simplificar(@\textbf{c}@, @\textbf{P}@)
+      si @\textbf{c}@ no es trivial:
+        @\textbf{U}@ = @\textbf{U}@ $\cup$ {@\textbf{c}@}
+Exito, el conjunto @\textbf{U}@ original es satisfacible.
+
+\end{lstlisting}
+\caption{Pseudoc'odigo del procedimiento de b'usqueda usado por \texttt{E-Prover}}
+\label{fig:codigo_clausula_dada_eprover}
+\end{figure}
+
+El procedimiento de b'usqueda de demostraci'on mostrado en la Fig. \ref{fig:codigo_clausula_dada_eprover} es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter}\cite{otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister}\cite{BH96} y forma parte adem'as del algoritmo principal de \texttt{Vampire} \cite{vampire} y \texttt{SPASS}\cite{spass}.
 
 \subsection{Heur'isticas}
 
