@@ -55,16 +55,18 @@ A modo de ejemplo, en la Fig.~\ref{seq selection} se muestra el cuadro de di'alo
         \label{seq selection}
 \end{figure}
 
-\subsubsection{Introducci'on de antecedentes desde una fuente externa}
-\todomm{En esta sección hay que aclarar que esta introducción de fórmulas es una generalización de la regla de corte (Cut-rule), la cual debe ser mencionada en el capítulo anterior. Hay que dejar claro que esta introducción de fórmulas provoca que el árbol se divida en dos ramas: la primera conteniendo las nuevas fórmulas como hipótesis y la segunda conteniéndolas como tesis. Esta implementada de esa manera, ¿no?}
+\subsubsection{Introducci'on de f'ormulas desde una fuente externa}
 
-Esta operaci'on permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}, e introducirlas como nuevas hip'otesis en el secuente actual. Esto se logra a trav'ez del men'u contextual que se muestra en la Fig. \ref{add antecedents 1}.
+Esta operaci'on es una generalizaci'on de la regla de corte, que permite cargar f'ormulas desde un archivo de especificaci'on, ya sea escrito en el lenguaje \textit{Alloy} o en \textit{TPTP-FOF}. Al seleccionar las f'ormulas nuevas, se crean dos nodos nuevos que se agregan como hijos del nodo actual. Las f'ormulas a su vez se introducen como hip'otesis en uno de los secuentes y como tesis en el otro.
+
+La operaci'on se puede ejecutar a trav'ez del men'u contextual que se muestra en la Fig. \ref{add antecedents 1}.
 
 
 \begin{prooftree}
-\AxiomC{$ \alpha_1,\ldots,\alpha_n,\beta_1,\ldots, \beta_k \vdash \alpha_{n+1},\ldots,\alpha_m $}
-\RightLabel{(Regla de introducci'on de antecedentes)}
-\UnaryInfC{$ \alpha_1,\ldots,\alpha_n \vdash \alpha_{n+1},\ldots,\alpha_m $}
+\AxiomC{$ \Gamma,\beta_1,\ldots, \beta_k \vdash \Delta $}
+\AxiomC{$ \Gamma\vdash \beta_1,\ldots, \beta_k , \Delta $}
+\RightLabel{(Regla de introducci'on de f'ormulas nuevas)}
+\BinaryInfC{$ \Gamma \vdash \Delta $}
 \end{prooftree}
 
 con $\{\beta_1 \ldots \beta_k\}$ un conjunto de f'ormulas nuevas a introducir.
