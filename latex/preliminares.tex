@@ -58,11 +58,22 @@ Gracias a ello, un gran n'umero de herramientas de demostraci'on autom'atica ace
 
 \textit{TPTP} (mil problemas para demostradores autom'aticos, por sus siglas en ingl'es) \cite{tptp} es una biblioteca de problemas para demostradores autom'aticos. La principal motivaci'on para \textit{TPTP} es permitir el testeo y evaluaci'on de diferentes sistemas de demostraci'on autom'atica de teoremas.
 
-Los problemas est'an expresados en cuatro lenguajes: \textit{THF} (Types Higher Order Form), \textit{TFF} (Types First Order Form), \textit{FOF} (First Order Form) y \textit{CNF} (Clause Normal Form). \textit{FOF} \cite{fof} es un lenguaje de l'ogica de primer 'orden con igualdad. Una especificaci'on de \textit{TPTP-FOF} es una lista de f'ormulas que adem'as tienen un nombre y un tipo. Por ejemplo:
+Los problemas est'an expresados en cuatro lenguajes: \textit{THF} (Types Higher Order Form), \textit{TFF} (Types First Order Form), \textit{FOF} (First Order Form) y \textit{CNF} (Clause Normal Form). \textit{FOF} \cite{fof} es un lenguaje de l'ogica de primer 'orden con igualdad. Una especificaci'on de \textit{TPTP-FOF} es una lista de f'ormulas que adem'as tienen un nombre y un tipo.
 
-\todo{Poner el ejemplo en una figura. Usar un par de párrafos para explicar de qué se trata el ejemplo. Elegir al menos un par de fórmulas y explicar qué están diciendo.}
+Por ejemplo en la fig. \ref{ejemplofof} se muestra una especificaci'on v'alida que define seis axiomas y una conjetura. La conjetura es una f'ormula de tipo \textit{conjecture} lo cu'al le indica al demostrador que es la f'ormula que se quiere probar. 
 
-\begin{figure}[htbp]
+El primer axioma que se llama \textbf{john} define que la proposici'on  \textit{human()} con la constante \textit{john} es verdadera.
+El axioma \textbf{all\_created\_equal} indica con el cuantificador universal que para cualquier par de variables \textit{H1} y \textit{H2} se cumple que si \textit{H1} y \textit{H2} son humanos (o sea que es verdad que \textit{human(H1)} y \textit{human(H2)} entonces se cumple que son creados de la misma forma (\textit{created\_equal(H1, H2)}).
+El axioma \textbf{john\_failed} define que la proposici'on \textit{grade()} evaluada con la constante \textit{john} es igual a \textit{f} que es otra constante.
+El siguiente exioma introduce un cuantificador existencial con lo cu'al se indica que existe una variable \textit{H} tal que \textit{human(H)} y \textit{grade(H)=a} valen.
+Los siguientes axiomas definen que \textit{a} es distinto del \textit{f} y que no se pueden componer \textit{human} con \textit{grade}.
+
+Lo definido por los axiomas se puede interpretar como: (1) \textit{john} es humano; (2) todos los humanos son creados de la misma forma; (3) la calificaci'on de \textit{john} es \textit{f}; (4) alguien tiene la calificaci'on \textit{a}; (5) \textit{a} es distinta de \textit{f} (6) las calificaciones no son humanos.
+
+A su vez la conjetura pregunta si existe un humano que no es \textit{john}.
+
+
+\begin{figure}[]
 \makebox[\textwidth]{}{
 \small
 \begin{verbatim}
@@ -84,9 +95,9 @@ fof(someone_not_john,conjecture,( ?[H] : ( human(H) & H != john ) )).
 \end{verbatim}
 \normalsize}
 \caption{Especificaci'on t'ipica en el lenguaje \textit{TPTP-FOF}. La sintaxis contiene todos los elementos de la l'ogica de primer 'orden. \textbf{![X]} es el cuantificador universal sobre la variable \textit{X}; \textbf{?[X]} es el cuantificador existencial sobre la variable \textit{X}. \textit{$human()$}, \textit{$grade()$}, \textit{$created\_equal()$} son predicados; las variables empiezan con una letra mayuscula y las constantes con minuscula. Los operadores disponibles son $\sim$, $|$, $\&$, $=>$, $<=>$, $=$ y $!=$ y corresponden con la negaci'on, la disyunci'on, la conjunci'on, la implicaci'on, la doble implicaci'on, la igualdad y la desigualdad.}
+\label{ejemplofof}
 \end{figure}
 
-En el ejemplo anterior la 'ultima f'ormula es de tipo \textit{conjecture}. 'Esto indica al demostrador que es la f'ormula que se quiere probar. Las otras f'ormulas, de tipo \textit{axiom} se interpretan como axiomas.
 
 \section{E-Prover}
 \todo{Agrupar la explicación de EProver, SPASS y Mace4 en una  subsección. Introducirla diciendo que allí vamos a explicar someramente el funcionamiento de las herramientas con las que extendimos Heterogenius}
