@@ -99,7 +99,11 @@ fof(someone_not_john,conjecture,( ?[H] : ( human(H) & H != john ) )).
 \end{figure}
 
 
-\section{E-Prover}
+\section{Herramientas autom'aticas utilizadas}
+
+En 'esta secci'on vamos a explicar somaramente el funcionamiento de las herramientas autom'aticas con las que extendimos la funcionalidad de \textit{Heterogenius}.
+
+\subsection{E-Prover}
 \todo{Agrupar la explicación de EProver, SPASS y Mace4 en una  subsección. Introducirla diciendo que allí vamos a explicar someramente el funcionamiento de las herramientas con las que extendimos Heterogenius}
 
 E-Prover es un demostrador de teoremas de l'ogica de primer orden con igualdad. El demostrador acepta como entrada una lista de cl'ausulas o f'ormulas de l'ogica de primer orden con una conjetura. El sistema intenta encontrar una demostraci'on para la conjetura asumiendo los axiomas especificados.
@@ -119,7 +123,7 @@ El demostrador opera en cuatro fases distintas:
 \item La etapa de saturaci'on que se implementa sobre un algoritmo del c'alculo de superposici'on descripto en \cite{bg94} y \cite{aicom2002} que trata de encontrar la cl'ausula vac'ia, lo que permite determinar que la cl'ausula original es insatisfacible y, por lo tanto, el problema de entrada es demostrable. E-Prover implementa el algoritmo de superposici'on con selecci'on del literal negativo y con factorizaci'on de igualdad. Se incorporan varias t'ecnicas de simplificaci'on como por ejemplo reescritura incondicional, subsunci'on, eliminaci'on de tautologias semanticas y corte de literales contextuales. Tambi'en se implementa la eliminaci'on de redundancia AC documentada en \cite{jsc2003} y la introducci'on controlada de definiciones para partes independientes de cl'ausulas \cite{ijcai2001}.
 \end{itemize}
 
-\subsection{B'usqueda de demostraci'on}
+\subsubsection{B'usqueda de demostraci'on}
 
 E-Prover utiliza una variante del algoritmo de ``cl'ausula dada'' \cite{dk97}. El estado de la demostraci'on se representa por dos conjuntos de cl'ausulas: el conjunto \textbf{P} de cl'ausulas procesadas (inicialmente vac'io) y el conjunto \textbf{U} de cl'ausulas sin procesar. Las cl'ausulas en \textbf{U} se ordenan de acuerdo a una funci'on de evaluaci'on he'uristica y se procesan en ese orden.
 
@@ -127,9 +131,12 @@ E-Prover utiliza una variante del algoritmo de ``cl'ausula dada'' \cite{dk97}. E
 %El procesamiento primero simplifica la cl'ausula seleccionada \textit{g} con todas las cl'ausulas en \textbf{P}, luego simplifica \textbf{P} con \textit{g}, moviendo todas las cl'ausulas afectadas desde \textbf{P} a \textbf{U}. Luego se computan todas las consecuencias directas entre \textit{g} y \textbf{P} que pueden ser derivadas utilizando las reglas de inferencia (superposici'on, factoreo de igualdad y resoluci'on de igualdad). Las nuevas cl'ausulas son simplificadas respecto a \textbf{P} y son agregadas a \textbf{U}, a su vez \textit{g} es agregado a \textbf{P}.
 
 \begin{figure}
+\makebox[\textwidth]{}{
+\small
 \begin{lstlisting}[mathescape=true,escapeinside={@}{@}]
 
-@\textbf{U}@: clausulas sin procesar. Inicialmente clausulas de la especificacion.
+@\textbf{U}@: clausulas sin procesar. Inicialmente clausulas
+    de la especificacion.
 @\textbf{P}@: clausulas procesadas. Inicialmente vacio.
 
 mientras @\textbf{U}@ $\neq$ {}
@@ -149,13 +156,14 @@ mientras @\textbf{U}@ $\neq$ {}
 Exito, el conjunto @\textbf{U}@ original es satisfacible.
 
 \end{lstlisting}
+\normalsize}
 \caption{Pseudoc'odigo del procedimiento de b'usqueda usado por \texttt{E-Prover}}
 \label{fig:codigo_clausula_dada_eprover}
 \end{figure}
 
 El procedimiento de b'usqueda de demostraci'on mostrado en la Fig. \ref{fig:codigo_clausula_dada_eprover} es diferente del algoritmo de ``cl'ausula dada'' implementado por \texttt{Otter}\cite{otter} y otros demostradores que tambi'en utilizan el conjunto \textbf{U} para la simplificaci'on. 'Esta variante tambi'en se utiliza en \texttt{Waldmeister}\cite{BH96} y forma parte adem'as del algoritmo principal de \texttt{Vampire} \cite{vampire} y \texttt{SPASS}\cite{spass}.
 
-\subsection{Heur'isticas}
+\subsubsection{Heur'isticas}
 
 E-Prover usa una serie de heur'isticas para: (1) la elecci'on del ordenamiento de t'erminos que restringe las inferencias y controla la reescritura; (2) la elecci'on de la siguiente cl'ausula de \textbf{U} y opcionalmente (3) la elecci'on de literales para la inferencia en las cl'ausulas que tienen por lo menos un literal negativo.
 
@@ -166,7 +174,7 @@ La selecci'on de literales es controlada por una de las cien heur'isticas de sel
 
 
 
-\section{SPASS}
+\subsection{SPASS}
 
 SPASS es un demostrador autom'atico de teoremas basado en saturaci'on para l'ogica de primer orden con igualdad. Como se menciona en la descripci'on oficial, SPASS es 'unico debido a que combina el c'alculo de superposici'on con reglas espec'ificas de inferencia/reducci'on para tipos y una regla de partici'on para an'alisis de casos motivada por la regla $\beta$ del m'etodo de \textit{tableau} anal'itico y el an'alisis de casos empleado en el procedimiento \textit{Davis-Putnam}. El 'enfasis de SPASS est'a puesto en las diferentes t'ecnicas de inferencia, reducci'on, simplificaci'on, y no as'i en las heur'isticas.
 
@@ -175,17 +183,17 @@ Todo el funcionamiento interno de SPASS est'a basado en l'ogica de primer 'orden
 La tercera dimensi'on que se considera en SPASS son las restricciones, informaci'on extra que se adjunta a las cl'ausulas restrigiendo su sem'antica y su uso respecto al c'alculo. Algunas de las restriciones son \textit{de orden}, forzando que los t'erminos substituidos satisfagan las funciones de restricci'on adjuntas y restricciones \textit{de tipo} que garantizan que la instanciaci'on de las variables corresponda al tipo especificado.
 
 
-\section{Mace4}
+\subsection{Mace4}
 
 Mace4 es un buscador de modelos finitos basado en \textit{backtracking} y puede ser considerado una variaci'on del algor'itmo \textit{DPLL/Davis-Putnam-Logemann-Loveland} \cite{dpll}. La principal diferencia radica en la selecci'on de celdas en la matriz que representa el modelo buscado, la selecci'on de valores a asignar y la propagaci'on de las asignaciones \cite{mace4_manual}.
 
-\subsection{Inicializaci'on}
+\subsubsection{Inicializaci'on}
 
 Mace4 siempre hace la b'usqueda sobre un modelo de dominio finito. Incluso cuando no se especifica un tamaño de dominio Mace4 itera sobre los posibles tamaños ejecutando la rutina de b'usqueda sobre cada dominio candidato.
 
 La inicializaci'on comienza con la creaci'on de matrices para las funciones. Para cada funci'on de aridad $k$ se crea una matriz $n^k$ donde $n$ es el tamaño del dominio.
 
-\subsection{B'usqueda}
+\subsubsection{B'usqueda}
 
 La b'usqueda se realiza con una recursi'on backtracking y su pseudoc'odigo es:
 
@@ -208,7 +216,7 @@ procedure search:
 
 Las partes m'as importantes del algor'itmo son las heuristicas de selecci'on de celdas; determinaci'on de los valores a asignar a la celda seleccionada; y propagaci'on de la asignacion.
 
-\subsubsection{Selecci'on de celdas}
+\paragraph{Selecci'on de celdas}
 
 La selecci'on de celdas se divide en dos fases. La primera determina el conjunto de celdas candidatas. La segunda fase elige una celdas del conjunto de candidatas previamente preparadas.
 
@@ -229,11 +237,11 @@ La selecci'on de celdas se divide en dos fases. La primera determina el conjunto
 \end{itemize}
 
 
-\subsubsection{Asignaci'on de la celda}
+\paragraph{Asignaci'on de la celda}
 Una vez que se seleccionan las celdas abiertas, se debe determinar el conjunto de valores a considerar para la asignaci'on. Si se trata de una celda booleana siempre se prueba con $0$ y $1$. Si no, se prueba con todos los valores del dominio $[0,\dots,n-1]$ si no se est'a usando la heur'istica \textit{LNH} (Least Number Heuristic). Esta heur'istica fue usada por primera vez en \cite{zhang95} y \cite{zhang96} y su objetivo es tratar de eliminar alg'un isomorfismo en la b'usqueda. La idea principal es de mantener el dominio particionado en valores asimetricos y valores sim''etricos. S'olo uno de los valores sim'etricos debe ser probado. En la pr'actica esta heur'istica es efectiva en los niveles m'as altos del 'arbol de b'usqueda.
 
 
-\subsubsection{Propagaci'on}
+\paragraph{Propagaci'on}
 
 \begin{itemize}
 
