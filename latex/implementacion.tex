@@ -30,21 +30,40 @@ Al ejecutar un demostrador autom'atico con la entrada preparada de este modo, se
 
 \subsubsection{Integraci'on con Heterogenius}
 
-Para integrar las herramientas autom'aticas, tanto los demostradores de teoremas como los buscadores de contraejemplos fue necesario \textit{refactorizar} y extender el diseño de algunas partes de la arquitectura de Heterogenius. Algunos de los objetivos y criterios que se usaron durante el rediseño fueron lograr abstraer las herramientas usadas y hacer un diseño lo suficientemente extensible y abierto para la integraci'on con nuevas herramientas en el futuro.
+Para integrar las herramientas autom'aticas, tanto los demostradores de teoremas como los buscadores de contraejemplos fue necesario \textit{refactorizar} y extender el diseño de algunas partes de la arquitectura de Heterogenius. Algunos de los objetivos y criterios que se usaron durante el rediseño fueron lograr abstraer las herramientas autom'aticas usadas y hacer un diseño lo suficientemente extensible y abierto para la integraci'on con nuevas herramientas en el futuro.
 
-\begin{figure}[H]
+\begin{figure}[]
 	\includegraphics[width=450px, angle=90]{img/arq_prover.png}
 	\centering
 	\caption{Demostradores autom'aticos usados como calculadores de secuentes.}
+	\label{fofproverdiagrama}
 \end{figure}
 
-\todomm{Mencionar en la explicación qué roles desempeñan cada una de las entidades mencionadas. Además indicar explícitamente cuáles debieron ser modificadas y cuáles agregadas en la nueva versión.
-Para explicar esto podés indicar los pasos que se deberían seguir para incorporar un demostrador nuevo (como lo que está en estos dos párrafos, pero explicado con más detalle).
-Y explicar cómo fueron implementados esos pasos para incluir alguno de los demostradores que agregaste.}
+\textit{Heterogenius} en su versi'on original defini'o la interfaz \textbf{SequentCalculator} (ver fig. \ref{ejecucionherramientaautomatica}) con un s'olo mensaje \textbf{calculate}. La idea fue que un calculador de secuentes (una herramienta autom'atica) pod'ia implementar dicha interfaz y tomando en cuenta la especificaci'on e informaci'on de eskolemizaci'on realizar un c'alculo que pod'ia producir cero o m'as secuentes nuevos.
 
-Un calculador de secuentes basado en un demostrador autom'atico del lenguaje \textit{TPTP-FOF} se crea subclasificando la clase abstracta \textbf{FOFSequentCalculator}. La nueva clase va a contener un objeto \textit{FOFProver} compuesto con los objetos de las subclases de \textbf{ProverParser} y de \textbf{ExternalToolRunner} correspondientes.
+As'i la forma m'as adecuada de integrar los demostradores autom'aticos sobre el lenguaje \textit{TPTP-FOF} fue implementar la interfaz \textbf{SequentCalculator}. Debido a que hay partes de funcionalidad que las herramientas que trabajan con \textit{TPTP-FOF} comparten, decidimos extender la jerarqu'ia de los calculadores de secuentes introduciendo la clase abstracta \textbf{FOFSequentCalculator} para representar un calculador de secuentes basado en \textit{TPTP-FOF}.
 
-Para agregar una herramienta nueva primero se debe subclasificar la clase abstracta \textbf{ExternalToolRunner}. Esta clase abstrae las particularidades de ejecuci'on de la herramienta especificando los parametros necesarios. Luego se extiende la clase \textbf{ProverParser} que se encarga de procesar el texto correspondiente a la salida de la herramienta. 
+A su vez, se proveen dos implementaciones de dicha clase: \textbf{FOFSequentCalculator\_overEProver} y \textbf{FOFSequentCalculator\_overSPASS} que como sus nombres lo indican son calculadores de secuentes que utilizan \textit{EProver} y \textit{SPASS} respectivamente.
+
+Vale aclarar que ninguna herramienta autom'atica incorporada provee una \textit{API} y el procesamiento se produce ejecutando el binario de la herramienta correspondiente pasandole como parametro un archivo de texto con los axiomas y la conjetura que se quiere probar como f'ormulas \textit{TPTP-FOF} serializadas. La salida \textit{STDOUT} de la ejecuci'on luego se parsea y se interpreta para producir un resultado. 'Estos pasos se pueden ver en la fig. \ref{ejecucionherramientaautomatica}.
+
+Primero para abstraer la ejecuci'on de un herramienta autom'atica agregamos la clase abstracta \textbf{ExternalToolRunner}. Esta clase es responsable de iniciar la ejecuci'on del archivo binario de la herramienta correspondiente con los parametros apropiados y en el formato aceptable. Presentamos tres implementaciones de dicha clase, una para cada herramienta incorporada: \textbf{EProverRunner}, \textbf{SPASSRunner} y \textbf{Mace4Runner}. Notar que en 'este punto no importa si la herramienta se utiliza como un demostrador o un buscador de contraejemplos o ambos como es el caso de \textit{EProver}.
+
+La segunda entidad que aparece en el diagrama de la fig. \ref{ejecucionherramientaautomatica} es un \textit{parser} de la salida de la herramienta. En 'este caso tambi'en se define la clase abstracta \textbf{ProverParser} que tiene dos implementaciones: \textbf{EProverProverParser} y \textbf{SPASSProverParser} y que representa a un parser que interpreta la salida de un demostrador autom'atico.
+
+Cada herramienta produce salidas diferentes, pero en general todas contienen alguna palabra clave o un marcador que permite interpretar el resultado.
+
+Como se ve en la fig. \ref{fofproverdiagrama} la entidad que ``orquesta'' los componentes mencioncionados es \textbf{FOFProver}. Es un objeto que se compone con un \textbf{ProverParser} y un \textbf{ExternalToolRunner} y realiza todo el proceso de ejecuci'on de la herramienta autom'atica y el posterior an'alisis del resultado.
+
+
+\begin{figure}[]
+	\includegraphics[width=350px]{img/ejecucion_herramienta_automatica.png}
+	\centering
+	\caption{Interacci'on de \textit{Heterogenius} con \textit{EProver}.}
+	\label{ejecucionherramientaautomatica}
+\end{figure}
+
+El diseño presentado hace f'acil la incorporaci'on de herramientas autom'aticas nuevas que trabajen con \textit{TPTP-FOF}. Para agregar una herramienta nueva ya sea un demostrador o un buscador de contraejemplos, primero se debe subclasificar la clase abstracta \textbf{ExternalToolRunner}. Esta clase abstrae las particularidades de ejecuci'on de la herramienta especificando los parametros necesarios. Luego se extiende la clase \textbf{ProverParser} que se encarga de procesar el texto correspondiente a la salida de la herramienta. En el caso de un buscador de contraejemplos existe una clase an'aloga que se debe subclasificar que es \textbf{ModelFinderParser}.
 
 
 
@@ -54,9 +73,9 @@ Para agregar una herramienta nueva primero se debe subclasificar la clase abstra
 
 Tanto \textit{Mace4} como \textit{E-Prover} se usan para buscar contraejemplos de los secuentes \textit{TPTP-FOF}. Como las dos herramientas son buscadores de modelos, para preparar el secuente lo que se hace es armar una lista de f'ormulas de tipo \textit{axiom} a partir de las f'ormulas del antecedente y del consecuente del secuente analizado.
 
-Cuando todas las f'ormulas que se envian como entrada a los buscadores de modelos son de tipo \textit{axiom}. Las herramientas tratan de buscar un modelo para el conjunto de los axiomas recibidos.
+Cuando todas las f'ormulas que se env'ian como entrada a los buscadores de modelos son de tipo \textit{axiom} las herramientas tratan de buscar un modelo para el conjunto de los axiomas recibidos.
 
-Lo que se quiere lograr es encontrar un contraejemplo, entonces se hace necesario negar el secuente y buscar un modelo para la negaci'on.
+Como lo que se quiere lograr es encontrar un contraejemplo, se hace necesario negar el secuente y buscar un modelo para la negaci'on.
 
 Sea $\{\alpha_1 \dots \alpha_n\} \vdash \{\beta_1 \dots \beta_m\}$ el secuente bajo an'alisis.
 La negaci'on se puede escribir como:
@@ -72,13 +91,15 @@ Encontrar un modelo para una especificaci'on armada de 'este modo implica la exi
 
 \subsubsection{Integraci'on con Heterogenius}
 
-Tambi'en como en el caso de los demostradores autom'aticos fue necesario \textit{refactorizar} el diseño de los buscadores de contraejemplos para permitir una mayor flexibilidad a la hora de agregar nuevas herramientas con soporte de \textit{TPTP-FOF}.
+Como en el caso de los demostradores autom'aticos fue necesario \textit{refactorizar} el diseño de los buscadores de contraejemplos para permitir una mayor flexibilidad a la hora de agregar nuevas herramientas con soporte de \textit{TPTP-FOF}, ver fig. \ref{diagramaclasesbuscadorescontraejemplos}.
 
-\begin{figure}[H]
+\begin{figure}[]
 	\includegraphics[width=450px, angle=90]{img/arq_ce.png}
 	\centering
 	\caption{Buscadores de contraejemplos.}
+	\label{diagramaclasesbuscadorescontraejemplos}
 \end{figure}
 
-\todomm{Ídem anterior (a menos que queden demasiado parecidos).}
-El diseño de los buscadores de contraejemplos basados en \textit{TPTP-FOF} es an'alogo a los calculadores de secuentes. Se usa la misma clase \textbf{ExternalToolRunner} que en el caso anterior para la abstracci'on de la ejecuci'on de la herramienta en s'i. Pero en lugar de subclasificar \textbf{ProverParser} se subclasifica la clase abstracta \textbf{ModelFinderParser} que tiene un comportamiento an'alogo.
+El diseño de los buscadores de contraejemplos basados en \textit{TPTP-FOF} es an'alogo a los calculadores de secuentes. Se usa la misma clase \textbf{ExternalToolRunner} que en el caso anterior, para la abstracci'on de la ejecuci'on de la herramienta en s'i. Pero en lugar de subclasificar \textbf{ProverParser} se subclasifica la clase abstracta \textbf{ModelFinderParser} que tiene un comportamiento an'alogo, o sea analiza e interpreta la salida \textit{STDOUT} de la herramienta correspondiente.
+
+Al igual que en el caso anterior, existe una herramienta que coordina el proceso de b'usqueda de contraejemplos que es \textbf{FOFModelFinder}.
